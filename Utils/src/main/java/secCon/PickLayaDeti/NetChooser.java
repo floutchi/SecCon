@@ -1,4 +1,4 @@
-package secCon.PickLayaDeti.utils;
+package secCon.PickLayaDeti;
 
 import java.net.InetAddress;
 import java.net.NetworkInterface;
@@ -10,11 +10,7 @@ import java.util.Scanner;
 
 public class NetChooser {
     private List<NetworkInterface> interfaces;
-    public NetworkInterface selected;
-
-    public NetworkInterface getSelected() {
-        return selected;
-    }
+    private NetworkInterface selected;
 
     public NetChooser() {
         loadInterfaces();
@@ -24,9 +20,13 @@ public class NetChooser {
             System.out.printf("%d. %s\n", index, allInterfaceNames[index]);
         }
         System.out.printf("Select your interface :");
-        this.selected = getInterfacesByIndex(console.nextInt());
+        selected = getInterfacesByIndex(console.nextInt());
         System.out.printf("Selected interface: %s\n", selected.getDisplayName());
 
+    }
+
+    public NetworkInterface getSelected() {
+        return selected;
     }
 
     private void loadInterfaces() {

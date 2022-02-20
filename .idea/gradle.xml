@@ -11,6 +11,7 @@
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/FileFrontEnd" />
             <option value="$PROJECT_DIR$/StorBackEnd" />
+            <option value="$PROJECT_DIR$/Utils" />
           </set>
         </option>
       </GradleProjectSettings>

@@ -2,7 +2,6 @@ package secCon.PickLayaDeti;
 
 
 import secCon.PickLayaDeti.Thread.MulticastSender;
-import secCon.PickLayaDeti.utils.NetChooser;
 
 import java.io.IOException;
 import java.net.MulticastSocket;

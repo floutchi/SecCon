@@ -1,7 +1,6 @@
 package secCon.PickLayaDeti;
 
 import secCon.PickLayaDeti.Thread.MulticastListener;
-import secCon.PickLayaDeti.utils.NetChooser;
 
 import java.io.IOException;
 import java.net.InetAddress;
