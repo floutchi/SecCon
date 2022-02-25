@@ -1,6 +1,6 @@
 package secCon.PickLayaDeti;
 
-import secCon.PickLayaDeti.Thread.ClientRunnable;
+import secCon.PickLayaDeti.thread.ClientRunnable;
 
 public interface AppController {
     void broadcastToAllClientsExceptMe(ClientRunnable clientRunnable, String line);

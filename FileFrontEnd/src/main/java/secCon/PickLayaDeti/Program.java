@@ -1,7 +1,7 @@
 package secCon.PickLayaDeti;
 
 import secCon.PickLayaDeti.Thread.StorManager;
-import secCon.PickLayaDeti.Thread.MulticastListener;
+import secCon.PickLayaDeti.thread.MulticastListener;
 import secCon.PickLayaDeti.client.Client;
 import secCon.PickLayaDeti.domains.StorProcessor;
 import secCon.PickLayaDeti.netChooser.NetChooser;
