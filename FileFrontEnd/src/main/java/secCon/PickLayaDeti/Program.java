@@ -51,7 +51,7 @@ public class Program {
     }
 
     public void setInformations(String[] informations) {
-        System.out.printf("Receiving HELLO from %s with ID %s (unicast port: %s) \r\n", informations[2], informations[0], informations[1]);
+        System.out.printf("[Program] Receiving HELLO from %s with ID %s (unicast port: %s) \r\n", informations[2], informations[0], informations[1]);
         if (client != null) return;
         this.client = new Client(informations[2], Integer.parseInt(informations[1]));
     }
