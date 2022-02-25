@@ -9,17 +9,24 @@ import java.io.PrintWriter;
 import java.net.Socket;
 import java.nio.charset.StandardCharsets;
 
-public class Client {
+public class ClientRunnable implements Runnable {
 
-    public Client(StorProcessor process, StorManager storManager) {
-        var ipAddress = process.getIpAddress();
-        var port = process.getPort();
-        var domain = process.getDomain();
+    StorProcessor process;
+    StorManager storManager;
+    String ipAddress;
+    int port;
+    String domain;
 
-        System.out.println(ipAddress);
-        System.out.println(port);
-        System.out.println(domain);
+    public ClientRunnable(StorProcessor process, StorManager storManager) {
+        this.process = process;
+        this.storManager = storManager;
+        ipAddress = process.getIpAddress();
+        port = process.getPort();
+        domain = process.getDomain();
+    }
 
+    @Override
+    public void run() {
         // Affichage la demande de connexion
         System.out.printf("Connexion en cours à %s sur le port %d\r\n", ipAddress, port);
 
@@ -38,5 +45,4 @@ public class Client {
             ex.printStackTrace();
         }
     }
-
 }

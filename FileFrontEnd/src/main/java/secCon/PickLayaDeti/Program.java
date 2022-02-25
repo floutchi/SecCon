@@ -2,9 +2,9 @@ package secCon.PickLayaDeti;
 
 import secCon.PickLayaDeti.Thread.StorManager;
 import secCon.PickLayaDeti.Thread.MulticastListener;
-import secCon.PickLayaDeti.client.Client;
+import secCon.PickLayaDeti.client.ClientRunnable;
 import secCon.PickLayaDeti.domains.StorProcessor;
-import secCon.PickLayaDeti.netChooser.NetChooser;
+import secCon.PickLayaDeti.utils.NetChooser;
 
 import java.io.IOException;
 import java.net.InetAddress;
@@ -19,7 +19,7 @@ public class Program {
     private final StorManager storManager;
     private MulticastSocket multicastSocket;
     private final NetworkInterface networkInterface;
-    private Client client;
+    private ClientRunnable client;
 
     public Program() {
         this.storManager = new StorManager();
@@ -56,7 +56,9 @@ public class Program {
         if (client != null) return;
 
         var process = new StorProcessor(informations[0],  informations[2], Integer.parseInt(informations[1]));
-        this.client = new Client(process, this.storManager);
+        this.client = new ClientRunnable(process, this.storManager);
+        Thread clientThread = new Thread(client);
+        clientThread.start();
     }
 
 }

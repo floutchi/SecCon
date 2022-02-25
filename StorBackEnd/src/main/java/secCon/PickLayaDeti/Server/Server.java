@@ -29,8 +29,7 @@ public class Server {
                 BufferedReader fromClient = new BufferedReader(new InputStreamReader(client.getInputStream(), Charset.forName("UTF-8")));
                 PrintWriter toClient = new PrintWriter(new OutputStreamWriter(client.getOutputStream(), Charset.forName("UTF-8")), true);
                 String ligne = readLine(fromClient);
-                System.out.println("Ligne reçue: " + (ligne == null ? "" : ligne));
-                toClient.print("Bonjour, tu vas bien ?\r\n");
+                System.out.println("[Server][listen] new connection, starting thread");
                 toClient.flush();
                 client.close();
                 isConnected = false;
