@@ -1,8 +1,6 @@
 package secCon.PickLayaDeti.Server;
 
 import secCon.PickLayaDeti.AppController;
-import secCon.PickLayaDeti.NetChooser;
-import secCon.PickLayaDeti.Thread.ClientRunnable;
 
 import java.io.*;
 

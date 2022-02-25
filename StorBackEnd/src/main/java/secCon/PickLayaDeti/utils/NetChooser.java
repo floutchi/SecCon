@@ -1,4 +1,4 @@
-package secCon.PickLayaDeti.netChooser;
+package secCon.PickLayaDeti.utils;
 
 import java.net.InetAddress;
 import java.net.NetworkInterface;

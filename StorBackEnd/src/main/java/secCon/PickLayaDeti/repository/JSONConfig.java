@@ -1,6 +1,66 @@
 package secCon.PickLayaDeti.repository;
 
-public class JSONConfig {
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.*;
 
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
 
+public class JSONConfig implements SBEConfig {
+
+    private JSONObject configObject;
+    private final String uniqueID;
+    private final String path;
+    private final String multicastAddress;
+    private final int multicastPort;
+    private final int multicastDelayInSeconds;
+    private final int unicastPort;
+
+    public JSONConfig() {
+        readJson();
+        this.uniqueID = (String) configObject.get("uniqueID");
+        this.path = (String) configObject.get("path");
+        this.multicastAddress = (String) configObject.get("multicastAddress");;
+        this.multicastPort = ((Long) configObject.get("multicastPort")).intValue();
+        this.multicastDelayInSeconds = ((Long) configObject.get("multicastDelayInSeconds")).intValue();
+        this.unicastPort = ((Long) configObject.get("unicastPort")).intValue();
+    }
+
+    private void readJson() {
+        JSONParser jsonParser = new JSONParser();
+
+        try (FileReader reader = new FileReader("C:\\dev\\reseau\\secCon\\ProjetReseau-secCon-PickLayaDeti\\StorBackEnd\\src\\main\\java\\secCon\\PickLayaDeti\\repository\\config.json")) {
+            Object obj = jsonParser.parse(reader);
+            this.configObject = (JSONObject) obj;
+
+        } catch (IOException | ParseException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public String getUniqueID() {
+        return uniqueID;
+    }
+
+    public String getPath() {
+        return path;
+    }
+
+    public String getMulticastAddress() {
+        return multicastAddress;
+    }
+
+    public int getMulticastPort() {
+        return multicastPort;
+    }
+
+    public int getMulticastDelayInSeconds() {
+        return multicastDelayInSeconds;
+    }
+
+    public int getUnicastPort() {
+        return unicastPort;
+    }
 }

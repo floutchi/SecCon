@@ -4,7 +4,8 @@ package secCon.PickLayaDeti;
 import secCon.PickLayaDeti.Server.Server;
 import secCon.PickLayaDeti.Thread.ClientRunnable;
 import secCon.PickLayaDeti.Thread.MulticastSender;
-import secCon.PickLayaDeti.netChooser.NetChooser;
+import secCon.PickLayaDeti.repository.JSONConfig;
+import secCon.PickLayaDeti.utils.NetChooser;
 
 import java.io.IOException;
 import java.net.MulticastSocket;
@@ -14,9 +15,15 @@ import java.util.List;
 
 public class Program implements AppController {
 
-    public final static String GROUP = "224.66.66.1";
-    public final static int PORT = 15201;
-    public final static String DOMAIN = "picklayadeti.sbe22.1";
+    private final JSONConfig jsonConfig = new JSONConfig();
+
+
+    public static String UNIQUE_ID = "";
+    public static String PATH = "";
+    public static String MULTICAST_ADDRESS = "";
+    public static int MULTICAST_PORT = 0;
+    public static int MULTICAST_DELAY_IN_SECONDS = 0;
+    public static int UNICAST_PORT = 0;
 
     private MulticastSocket multicastSocket;
     private final NetworkInterface networkInterface;
@@ -26,7 +33,14 @@ public class Program implements AppController {
         new Program();
     }
 
+
     public Program() {
+        UNIQUE_ID = jsonConfig.getUniqueID();
+        PATH = jsonConfig.getPath();
+        MULTICAST_ADDRESS = jsonConfig.getMulticastAddress();
+        MULTICAST_PORT = jsonConfig.getMulticastPort();
+        MULTICAST_DELAY_IN_SECONDS = jsonConfig.getMulticastDelayInSeconds();
+        UNICAST_PORT = jsonConfig.getUnicastPort();
 
         this.networkInterface = new NetChooser().getSelected();
         createMulticastSocket();
@@ -42,7 +56,7 @@ public class Program implements AppController {
 
     private void createMulticastSocket() {
         try {
-            this.multicastSocket = new MulticastSocket(PORT);
+            this.multicastSocket = new MulticastSocket(MULTICAST_PORT);
             this.multicastSocket.setInterface(networkInterface.getInetAddresses().nextElement());
         } catch (IOException e) {
             e.printStackTrace();
