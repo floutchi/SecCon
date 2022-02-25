@@ -1,9 +1,9 @@
 package secCon.PickLayaDeti;
 
 
-import secCon.PickLayaDeti.server.Server;
-import secCon.PickLayaDeti.thread.ClientRunnable;
-import secCon.PickLayaDeti.thread.MulticastSender;
+import secCon.PickLayaDeti.Server.Server;
+import secCon.PickLayaDeti.Thread.ClientRunnable;
+import secCon.PickLayaDeti.Thread.MulticastSender;
 import secCon.PickLayaDeti.repository.JSONConfig;
 import secCon.PickLayaDeti.utils.NetChooser;
 
@@ -61,24 +61,5 @@ public class Program implements AppController {
         } catch (IOException e) {
             e.printStackTrace();
         }
-    }
-
-    @Override
-    public void broadcastToAllClientsExceptMe(ClientRunnable clientRunnable, String line) {
-        for(ClientRunnable current : clients) {
-            if(current != clientRunnable) {
-                current.sendMessage(line);
-            }
-        }
-    }
-
-    @Override
-    public void registerClient(ClientRunnable clientRunnable) {
-
-    }
-
-    @Override
-    public void unregisterClient(ClientRunnable clientRunnable) {
-
     }
 }

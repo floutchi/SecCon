@@ -2,6 +2,7 @@ package secCon.PickLayaDeti.client;
 
 import secCon.PickLayaDeti.Thread.StorManager;
 import secCon.PickLayaDeti.domains.StorProcessor;
+import secCon.PickLayaDeti.fileManager.FileSender;
 
 import java.io.IOException;
 import java.io.OutputStreamWriter;
@@ -35,10 +36,14 @@ public class ClientRunnable implements Runnable {
             var toServer = new PrintWriter(new OutputStreamWriter(server.getOutputStream(), StandardCharsets.UTF_8), true);
 
             // Envoie le message pour valider la connexion.
-            toServer.print("Connecté au serveur \r\n");
             toServer.flush();
             storManager.addStorage(process);
 
+
+            // Envoie le fichier
+            FileSender fileSender = new FileSender("C:\\TEMP\\FFE");
+            fileSender.sendFile("aa.png", server.getOutputStream());
+            //TODO
 
         } catch (IOException ex) {
             System.out.println("Erreur lors de la connexion au serveur : " + ex.getMessage());

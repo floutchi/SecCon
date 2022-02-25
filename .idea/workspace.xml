@@ -4,27 +4,26 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="3ba9187d-69d7-43ee-9e4a-6418d73e8210" name="Changes" comment="Ajout de la configuration JSON">
-      <change afterPath="$PROJECT_DIR$/FileFrontEnd/src/main/java/secCon/PickLayaDeti/utils/FileSender.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/StorBackEnd/src/main/java/secCon/PickLayaDeti/utils/FileReceiver.java" afterDir="false" />
+    <list default="true" id="3ba9187d-69d7-43ee-9e4a-6418d73e8210" name="Changes" comment="Client en ClientRunnable">
       <change beforePath="$PROJECT_DIR$/.gradle/7.1/executionHistory/executionHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/7.1/executionHistory/executionHistory.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/7.1/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/7.1/executionHistory/executionHistory.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/7.1/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/7.1/fileHashes/fileHashes.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/7.1/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/7.1/fileHashes/fileHashes.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/FileFrontEnd/build/classes/java/main/secCon/PickLayaDeti/Program.class" beforeDir="false" afterPath="$PROJECT_DIR$/FileFrontEnd/build/classes/java/main/secCon/PickLayaDeti/Program.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FileFrontEnd/build/classes/java/main/secCon/PickLayaDeti/Thread/MulticastListener.class" beforeDir="false" afterPath="$PROJECT_DIR$/FileFrontEnd/build/classes/java/main/secCon/PickLayaDeti/Thread/MulticastListener.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/FileFrontEnd/build/tmp/compileJava/previous-compilation-data.bin" beforeDir="false" afterPath="$PROJECT_DIR$/FileFrontEnd/build/tmp/compileJava/previous-compilation-data.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FileFrontEnd/src/main/java/secCon/PickLayaDeti/Program.java" beforeDir="false" afterPath="$PROJECT_DIR$/FileFrontEnd/src/main/java/secCon/PickLayaDeti/Program.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FileFrontEnd/src/main/java/secCon/PickLayaDeti/client/Client.java" beforeDir="false" afterPath="$PROJECT_DIR$/FileFrontEnd/src/main/java/secCon/PickLayaDeti/client/ClientRunnable.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FileFrontEnd/src/main/java/secCon/PickLayaDeti/client/ClientRunnable.java" beforeDir="false" afterPath="$PROJECT_DIR$/FileFrontEnd/src/main/java/secCon/PickLayaDeti/client/ClientRunnable.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FileFrontEnd/src/main/java/secCon/PickLayaDeti/utils/FileSender.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/StorBackEnd/build/classes/java/main/secCon/PickLayaDeti/AppController.class" beforeDir="false" afterPath="$PROJECT_DIR$/StorBackEnd/build/classes/java/main/secCon/PickLayaDeti/AppController.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/StorBackEnd/build/classes/java/main/secCon/PickLayaDeti/Program.class" beforeDir="false" afterPath="$PROJECT_DIR$/StorBackEnd/build/classes/java/main/secCon/PickLayaDeti/Program.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/StorBackEnd/build/classes/java/main/secCon/PickLayaDeti/Server/Server.class" beforeDir="false" afterPath="$PROJECT_DIR$/StorBackEnd/build/classes/java/main/secCon/PickLayaDeti/Server/Server.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/StorBackEnd/build/classes/java/main/secCon/PickLayaDeti/Thread/MulticastSender.class" beforeDir="false" afterPath="$PROJECT_DIR$/StorBackEnd/build/classes/java/main/secCon/PickLayaDeti/Thread/MulticastSender.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/StorBackEnd/build/classes/java/main/secCon/PickLayaDeti/repository/JSONConfig.class" beforeDir="false" afterPath="$PROJECT_DIR$/StorBackEnd/build/classes/java/main/secCon/PickLayaDeti/repository/JSONConfig.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/StorBackEnd/build/tmp/compileJava/previous-compilation-data.bin" beforeDir="false" afterPath="$PROJECT_DIR$/StorBackEnd/build/tmp/compileJava/previous-compilation-data.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/StorBackEnd/src/main/java/secCon/PickLayaDeti/AppController.java" beforeDir="false" afterPath="$PROJECT_DIR$/StorBackEnd/src/main/java/secCon/PickLayaDeti/AppController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/StorBackEnd/src/main/java/secCon/PickLayaDeti/Program.java" beforeDir="false" afterPath="$PROJECT_DIR$/StorBackEnd/src/main/java/secCon/PickLayaDeti/Program.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/StorBackEnd/src/main/java/secCon/PickLayaDeti/Server/Server.java" beforeDir="false" afterPath="$PROJECT_DIR$/StorBackEnd/src/main/java/secCon/PickLayaDeti/Server/Server.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/StorBackEnd/src/main/java/secCon/PickLayaDeti/Thread/ClientRunnable.java" beforeDir="false" afterPath="$PROJECT_DIR$/StorBackEnd/src/main/java/secCon/PickLayaDeti/Thread/ClientRunnable.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/StorBackEnd/src/main/java/secCon/PickLayaDeti/utils/FileReceiver.java" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -67,6 +66,14 @@
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="GitSEFilterConfiguration">
+    <file-type-list>
+      <filtered-out-file-type name="LOCAL_BRANCH" />
+      <filtered-out-file-type name="REMOTE_BRANCH" />
+      <filtered-out-file-type name="TAG" />
+      <filtered-out-file-type name="COMMIT_BY_MESSAGE" />
+    </file-type-list>
+  </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
@@ -93,6 +100,7 @@
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
     <property name="node.js.selected.package.tslint" value="(autodetect)" />
+    <property name="nodejs_package_manager_path" value="npm" />
     <property name="project.structure.last.edited" value="Project" />
     <property name="project.structure.proportion" value="0.0" />
     <property name="project.structure.side.proportion" value="0.0" />
@@ -108,7 +116,7 @@
       <recent name="secCon.PickLayaDeti" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.SBE">
+  <component name="RunManager" selected="Application.FFE">
     <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
       <option name="arquillianRunConfiguration">
         <value>
@@ -134,8 +142,9 @@
       </method>
     </configuration>
     <configuration name="Program" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="ALTERNATIVE_JRE_PATH" value="11" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
       <option name="MAIN_CLASS_NAME" value="secCon.PickLayaDeti.Program" />
-      <module name="multi-gradle-secCon.StorBackEnd.main" />
       <extension name="coverage">
         <pattern>
           <option name="PATTERN" value="secCon.PickLayaDeti.*" />
@@ -202,8 +211,8 @@
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Gradle.multi-gradle-secCon [dependencies]" />
         <item itemvalue="Application.Program" />
+        <item itemvalue="Gradle.multi-gradle-secCon [dependencies]" />
         <item itemvalue="Application.Server" />
       </list>
     </recent_temporary>
@@ -220,7 +229,12 @@
       <workItem from="1645705789940" duration="4626000" />
       <workItem from="1645711183747" duration="8000" />
       <workItem from="1645711756295" duration="369000" />
-      <workItem from="1645786274952" duration="370000" />
+      <workItem from="1645786274952" duration="1199000" />
+      <workItem from="1645787814338" duration="498000" />
+      <workItem from="1645788403809" duration="229000" />
+      <workItem from="1645792192977" duration="1397000" />
+      <workItem from="1645796019795" duration="169000" />
+      <workItem from="1645796232518" duration="1035000" />
     </task>
     <task id="LOCAL-00001" summary="Séparation des deux programmes">
       <created>1645377433506</created>
@@ -236,7 +250,14 @@
       <option name="project" value="LOCAL" />
       <updated>1645774371563</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="Client en ClientRunnable">
+      <created>1645786662248</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1645786662248</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -256,9 +277,19 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Séparation des deux programmes" />
     <MESSAGE value="Ajouts de commentaire + Remise au propre" />
-    <option name="LAST_COMMIT_MESSAGE" value="Ajouts de commentaire + Remise au propre" />
+    <MESSAGE value="Client en ClientRunnable" />
+    <option name="LAST_COMMIT_MESSAGE" value="Client en ClientRunnable" />
   </component>
   <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/FileFrontEnd/src/main/java/secCon/PickLayaDeti/fileManager/FileSender.java</url>
+          <line>11</line>
+          <option name="timeStamp" value="5" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
     <pin-to-top-manager>
       <pinned-members>
         <PinnedItemInfo parentTag="secCon.PickLayaDeti.Thread.StorManager" memberName="servers" />

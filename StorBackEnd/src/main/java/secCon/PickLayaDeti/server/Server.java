@@ -2,6 +2,7 @@ package secCon.PickLayaDeti.Server;
 
 import secCon.PickLayaDeti.AppController;
 import secCon.PickLayaDeti.Thread.ClientRunnable;
+import secCon.PickLayaDeti.fileManager.FileReceiver;
 
 import java.io.*;
 
@@ -25,13 +26,9 @@ public class Server {
             while(!stop) {
                 Socket client = server.accept();
 
-
-                BufferedReader fromClient = new BufferedReader(new InputStreamReader(client.getInputStream(), Charset.forName("UTF-8")));
-                PrintWriter toClient = new PrintWriter(new OutputStreamWriter(client.getOutputStream(), Charset.forName("UTF-8")), true);
-                String ligne = readLine(fromClient);
-                System.out.println("Ligne reçue: " + (ligne == null ? "" : ligne));
-                toClient.print("Bonjour, tu vas bien ?\r\n");
-                toClient.flush();
+                //Recoit le fichier
+                FileReceiver fileReceiver = new FileReceiver("C:\\TEMP\\SBE");
+                fileReceiver.receiveFile(client.getInputStream(), "aa.png", 154727);
                 client.close();
                 isConnected = false;
             }

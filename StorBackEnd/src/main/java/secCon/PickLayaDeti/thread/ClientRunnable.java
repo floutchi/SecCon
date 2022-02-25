@@ -47,7 +47,7 @@ public class ClientRunnable implements Runnable {
             while(connected && !stop) {
                 String line = in.readLine();
                 if(line != null) {
-                    controller.broadcastToAllClientsExceptMe(this, line);
+
                 } else {
                     stop = true;
                 }
