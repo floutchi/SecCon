@@ -23,17 +23,17 @@ public class MulticastSender implements Runnable {
 
     @Override
     public void run() {
-        String message = "HELLO " + Program.DOMAIN + " " + Program.PORT;
+        String message = "HELLO " + Program.UNIQUE_ID + " " + Program.UNICAST_PORT;
         try {
             while(!stop) {
                 DatagramPacket dp = new DatagramPacket(message.getBytes(StandardCharsets.UTF_8),
                         message.length(),
-                        InetAddress.getByName(Program.GROUP),
-                        Program.PORT);
+                        InetAddress.getByName(Program.MULTICAST_ADDRESS),
+                        Program.MULTICAST_PORT);
 
                 multicastSocket.send(dp);
                 System.out.println("[MulticastSender] Sending: " + message);
-                Thread.sleep(30000);
+                Thread.sleep(Program.MULTICAST_DELAY_IN_SECONDS * 1000L);
             }
         } catch (IOException | InterruptedException e) {
             e.printStackTrace();
