@@ -1,13 +1,11 @@
 package secCon.PickLayaDeti.Thread;
 
 import secCon.PickLayaDeti.Program;
-import secCon.PickLayaDeti.client.Client;
 
 import java.io.IOException;
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
 import java.net.InetAddress;
-import java.sql.SQLOutput;
 
 public class MulticastListener implements Runnable{
 
@@ -20,14 +18,14 @@ public class MulticastListener implements Runnable{
         this.receiveStoreBackEnd = receiveStoreBackEnd;
         this.buffer = buffer;
         this.program = program;
-        System.out.println("[MulticastSender] Setting interface");
+        System.out.println("[MulticastListener] Setting interface");
     }
 
 
 
     @Override
     public void run() {
-        System.out.println("[MulticastSender] Started");
+        System.out.println("[MulticastListener] Started");
 
         // Déclaration du buffer
         var buffered = new DatagramPacket(buffer, 1024);
@@ -42,7 +40,7 @@ public class MulticastListener implements Runnable{
 
                 // Réceptionne et écrit le message reçu par le multicast.
                 System.out.println("[MulticastListener] " + received);
-                program.setInformations(getInformations(received, buffered.getAddress()));
+                program.createClient(getInformations(received, buffered.getAddress()));
                 //TODO : une fois le message reçu, effectuer connexion TCP
 
             }

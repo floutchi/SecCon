@@ -1,6 +1,7 @@
 package secCon.PickLayaDeti.Server;
 
 import secCon.PickLayaDeti.AppController;
+import secCon.PickLayaDeti.Thread.ClientRunnable;
 
 import java.io.*;
 
@@ -9,14 +10,12 @@ import java.net.Socket;
 import java.nio.charset.Charset;
 
 public class Server {
-    private AppController controller;
-    private int listeningPort;
+    private final int listeningPort;
     private boolean stop = false;
     private boolean isConnected = false;
 
     public Server(AppController controller) {
         this.listeningPort = 15201;
-        this.controller = controller;
     }
 
     public void startListening() {
