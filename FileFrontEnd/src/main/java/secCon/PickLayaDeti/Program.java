@@ -1,7 +1,9 @@
 package secCon.PickLayaDeti;
 
+import secCon.PickLayaDeti.Thread.StorManager;
 import secCon.PickLayaDeti.Thread.MulticastListener;
 import secCon.PickLayaDeti.client.Client;
+import secCon.PickLayaDeti.domains.StorProcessor;
 import secCon.PickLayaDeti.netChooser.NetChooser;
 
 import java.io.IOException;
@@ -14,21 +16,20 @@ public class Program {
     private static final int DEFAULT_PORT = 15201;
 
     private static byte[] buffer = new byte[1024];
+    private final StorManager storManager;
     private MulticastSocket multicastSocket;
     private final NetworkInterface networkInterface;
     private Client client;
 
     public Program() {
+        this.storManager = new StorManager();
         this.networkInterface = new NetChooser().getSelected();
-        client = null;
         createMulticastSocket();
 
         // Le Multicast se rend disponible pour recevoir l'information du storeBackEnd.
         MulticastListener multicastListener = new MulticastListener(multicastSocket, buffer, this);
         Thread multicastListenerThread = new Thread(multicastListener);
         multicastListenerThread.start();
-
-        //var client = new Client();
     }
 
     private void createMulticastSocket() {
@@ -50,9 +51,12 @@ public class Program {
         new Program();
     }
 
-    public void setInformations(String[] informations) {
+    public void createClient(String[] informations) {
         System.out.printf("[Program] Receiving HELLO from %s with ID %s (unicast port: %s) \r\n", informations[2], informations[0], informations[1]);
         if (client != null) return;
-        this.client = new Client(informations[2], Integer.parseInt(informations[1]));
+
+        var process = new StorProcessor(informations[0],  informations[2], Integer.parseInt(informations[1]));
+        this.client = new Client(process, this.storManager);
     }
+
 }

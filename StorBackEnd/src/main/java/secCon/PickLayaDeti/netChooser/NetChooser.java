@@ -10,7 +10,7 @@ import java.util.Scanner;
 
 public class NetChooser {
     private List<NetworkInterface> interfaces;
-    private NetworkInterface selected;
+    private final NetworkInterface selected;
 
     public NetChooser() {
         loadInterfaces();
@@ -19,7 +19,7 @@ public class NetChooser {
         for(int index=0; index < allInterfaceNames.length; ++index) {
             System.out.printf("%d. %s\n", index, allInterfaceNames[index]);
         }
-        System.out.printf("Select your interface :");
+        System.out.print("Select your interface :");
         selected = getInterfacesByIndex(console.nextInt());
         System.out.printf("Selected interface: %s\n", selected.getDisplayName());
 
