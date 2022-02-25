@@ -1,0 +1,8 @@
+{
+  "uniqueID": "picklayadeti.sbe22.1",
+  "path": "C:\\TEMP\\SBE",
+  "multicastAddress": "224.66.66.1",
+  "multicastPort": 15201,
+  "multicastDelayInSeconds": 30,
+  "unicastPort": 15201
+}
