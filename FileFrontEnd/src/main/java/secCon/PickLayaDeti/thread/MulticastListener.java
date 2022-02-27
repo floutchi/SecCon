@@ -25,7 +25,7 @@ public class MulticastListener implements Runnable{
 
     @Override
     public void run() {
-        System.out.println("[MulticastListener] Started");
+        System.out.println("= [MulticastListener] Started");
 
         // Déclaration du buffer
         var buffered = new DatagramPacket(buffer, 1024);
@@ -39,12 +39,10 @@ public class MulticastListener implements Runnable{
                 String received = new String(buffered.getData(), 0, buffered.getLength());
 
                 // Réceptionne et écrit le message reçu par le multicast.
-                System.out.println("[MulticastListener] " + received);
+                System.out.println("> [MulticastListener] " + received);
                 program.createClient(getInformations(received, buffered.getAddress()));
-                //TODO : une fois le message reçu, effectuer connexion TCP
 
             }
-            System.out.println("Sortie de la boucle.");
 
         } catch (IOException e) {
             System.out.println("Erreur lors de la réception du Multicast : " + e.getMessage());

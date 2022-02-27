@@ -2,8 +2,8 @@ package secCon.PickLayaDeti;
 
 import secCon.PickLayaDeti.Thread.StorManager;
 import secCon.PickLayaDeti.Thread.MulticastListener;
-import secCon.PickLayaDeti.client.ClientRunnable;
-import secCon.PickLayaDeti.domains.StorProcessor;
+import secCon.PickLayaDeti.Thread.StorProcessorRunnable;
+import secCon.PickLayaDeti.domains.ServerInfo;
 import secCon.PickLayaDeti.utils.NetChooser;
 
 import java.io.IOException;
@@ -19,7 +19,7 @@ public class Program {
     private final StorManager storManager;
     private MulticastSocket multicastSocket;
     private final NetworkInterface networkInterface;
-    private ClientRunnable client;
+    private StorProcessorRunnable client;
 
     public Program() {
         this.storManager = new StorManager();
@@ -55,8 +55,8 @@ public class Program {
         System.out.printf("[Program] Receiving HELLO from %s with ID %s (unicast port: %s) \r\n", informations[2], informations[0], informations[1]);
         if (client != null) return;
 
-        var process = new StorProcessor(informations[0],  informations[2], Integer.parseInt(informations[1]));
-        this.client = new ClientRunnable(process, this.storManager);
+        var process = new ServerInfo(informations[0],  informations[2], Integer.parseInt(informations[1]));
+        this.client = new StorProcessorRunnable(process, this.storManager);
         Thread clientThread = new Thread(client);
         clientThread.start();
     }

@@ -1,12 +1,12 @@
 package secCon.PickLayaDeti.domains;
 
-public class StorProcessor {
+public class ServerInfo {
 
     private final String domain;
     private final String ipAddress;
     private final int port;
 
-    public StorProcessor(String domain, String ipAddress, int port) {
+    public ServerInfo(String domain, String ipAddress, int port) {
         this.domain = domain;
         this.ipAddress = ipAddress;
         this.port = port;

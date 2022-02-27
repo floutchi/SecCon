@@ -1,20 +1,23 @@
 package secCon.PickLayaDeti.Thread;
 
-import secCon.PickLayaDeti.domains.StorProcessor;
+import secCon.PickLayaDeti.domains.ServerInfo;
 
-import java.net.Socket;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 
 public class StorManager {
-    List<StorProcessor> servers;
+    Map<String, Integer> servers;
 
     public StorManager() {
-        this.servers = new ArrayList<>();
+        this.servers = new HashMap<>();
     }
 
-    public void addStorage(StorProcessor server) {
-        System.out.printf("[StorManager][addStorage] added [%d] %s", server.getPort(), server.getDomain());
-        servers.add(server);
+    public void addStorage(ServerInfo server) {
+        System.out.printf("[StorManager][addStorage] added [%d] %s\r\n", server.getPort(), server.getDomain());
+        servers.put(server.getDomain(), server.getPort());
+    }
+
+    public boolean isSBEAlreadyIn(ServerInfo server) {
+        return servers.containsKey(server.getDomain());
     }
 }

@@ -1,7 +1,6 @@
-package secCon.PickLayaDeti.client;
+package secCon.PickLayaDeti.Thread;
 
-import secCon.PickLayaDeti.Thread.StorManager;
-import secCon.PickLayaDeti.domains.StorProcessor;
+import secCon.PickLayaDeti.domains.ServerInfo;
 import secCon.PickLayaDeti.fileManager.FileSender;
 
 import java.io.IOException;
@@ -10,15 +9,15 @@ import java.io.PrintWriter;
 import java.net.Socket;
 import java.nio.charset.StandardCharsets;
 
-public class ClientRunnable implements Runnable {
+public class StorProcessorRunnable implements Runnable {
 
-    StorProcessor process;
+    ServerInfo process;
     StorManager storManager;
     String ipAddress;
     int port;
     String domain;
 
-    public ClientRunnable(StorProcessor process, StorManager storManager) {
+    public StorProcessorRunnable(ServerInfo process, StorManager storManager) {
         this.process = process;
         this.storManager = storManager;
         ipAddress = process.getIpAddress();
@@ -29,7 +28,7 @@ public class ClientRunnable implements Runnable {
     @Override
     public void run() {
         // Affichage la demande de connexion
-        System.out.printf("Connexion en cours à %s sur le port %d\r\n", ipAddress, port);
+        System.out.printf("[StorProcessorRunnable][run] Attempting connection to %s:%d\r\n", ipAddress, port);
 
         try (var server = new Socket(ipAddress, port)) {
             // Déclare une sortie pour envoyer un message qui va vérifier la connexion.
@@ -37,13 +36,13 @@ public class ClientRunnable implements Runnable {
 
             // Envoie le message pour valider la connexion.
             toServer.flush();
-            storManager.addStorage(process);
-
+            if(!storManager.isSBEAlreadyIn(process)) {
+                storManager.addStorage(process);
+            }
 
             // Envoie le fichier
-            FileSender fileSender = new FileSender("C:\\TEMP\\FFE");
-            fileSender.sendFile("aa.png", server.getOutputStream());
-            //TODO
+            //FileSender fileSender = new FileSender("C:\\TEMP\\FFE");
+            //fileSender.sendFile("aa.png", server.getOutputStream());
 
         } catch (IOException ex) {
             System.out.println("Erreur lors de la connexion au serveur : " + ex.getMessage());
