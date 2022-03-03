@@ -1,14 +1,12 @@
 package secCon.PickLayaDeti.Server;
 
 import secCon.PickLayaDeti.AppController;
-import secCon.PickLayaDeti.thread.ClientRunnable;
 import secCon.PickLayaDeti.fileManager.FileReceiver;
 
 import java.io.*;
 
 import java.net.ServerSocket;
 import java.net.Socket;
-import java.nio.charset.Charset;
 
 public class Server {
     private final int listeningPort;

@@ -4,13 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="3ba9187d-69d7-43ee-9e4a-6418d73e8210" name="Changes" comment="Correct ajout et reception de fichier">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FileFrontEnd/src/main/java/secCon/PickLayaDeti/Program.java" beforeDir="false" afterPath="$PROJECT_DIR$/FileFrontEnd/src/main/java/secCon/PickLayaDeti/Program.java" afterDir="false" />
+    <list default="true" id="3ba9187d-69d7-43ee-9e4a-6418d73e8210" name="Changes" comment="Refactor">
       <change beforePath="$PROJECT_DIR$/FileFrontEnd/src/main/java/secCon/PickLayaDeti/Thread/MulticastListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/FileFrontEnd/src/main/java/secCon/PickLayaDeti/Thread/MulticastListener.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FileFrontEnd/src/main/java/secCon/PickLayaDeti/Thread/StorProcessorRunnable.java" beforeDir="false" afterPath="$PROJECT_DIR$/FileFrontEnd/src/main/java/secCon/PickLayaDeti/Thread/StorProcessor.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/StorBackEnd/src/main/java/secCon/PickLayaDeti/Server/Server.java" beforeDir="false" afterPath="$PROJECT_DIR$/StorBackEnd/src/main/java/secCon/PickLayaDeti/Server/Server.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/StorBackEnd/src/main/java/secCon/PickLayaDeti/Thread/ClientRunnable.java" beforeDir="false" afterPath="$PROJECT_DIR$/StorBackEnd/src/main/java/secCon/PickLayaDeti/Thread/ClientRunnable.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/StorBackEnd/src/main/java/secCon/PickLayaDeti/thread/ClientRunnable.java" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -104,17 +102,6 @@
     </key>
   </component>
   <component name="RunManager" selected="Application.FFE">
-    <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
-      <option name="arquillianRunConfiguration">
-        <value>
-          <option name="containerStateName" value="" />
-        </value>
-      </option>
-      <option name="TEST_OBJECT" value="class" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <configuration name="FFE" type="Application" factoryName="Application" temporary="true">
       <option name="MAIN_CLASS_NAME" value="secCon.PickLayaDeti.Program" />
       <module name="ProjetReseau-secCon-PickLayaDeti.FileFrontEnd.main" />
@@ -164,6 +151,17 @@
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
+      <option name="arquillianRunConfiguration">
+        <value>
+          <option name="containerStateName" value="" />
+        </value>
+      </option>
+      <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -276,7 +274,8 @@
     <MESSAGE value="Ajouts de commentaire + Remise au propre" />
     <MESSAGE value="Client en ClientRunnable" />
     <MESSAGE value="Correct ajout et reception de fichier" />
-    <option name="LAST_COMMIT_MESSAGE" value="Correct ajout et reception de fichier" />
+    <MESSAGE value="Refactor" />
+    <option name="LAST_COMMIT_MESSAGE" value="Refactor" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
