@@ -1,9 +1,10 @@
 package secCon.PickLayaDeti;
 
-import secCon.PickLayaDeti.Thread.StorManager;
-import secCon.PickLayaDeti.Thread.MulticastListener;
-import secCon.PickLayaDeti.Thread.StorProcessor;
+import secCon.PickLayaDeti.thread.StorManager;
+import secCon.PickLayaDeti.thread.MulticastListener;
+import secCon.PickLayaDeti.thread.StorProcessor;
 import secCon.PickLayaDeti.domains.ServerInfo;
+import secCon.PickLayaDeti.domains.TaskProcessor;
 import secCon.PickLayaDeti.utils.NetChooser;
 
 import java.io.IOException;

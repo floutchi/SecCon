@@ -1,4 +1,4 @@
-package secCon.PickLayaDeti.Thread;
+package secCon.PickLayaDeti.thread;
 
 import secCon.PickLayaDeti.AppController;
 
@@ -6,7 +6,7 @@ import java.io.*;
 import java.net.Socket;
 import java.nio.charset.StandardCharsets;
 
-public class ClientRunnable implements Runnable {
+public class ClientHandler implements Runnable {
 
     private Socket client;
     private AppController controller;
@@ -15,7 +15,7 @@ public class ClientRunnable implements Runnable {
     private PrintWriter out;
     private BufferedReader in;
 
-    public ClientRunnable(Socket client, AppController controller) {
+    public ClientHandler(Socket client, AppController controller) {
         try {
             this.client = client;
             this.controller = controller;
@@ -47,7 +47,7 @@ public class ClientRunnable implements Runnable {
             while(connected && !stop) {
                 String line = in.readLine();
                 if(line != null) {
-                    controller.broadcastToAllClientsExceptMe(this, line);
+
                 } else {
                     stop = true;
                 }

@@ -2,9 +2,9 @@ package secCon.PickLayaDeti;
 
 
 import secCon.PickLayaDeti.Server.Server;
-import secCon.PickLayaDeti.Thread.ClientRunnable;
-import secCon.PickLayaDeti.Thread.MulticastSender;
 import secCon.PickLayaDeti.repository.JSONConfig;
+import secCon.PickLayaDeti.thread.ClientHandler;
+import secCon.PickLayaDeti.thread.MulticastSender;
 import secCon.PickLayaDeti.utils.NetChooser;
 
 import java.io.IOException;
@@ -27,7 +27,7 @@ public class Program implements AppController {
 
     private MulticastSocket multicastSocket;
     private final NetworkInterface networkInterface;
-    private List<ClientRunnable> clients;
+    private List<ClientHandler> clients;
 
     public static void main(String[] args) {
         new Program();
