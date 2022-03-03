@@ -13,20 +13,17 @@ public class StorProcessor implements Runnable {
 
     ServerInfo process;
     StorManager storManager;
-    String ipAddress;
-    int port;
-    String domain;
 
     public StorProcessor(ServerInfo process, StorManager storManager) {
         this.process = process;
         this.storManager = storManager;
-        ipAddress = process.getIpAddress();
-        port = process.getPort();
-        domain = process.getDomain();
     }
 
     @Override
     public void run() {
+       var ipAddress = process.getIpAddress();
+       var port = process.getPort();
+
         // Affichage la demande de connexion
         System.out.printf("[StorProcessorRunnable][run] Attempting connection to %s:%d\r\n", ipAddress, port);
 
