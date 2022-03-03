@@ -1,7 +1,7 @@
 package secCon.PickLayaDeti.Server;
 
 import secCon.PickLayaDeti.AppController;
-import secCon.PickLayaDeti.Thread.ClientRunnable;
+import secCon.PickLayaDeti.thread.ClientRunnable;
 import secCon.PickLayaDeti.fileManager.FileReceiver;
 
 import java.io.*;

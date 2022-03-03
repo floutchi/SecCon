@@ -1,6 +1,6 @@
-package secCon.PickLayaDeti.Thread;
+package secCon.PickLayaDeti.thread;
 
-public class ClientRunnable implements Runnable {
+public class ClientHandler implements Runnable {
 
     @Override
     public void run() {

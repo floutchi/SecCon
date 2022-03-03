@@ -1,4 +1,4 @@
-package secCon.PickLayaDeti.Thread;
+package secCon.PickLayaDeti.thread;
 
 import secCon.PickLayaDeti.AppController;
 

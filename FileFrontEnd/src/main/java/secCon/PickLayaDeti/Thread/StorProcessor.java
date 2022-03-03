@@ -1,15 +1,15 @@
-package secCon.PickLayaDeti.Thread;
+package secCon.PickLayaDeti.thread;
 
 import secCon.PickLayaDeti.domains.ServerInfo;
-import secCon.PickLayaDeti.fileManager.FileSender;
 
+import secCon.PickLayaDeti.thread.*;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
 import java.net.Socket;
 import java.nio.charset.StandardCharsets;
 
-public class StorProcessorRunnable implements Runnable {
+public class StorProcessor implements Runnable {
 
     ServerInfo process;
     StorManager storManager;
@@ -17,7 +17,7 @@ public class StorProcessorRunnable implements Runnable {
     int port;
     String domain;
 
-    public StorProcessorRunnable(ServerInfo process, StorManager storManager) {
+    public StorProcessor(ServerInfo process, StorManager storManager) {
         this.process = process;
         this.storManager = storManager;
         ipAddress = process.getIpAddress();
