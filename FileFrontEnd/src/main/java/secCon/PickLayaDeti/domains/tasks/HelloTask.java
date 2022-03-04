@@ -1,9 +1,11 @@
-package secCon.PickLayaDeti.domains;
+package secCon.PickLayaDeti.domains.tasks;
+
+import secCon.PickLayaDeti.domains.tasks.interfaces.TaskManager;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class HelloTask implements TaskProcessor {
+public class HelloTask implements TaskManager {
 
     @Override
     public boolean check(String message){
