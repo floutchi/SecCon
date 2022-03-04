@@ -15,6 +15,11 @@ public class SignUpTask implements TaskManager {
 
     @Override
     public void execute(String message) {
+        // 1. Desplit le regex
+        // 2. Verifier si login existe : Si oui, sortie
+        // 3. Générer clé AES
+        // 4. Hachage mdp (SHA-384)
+        // 5. Ajout clé + login + mdp haché dans fichier Json
 
     }
 }

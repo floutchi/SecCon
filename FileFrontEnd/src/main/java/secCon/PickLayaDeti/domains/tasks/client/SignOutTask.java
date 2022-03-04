@@ -15,6 +15,6 @@ public class SignOutTask implements TaskManager {
 
     @Override
     public void execute(String message) {
-
+        // ciao
     }
 }

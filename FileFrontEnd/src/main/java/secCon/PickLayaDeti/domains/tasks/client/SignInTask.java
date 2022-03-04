@@ -16,6 +16,7 @@ public class SignInTask implements TaskManager {
 
     @Override
     public void execute(String message) {
-        // TODO
+        // 1. Desplit le regex
+        // 2. Vérifier login + mdp correspondant (clé AES)
     }
 }
