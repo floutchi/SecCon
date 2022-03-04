@@ -8,7 +8,7 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 
-public class JSONConfig implements SBEConfig {
+public class JSONConfig {
 
     private JSONObject configObject;
     private final String uniqueID;

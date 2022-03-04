@@ -1,5 +1,6 @@
 package secCon.PickLayaDeti;
 
+import secCon.PickLayaDeti.repository.JSONConfig;
 import secCon.PickLayaDeti.server.Server;
 import secCon.PickLayaDeti.thread.MulticastListener;
 import secCon.PickLayaDeti.thread.StorManager;
@@ -13,8 +14,13 @@ import java.net.MulticastSocket;
 import java.net.NetworkInterface;
 
 public class Program {
-    private static final String DEFAULT_DESTINATION = "224.66.66.1";
-    private static final int DEFAULT_PORT = 15201;
+
+    private final JSONConfig jsonConfig = new JSONConfig();
+
+    public static String MULTICAST_ADDRESS = "";
+    public static int MULTICAST_PORT = 0;
+    public static String PATH = "";
+
 
     private static byte[] buffer = new byte[1024];
     private final StorManager storManager;
@@ -23,6 +29,12 @@ public class Program {
     private StorProcessor client;
 
     public Program() {
+        // Initialisation attributs
+        MULTICAST_ADDRESS = jsonConfig.getMulticastAddress();
+        MULTICAST_PORT = jsonConfig.getMulticastPort();
+        PATH = jsonConfig.getPath();
+
+
         // Démarrage du serveur pour le client.
         var server = new Server();
         System.out.printf("Démarrage du serveur sur le port %s", 15201);
@@ -41,8 +53,8 @@ public class Program {
 
     private void createMulticastSocket() {
         try  {
-            this.multicastSocket = new MulticastSocket(DEFAULT_PORT);
-            this.multicastSocket.joinGroup(InetAddress.getByName(DEFAULT_DESTINATION));
+            this.multicastSocket = new MulticastSocket(MULTICAST_PORT);
+            this.multicastSocket.joinGroup(InetAddress.getByName(MULTICAST_ADDRESS));
 
             // Déclare l'interface pour pouvoir communiquer sur le réseau aux autres Multicast.
             multicastSocket.setInterface(networkInterface.getInetAddresses().nextElement());
