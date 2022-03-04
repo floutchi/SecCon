@@ -5,9 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="3ba9187d-69d7-43ee-9e4a-6418d73e8210" name="Changes" comment="AES key + etapes synthétiques des execute">
-      <change afterPath="$PROJECT_DIR$/FileFrontEnd/src/main/java/secCon/PickLayaDeti/domains/Clients.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/FileFrontEnd/src/main/java/secCon/PickLayaDeti/domains/StoredFiles.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/runConfigurations.xml" beforeDir="false" />
+      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -295,6 +293,7 @@
         </entry>
       </map>
     </option>
+    <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Séparation des deux programmes" />
@@ -304,7 +303,8 @@
     <MESSAGE value="Refactor" />
     <MESSAGE value="Regex" />
     <MESSAGE value="AES key + etapes synthétiques des execute" />
-    <option name="LAST_COMMIT_MESSAGE" value="AES key + etapes synthétiques des execute" />
+    <MESSAGE value="Execute SIGNUP" />
+    <option name="LAST_COMMIT_MESSAGE" value="Execute SIGNUP" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
