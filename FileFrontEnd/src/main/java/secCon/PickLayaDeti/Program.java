@@ -1,5 +1,6 @@
 package secCon.PickLayaDeti;
 
+import secCon.PickLayaDeti.server.Server;
 import secCon.PickLayaDeti.thread.MulticastListener;
 import secCon.PickLayaDeti.thread.StorManager;
 import secCon.PickLayaDeti.thread.StorProcessor;
@@ -22,6 +23,12 @@ public class Program {
     private StorProcessor client;
 
     public Program() {
+        // Démarrage du serveur pour le client.
+        var server = new Server();
+        System.out.printf("Démarrage du serveur sur le port %s", 15201);
+        server.startListening();
+
+        // Démarrage du multicast pour le SBE
         this.storManager = new StorManager();
         this.networkInterface = new NetChooser().getSelected();
         createMulticastSocket();
