@@ -1,14 +1,14 @@
-package secCon.PickLayaDeti.domains.tasks;
+package secCon.PickLayaDeti.domains.tasks.sbe;
 
 import secCon.PickLayaDeti.domains.tasks.interfaces.TaskManager;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class FileListTask implements TaskManager {
+public class SendResultTask implements TaskManager {
     @Override
     public boolean check(String message) {
-        Pattern pattern = Pattern.compile("^(SAVEFILE_OK|SAVEFILE_ERROR)$");
+        Pattern pattern = Pattern.compile("^(SEND_ERROR|SEND_OK)$");
         Matcher matcher = pattern.matcher(message);
         return matcher.matches();
     }

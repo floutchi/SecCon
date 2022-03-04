@@ -1,4 +1,4 @@
-package secCon.PickLayaDeti.domains.tasks;
+package secCon.PickLayaDeti.domains.tasks.client;
 
 import secCon.PickLayaDeti.domains.tasks.interfaces.TaskManager;
 

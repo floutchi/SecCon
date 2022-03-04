@@ -41,7 +41,6 @@ public class MulticastListener implements Runnable{
                 // Réceptionne et écrit le message reçu par le multicast.
                 System.out.println("[MulticastListener] " + received);
                 program.createClient(getInformations(received, buffered.getAddress()));
-                //TODO : une fois le message reçu, effectuer connexion TCP
 
             }
             System.out.println("Sortie de la boucle.");
