@@ -1,8 +1,7 @@
 package secCon.PickLayaDeti;
 
-
-import secCon.PickLayaDeti.Server.Server;
 import secCon.PickLayaDeti.repository.JSONConfig;
+import secCon.PickLayaDeti.server.Server;
 import secCon.PickLayaDeti.thread.ClientHandler;
 import secCon.PickLayaDeti.thread.MulticastSender;
 import secCon.PickLayaDeti.utils.NetChooser;

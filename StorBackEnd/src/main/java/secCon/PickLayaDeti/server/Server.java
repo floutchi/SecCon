@@ -1,10 +1,10 @@
-package secCon.PickLayaDeti.Server;
+package secCon.PickLayaDeti.server;
 
 import secCon.PickLayaDeti.AppController;
 import secCon.PickLayaDeti.fileManager.FileReceiver;
 
-import java.io.*;
-
+import java.io.BufferedReader;
+import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
 
@@ -19,19 +19,20 @@ public class Server {
 
     public void startListening() {
         try {
-            ServerSocket server = new ServerSocket(listeningPort);
+            try (ServerSocket server = new ServerSocket(listeningPort)) {
 
-            while(!stop) {
-                Socket client = server.accept();
+                while (!stop) {
+                    Socket client = server.accept();
 
-                //Recoit le fichier
-                FileReceiver fileReceiver = new FileReceiver("C:\\TEMP\\SBE");
-                fileReceiver.receiveFile(client.getInputStream(), "aa.png", 154727);
-                client.close();
-                isConnected = false;
+                    //Recoit le fichier
+                    FileReceiver fileReceiver = new FileReceiver("C:\\TEMP\\SBE");
+                    fileReceiver.receiveFile(client.getInputStream(), "aa.png", 154727);
+                    client.close();
+                    isConnected = false;
+                }
+
+                server.close();
             }
-
-            server.close();
         } catch (IOException ex) {
             ex.printStackTrace();
         }
@@ -48,4 +49,3 @@ public class Server {
         stop = true;
     }
 }
-
