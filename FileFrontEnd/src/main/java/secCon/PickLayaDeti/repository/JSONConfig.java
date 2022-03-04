@@ -21,6 +21,10 @@ public class JSONConfig {
         this.path = (String) configObject.get("path");
     }
 
+    public String getJSONString() {
+        return configObject.toJSONString();
+    }
+
     private void readJson() {
         JSONParser jsonParser = new JSONParser();
 
