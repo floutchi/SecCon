@@ -5,12 +5,19 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="3ba9187d-69d7-43ee-9e4a-6418d73e8210" name="Changes" comment="Regex">
-      <change beforePath="$PROJECT_DIR$/FileFrontEnd/src/main/java/secCon/PickLayaDeti/Program.java" beforeDir="false" afterPath="$PROJECT_DIR$/FileFrontEnd/src/main/java/secCon/PickLayaDeti/Program.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FileFrontEnd/src/main/java/secCon/PickLayaDeti/Thread/ClientHandler.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/FileFrontEnd/src/main/java/secCon/PickLayaDeti/Thread/StorManager.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/FileFrontEnd/src/main/java/secCon/PickLayaDeti/Thread/StorProcessor.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/StorBackEnd/src/main/java/secCon/PickLayaDeti/Thread/ClientHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/StorBackEnd/src/main/java/secCon/PickLayaDeti/thread/ClientHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/StorBackEnd/src/main/java/secCon/PickLayaDeti/Thread/MulticastSender.java" beforeDir="false" afterPath="$PROJECT_DIR$/StorBackEnd/src/main/java/secCon/PickLayaDeti/thread/MulticastSender.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/runConfigurations.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/FileFrontEnd/src/main/java/secCon/PickLayaDeti/domains/tasks/client/GetFileTask.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/FileFrontEnd/src/main/java/secCon/PickLayaDeti/domains/tasks/client/SaveFileTask.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/FileFrontEnd/src/main/java/secCon/PickLayaDeti/domains/tasks/sbe/RetrieveResultTask.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FileFrontEnd/src/main/java/secCon/PickLayaDeti/domains/tasks/EraseResultTask.java" beforeDir="false" afterPath="$PROJECT_DIR$/FileFrontEnd/src/main/java/secCon/PickLayaDeti/domains/tasks/sbe/EraseResultTask.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FileFrontEnd/src/main/java/secCon/PickLayaDeti/domains/tasks/FileListTask.java" beforeDir="false" afterPath="$PROJECT_DIR$/FileFrontEnd/src/main/java/secCon/PickLayaDeti/domains/tasks/client/FileListTask.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FileFrontEnd/src/main/java/secCon/PickLayaDeti/domains/tasks/HelloTask.java" beforeDir="false" afterPath="$PROJECT_DIR$/FileFrontEnd/src/main/java/secCon/PickLayaDeti/domains/tasks/sbe/HelloTask.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FileFrontEnd/src/main/java/secCon/PickLayaDeti/domains/tasks/SbeSendResultTask.java" beforeDir="false" afterPath="$PROJECT_DIR$/FileFrontEnd/src/main/java/secCon/PickLayaDeti/domains/tasks/sbe/SendResultTask.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FileFrontEnd/src/main/java/secCon/PickLayaDeti/domains/tasks/SignInTask.java" beforeDir="false" afterPath="$PROJECT_DIR$/FileFrontEnd/src/main/java/secCon/PickLayaDeti/domains/tasks/client/SignInTask.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FileFrontEnd/src/main/java/secCon/PickLayaDeti/domains/tasks/SignOutTask.java" beforeDir="false" afterPath="$PROJECT_DIR$/FileFrontEnd/src/main/java/secCon/PickLayaDeti/domains/tasks/client/SignOutTask.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FileFrontEnd/src/main/java/secCon/PickLayaDeti/domains/tasks/SignUpTask.java" beforeDir="false" afterPath="$PROJECT_DIR$/FileFrontEnd/src/main/java/secCon/PickLayaDeti/domains/tasks/client/SignUpTask.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FileFrontEnd/src/main/java/secCon/PickLayaDeti/thread/MulticastListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/FileFrontEnd/src/main/java/secCon/PickLayaDeti/thread/MulticastListener.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -80,6 +87,7 @@
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
@@ -225,6 +233,7 @@
       <workItem from="1645801313288" duration="123000" />
       <workItem from="1645990420445" duration="1650000" />
       <workItem from="1646378587378" duration="2054000" />
+      <workItem from="1646381587054" duration="319000" />
     </task>
     <task id="LOCAL-00001" summary="Séparation des deux programmes">
       <created>1645377433506</created>
@@ -277,6 +286,7 @@
         </entry>
       </map>
     </option>
+    <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Séparation des deux programmes" />
