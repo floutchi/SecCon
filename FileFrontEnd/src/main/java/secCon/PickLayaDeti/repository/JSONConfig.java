@@ -12,12 +12,14 @@ public class JSONConfig {
     private JSONObject configObject;
     private final String multicastAddress;
     private final int multicastPort;
+    private final int unicastPort;
     private final String path;
 
     public JSONConfig() {
         readJson();
         this.multicastAddress = (String) configObject.get("multicastAddress");
         this.multicastPort = ((Long) configObject.get("multicastPort")).intValue();
+        this.unicastPort = ((Long) configObject.get("unicastPort")).intValue();
         this.path = (String) configObject.get("path");
     }
 
@@ -44,6 +46,7 @@ public class JSONConfig {
     public int getMulticastPort() {
         return multicastPort;
     }
+    public int getUnicastPort() { return unicastPort; }
 
     public String getPath() {
         return path;

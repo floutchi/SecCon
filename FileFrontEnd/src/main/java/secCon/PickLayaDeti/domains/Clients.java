@@ -26,8 +26,9 @@ public class Clients {
         obj.put("login", login);
         obj.put("hashPass", hashPass);
         obj.put("aesKey", aesKey);
-        obj.put("stored_files", filesList);
-
+        for (StoredFiles file : filesList) {
+            obj.put("stored_files", file.toJson());
+        }
 
         try(FileWriter fileWriter = new FileWriter("C:\\dev\\reseau\\secCon\\ProjetReseau-secCon-PickLayaDeti\\FileFrontEnd\\src\\main\\java\\secCon\\PickLayaDeti\\repository\\config.json")) {
             fileWriter.write(new JSONConfig().getJSONString() + obj.toJSONString());

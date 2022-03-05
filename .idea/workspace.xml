@@ -4,11 +4,17 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="3ba9187d-69d7-43ee-9e4a-6418d73e8210" name="Changes" comment="AES key + etapes synthétiques des execute">
-      <change afterPath="$PROJECT_DIR$/FileFrontEnd/src/main/java/secCon/PickLayaDeti/domains/Clients.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/FileFrontEnd/src/main/java/secCon/PickLayaDeti/domains/StoredFiles.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/runConfigurations.xml" beforeDir="false" />
+    <list default="true" id="3ba9187d-69d7-43ee-9e4a-6418d73e8210" name="Changes" comment="Objet Clients et StoredFiles">
+      <change beforePath="$PROJECT_DIR$/.idea/discord.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/discord.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FileFrontEnd/src/main/java/secCon/PickLayaDeti/Program.java" beforeDir="false" afterPath="$PROJECT_DIR$/FileFrontEnd/src/main/java/secCon/PickLayaDeti/Program.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FileFrontEnd/src/main/java/secCon/PickLayaDeti/domains/Clients.java" beforeDir="false" afterPath="$PROJECT_DIR$/FileFrontEnd/src/main/java/secCon/PickLayaDeti/domains/Clients.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FileFrontEnd/src/main/java/secCon/PickLayaDeti/domains/StoredFiles.java" beforeDir="false" afterPath="$PROJECT_DIR$/FileFrontEnd/src/main/java/secCon/PickLayaDeti/domains/StoredFiles.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FileFrontEnd/src/main/java/secCon/PickLayaDeti/repository/JSONConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/FileFrontEnd/src/main/java/secCon/PickLayaDeti/repository/JSONConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FileFrontEnd/src/main/java/secCon/PickLayaDeti/repository/config.json" beforeDir="false" afterPath="$PROJECT_DIR$/FileFrontEnd/src/main/java/secCon/PickLayaDeti/repository/config.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FileFrontEnd/src/main/java/secCon/PickLayaDeti/server/Server.java" beforeDir="false" afterPath="$PROJECT_DIR$/FileFrontEnd/src/main/java/secCon/PickLayaDeti/server/Server.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FileFrontEnd/src/main/java/secCon/PickLayaDeti/thread/ClientHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/FileFrontEnd/src/main/java/secCon/PickLayaDeti/thread/ClientHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/StorBackEnd/src/main/java/secCon/PickLayaDeti/thread/ClientHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/StorBackEnd/src/main/java/secCon/PickLayaDeti/thread/ClientHandler.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -46,7 +52,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="master" />
+        <entry key="$PROJECT_DIR$" value="ClientsClass" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -103,7 +109,7 @@
       <recent name="secCon.PickLayaDeti" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.SBE">
+  <component name="RunManager" selected="Application.FFE">
     <configuration default="true" type="ArquillianTestNG" factoryName="" nameIsGenerated="true">
       <option name="arquillianRunConfiguration">
         <value>
@@ -229,6 +235,7 @@
       <workItem from="1646378587378" duration="2054000" />
       <workItem from="1646381587054" duration="319000" />
       <workItem from="1646389197319" duration="873000" />
+      <workItem from="1646507842943" duration="4065000" />
     </task>
     <task id="LOCAL-00001" summary="Séparation des deux programmes">
       <created>1645377433506</created>

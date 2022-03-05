@@ -1,6 +1,7 @@
 package secCon.PickLayaDeti.thread;
 
 import secCon.PickLayaDeti.AppController;
+import secCon.PickLayaDeti.tasks.interfaces.TaskManager;
 
 import java.io.*;
 import java.net.Socket;
@@ -14,6 +15,7 @@ public class ClientHandler implements Runnable {
     private boolean connected = false;
     private PrintWriter out;
     private BufferedReader in;
+    private int state = 0;
 
     public ClientHandler(Socket client, AppController controller) {
         try {
@@ -30,19 +32,8 @@ public class ClientHandler implements Runnable {
         }
     }
 
-    public void sendMessage(String message) {
-        if(connected) {
-            out.print(String.format("%s\r\n", message));
-            out.flush();
-        }
-    }
-
     @Override
     public void run() {
-        // TODO: 1. Lire le message du client
-        // TODO: 2. Propager le message à tous les autres clients
-        // TODO: RECOMMENCER
-
         try {
             while(connected && !stop) {
                 String line = in.readLine();
@@ -51,15 +42,13 @@ public class ClientHandler implements Runnable {
                 } else {
                     stop = true;
                 }
-
             }
-
-        } catch (IOException ex) {
-            ex.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+            try { client.close(); } catch (IOException ex) {}
         }
 
-
-
     }
+
 }
 

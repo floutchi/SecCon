@@ -1,6 +1,7 @@
 {
   "multicastAddress": "224.66.66.1",
-  "multicastPort": "15201",
+  "multicastPort": 15201,
+  "unicastPort": 32000,
   "tls": false,
   "path": "C:\\TEMP\\FFE",
   "users": [ ]
