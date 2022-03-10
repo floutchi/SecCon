@@ -1,7 +1,22 @@
 {
-  "multicastAddress": "224.66.66.1",
-  "multicastPort": "15201",
-  "tls": false,
   "path": "C:\\TEMP\\FFE",
-  "users": [ ]
+  "multicastAddress": "224.66.66.1",
+  "tls": false,
+  "multicastPort": 15201,
+  "unicastPort": 32000,
+  "users": [
+    {
+      "aeskey": "nifozejbfroe",
+      "stored_files": [
+        {
+          "filename": "LOTD.jpg",
+          "storage_provider": null,
+          "filesize": 93017,
+          "iv": "hfieorfroi"
+        }
+      ],
+      "login": "louis",
+      "hashpass": "biufnsjklf"
+    }
+  ]
 }
