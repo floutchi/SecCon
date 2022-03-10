@@ -102,19 +102,6 @@
     </key>
   </component>
   <component name="RunManager" selected="Application.JSONConfig">
-    <configuration default="true" type="ArquillianTestNG" factoryName="" nameIsGenerated="true">
-      <option name="arquillianRunConfiguration">
-        <value>
-          <option name="containerStateName" value="" />
-        </value>
-      </option>
-      <option name="TEST_OBJECT" value="CLASS" />
-      <properties />
-      <listeners />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <configuration name="FFE" type="Application" factoryName="Application" temporary="true">
       <option name="MAIN_CLASS_NAME" value="secCon.PickLayaDeti.Program" />
       <module name="ProjetReseau-secCon-PickLayaDeti.FileFrontEnd.main" />
