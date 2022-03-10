@@ -4,17 +4,23 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="3ba9187d-69d7-43ee-9e4a-6418d73e8210" name="Changes" comment="Objet Clients et StoredFiles">
-      <change beforePath="$PROJECT_DIR$/.idea/discord.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/discord.xml" afterDir="false" />
+    <list default="true" id="3ba9187d-69d7-43ee-9e4a-6418d73e8210" name="Changes" comment="Correction JSON et connexion au client + appel des execute">
+      <change beforePath="$PROJECT_DIR$/.gradle/7.1/executionHistory/executionHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/7.1/executionHistory/executionHistory.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/7.1/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/7.1/executionHistory/executionHistory.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/7.1/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/7.1/fileHashes/fileHashes.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/7.1/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/7.1/fileHashes/fileHashes.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FileFrontEnd/src/main/java/secCon/PickLayaDeti/Program.java" beforeDir="false" afterPath="$PROJECT_DIR$/FileFrontEnd/src/main/java/secCon/PickLayaDeti/Program.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FileFrontEnd/build/classes/java/main/secCon/PickLayaDeti/Program.class" beforeDir="false" afterPath="$PROJECT_DIR$/FileFrontEnd/build/classes/java/main/secCon/PickLayaDeti/Program.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FileFrontEnd/build/classes/java/main/secCon/PickLayaDeti/Thread/MulticastListener.class" beforeDir="false" afterPath="$PROJECT_DIR$/FileFrontEnd/build/classes/java/main/secCon/PickLayaDeti/Thread/MulticastListener.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FileFrontEnd/build/classes/java/main/secCon/PickLayaDeti/repository/JSONConfig.class" beforeDir="false" afterPath="$PROJECT_DIR$/FileFrontEnd/build/classes/java/main/secCon/PickLayaDeti/repository/JSONConfig.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FileFrontEnd/build/tmp/compileJava/previous-compilation-data.bin" beforeDir="false" afterPath="$PROJECT_DIR$/FileFrontEnd/build/tmp/compileJava/previous-compilation-data.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/FileFrontEnd/src/main/java/secCon/PickLayaDeti/domains/Clients.java" beforeDir="false" afterPath="$PROJECT_DIR$/FileFrontEnd/src/main/java/secCon/PickLayaDeti/domains/Clients.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/FileFrontEnd/src/main/java/secCon/PickLayaDeti/domains/StoredFiles.java" beforeDir="false" afterPath="$PROJECT_DIR$/FileFrontEnd/src/main/java/secCon/PickLayaDeti/domains/StoredFiles.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/FileFrontEnd/src/main/java/secCon/PickLayaDeti/repository/JSONConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/FileFrontEnd/src/main/java/secCon/PickLayaDeti/repository/JSONConfig.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/FileFrontEnd/src/main/java/secCon/PickLayaDeti/repository/config.json" beforeDir="false" afterPath="$PROJECT_DIR$/FileFrontEnd/src/main/java/secCon/PickLayaDeti/repository/config.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FileFrontEnd/src/main/java/secCon/PickLayaDeti/server/Server.java" beforeDir="false" afterPath="$PROJECT_DIR$/FileFrontEnd/src/main/java/secCon/PickLayaDeti/server/Server.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FileFrontEnd/src/main/java/secCon/PickLayaDeti/thread/ClientHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/FileFrontEnd/src/main/java/secCon/PickLayaDeti/thread/ClientHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/StorBackEnd/src/main/java/secCon/PickLayaDeti/thread/ClientHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/StorBackEnd/src/main/java/secCon/PickLayaDeti/thread/ClientHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/StorBackEnd/build/classes/java/main/secCon/PickLayaDeti/repository/JSONConfig.class" beforeDir="false" afterPath="$PROJECT_DIR$/StorBackEnd/build/classes/java/main/secCon/PickLayaDeti/repository/JSONConfig.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/StorBackEnd/build/tmp/compileJava/previous-compilation-data.bin" beforeDir="false" afterPath="$PROJECT_DIR$/StorBackEnd/build/tmp/compileJava/previous-compilation-data.bin" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -109,7 +115,7 @@
       <recent name="secCon.PickLayaDeti" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.FFE">
+  <component name="RunManager" selected="Application.JSONConfig">
     <configuration default="true" type="ArquillianTestNG" factoryName="" nameIsGenerated="true">
       <option name="arquillianRunConfiguration">
         <value>
@@ -136,13 +142,12 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="Program" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="ALTERNATIVE_JRE_PATH" value="11" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
-      <option name="MAIN_CLASS_NAME" value="secCon.PickLayaDeti.Program" />
+    <configuration name="JSONConfig" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="secCon.PickLayaDeti.repository.JSONConfig" />
+      <module name="ProjetReseau-secCon-PickLayaDeti.FileFrontEnd.main" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="secCon.PickLayaDeti.*" />
+          <option name="PATTERN" value="secCon.PickLayaDeti.repository.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -150,9 +155,10 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="SBE" type="Application" factoryName="Application" temporary="true">
+    <configuration name="Program" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="ALTERNATIVE_JRE_PATH" value="11" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
       <option name="MAIN_CLASS_NAME" value="secCon.PickLayaDeti.Program" />
-      <module name="ProjetReseau-secCon-PickLayaDeti.StorBackEnd.main" />
       <extension name="coverage">
         <pattern>
           <option name="PATTERN" value="secCon.PickLayaDeti.*" />
@@ -199,13 +205,14 @@
     </configuration>
     <list>
       <item itemvalue="Application.Program" />
-      <item itemvalue="Application.SBE" />
       <item itemvalue="Application.FFE" />
       <item itemvalue="Application.Server" />
+      <item itemvalue="Application.JSONConfig" />
       <item itemvalue="Gradle.multi-gradle-secCon [dependencies]" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.JSONConfig" />
         <item itemvalue="Application.Program" />
         <item itemvalue="Gradle.multi-gradle-secCon [dependencies]" />
         <item itemvalue="Application.Server" />
@@ -235,7 +242,8 @@
       <workItem from="1646378587378" duration="2054000" />
       <workItem from="1646381587054" duration="319000" />
       <workItem from="1646389197319" duration="873000" />
-      <workItem from="1646507842943" duration="4065000" />
+      <workItem from="1646507842943" duration="4171000" />
+      <workItem from="1646861245091" duration="5320000" />
     </task>
     <task id="LOCAL-00001" summary="Séparation des deux programmes">
       <created>1645377433506</created>
@@ -286,7 +294,14 @@
       <option name="project" value="LOCAL" />
       <updated>1646388812221</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="Correction JSON et connexion au client + appel des execute">
+      <created>1646511976045</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1646511976045</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -311,7 +326,8 @@
     <MESSAGE value="Refactor" />
     <MESSAGE value="Regex" />
     <MESSAGE value="AES key + etapes synthétiques des execute" />
-    <option name="LAST_COMMIT_MESSAGE" value="AES key + etapes synthétiques des execute" />
+    <MESSAGE value="Correction JSON et connexion au client + appel des execute" />
+    <option name="LAST_COMMIT_MESSAGE" value="Correction JSON et connexion au client + appel des execute" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -321,6 +337,10 @@
           <line>11</line>
           <option name="timeStamp" value="5" />
         </line-breakpoint>
+        <breakpoint enabled="true" type="java-exception">
+          <properties class="java.lang.NullPointerException" package="java.lang" />
+          <option name="timeStamp" value="9" />
+        </breakpoint>
       </breakpoints>
     </breakpoint-manager>
     <pin-to-top-manager>
