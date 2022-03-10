@@ -19,6 +19,7 @@ public class Program {
 
     public static String MULTICAST_ADDRESS = "";
     public static int MULTICAST_PORT = 0;
+    public static int UNICAST_PORT = 0;
     public static String PATH = "";
 
 
@@ -32,13 +33,15 @@ public class Program {
         // Initialisation attributs
         MULTICAST_ADDRESS = jsonConfig.getMulticastAddress();
         MULTICAST_PORT = jsonConfig.getMulticastPort();
+        UNICAST_PORT = jsonConfig.getUnicastPort();
         PATH = jsonConfig.getPath();
 
 
         // Démarrage du serveur pour le client.
         var server = new Server();
-        System.out.printf("Démarrage du serveur sur le port %s", 15201);
-        server.startListening();
+        System.out.printf("Démarrage du serveur sur le port %s\n", UNICAST_PORT);
+        Thread serverThread = new Thread(server);
+        serverThread.start();
 
         // Démarrage du multicast pour le SBE
         this.storManager = new StorManager();
