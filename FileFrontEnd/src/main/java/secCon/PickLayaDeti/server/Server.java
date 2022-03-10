@@ -1,5 +1,6 @@
 package secCon.PickLayaDeti.server;
 
+import secCon.PickLayaDeti.Program;
 import secCon.PickLayaDeti.thread.ClientHandler;
 
 import javax.net.ssl.SSLServerSocket;
@@ -18,7 +19,7 @@ public class Server implements Runnable {
     private boolean isConnected = false;
 
     public Server() {
-        this.listeningPort = 15201;
+        this.listeningPort = Program.UNICAST_PORT;
     }
 
     private String readLine(BufferedReader reader) throws IOException {
@@ -55,7 +56,6 @@ public class Server implements Runnable {
                 // Démarre le thread.
                 (new Thread(handler)).start();
 
-                client.close();
                 isConnected = false;
             }
             serverSocket.close();
