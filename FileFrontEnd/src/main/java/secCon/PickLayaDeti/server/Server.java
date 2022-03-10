@@ -11,7 +11,7 @@ import java.net.ServerSocket;
 import java.net.Socket;
 
 // changer ServerSocket en SSL serverSocket
-public class Server {
+public class Server implements Runnable {
 
     private final int listeningPort;
     private boolean stop = false;
@@ -21,34 +21,46 @@ public class Server {
         this.listeningPort = 15201;
     }
 
-    public void startListening() {
-        try {
-            SSLServerSocketFactory factory = (SSLServerSocketFactory)SSLServerSocketFactory.getDefault();
-            SSLServerSocket serverSocket = (SSLServerSocket) factory.createServerSocket(listeningPort);
-
-                while (!stop) {
-                    Socket client = serverSocket.accept();
-
-                    //var in = new BufferedReader(new InputStreamReader(client.getInputStream()));
-                    //System.out.println(readLine(in));
-
-                    var handler = new ClientHandler();
-                    // Démarre le thread.
-                    (new Thread(handler)).start();
-
-                    client.close();
-                    isConnected = false;
-                }
-                serverSocket.close();
-            } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
     private String readLine(BufferedReader reader) throws IOException {
         String line = reader.readLine();
         if (line != null && line.length() > 2 && line.startsWith("\uFEFF"))
             return line.substring("\uFEFF".length());
         return line;
+    }
+
+    /**
+     * When an object implementing interface <code>Runnable</code> is used
+     * to create a thread, starting the thread causes the object's
+     * <code>run</code> method to be called in that separately executing
+     * thread.
+     * <p>
+     * The general contract of the method <code>run</code> is that it may
+     * take any action whatsoever.
+     *
+     * @see Thread#run()
+     */
+    @Override
+    public void run() {
+        try {
+            SSLServerSocketFactory factory = (SSLServerSocketFactory)SSLServerSocketFactory.getDefault();
+            SSLServerSocket serverSocket = (SSLServerSocket) factory.createServerSocket(listeningPort);
+
+            while (!stop) {
+                Socket client = serverSocket.accept();
+
+                //var in = new BufferedReader(new InputStreamReader(client.getInputStream()));
+                //System.out.println(readLine(in));
+
+                var handler = new ClientHandler(client);
+                // Démarre le thread.
+                (new Thread(handler)).start();
+
+                client.close();
+                isConnected = false;
+            }
+            serverSocket.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }
