@@ -1,8 +1,6 @@
-package secCon.PickLayaDeti.domains.tasks;
+package secCon.PickLayaDeti.domains;
 
 import secCon.PickLayaDeti.Program;
-import secCon.PickLayaDeti.domains.User;
-import secCon.PickLayaDeti.repository.JSONConfig;
 
 import java.util.List;
 
@@ -10,7 +8,11 @@ public class Users {
 
     List<User> userList;
 
-    public void Users() {
+    public List<User> getUserList() {
+        return userList;
+    }
+
+    public Users() {
         this.userList = Program.jsonConfig.readUsers();
     }
 }

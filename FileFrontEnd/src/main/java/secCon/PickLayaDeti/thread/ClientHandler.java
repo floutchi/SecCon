@@ -1,6 +1,7 @@
 package secCon.PickLayaDeti.thread;
 
-import secCon.PickLayaDeti.domains.tasks.Users;
+import secCon.PickLayaDeti.Program;
+import secCon.PickLayaDeti.domains.Users;
 import secCon.PickLayaDeti.domains.tasks.client.*;
 import secCon.PickLayaDeti.domains.tasks.interfaces.TaskManager;
 
@@ -53,6 +54,9 @@ public class ClientHandler implements Runnable {
             e.printStackTrace();
             try { client.close(); } catch (IOException ex) {}
         }
+
+        Program.jsonConfig.setUserList(users.getUserList());
+        Program.jsonConfig.writeUsers();
 
     }
 
