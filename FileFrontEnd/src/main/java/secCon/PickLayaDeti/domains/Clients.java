@@ -1,10 +1,5 @@
 package secCon.PickLayaDeti.domains;
 
-import org.json.simple.JSONObject;
-import secCon.PickLayaDeti.repository.JSONConfig;
-
-import java.io.FileWriter;
-import java.io.IOException;
 import java.util.List;
 
 public class Clients {
@@ -21,19 +16,19 @@ public class Clients {
         this.filesList = filesList;
     }
 
-    public void parsetoJson() {
-        JSONObject obj = new JSONObject();
-        obj.put("login", login);
-        obj.put("hashPass", hashPass);
-        obj.put("aesKey", aesKey);
-        for (StoredFiles file : filesList) {
-            obj.put("stored_files", file.toJson());
-        }
+    public String getAesKey() {
+        return aesKey;
+    }
 
-        try(FileWriter fileWriter = new FileWriter("C:\\dev\\reseau\\secCon\\ProjetReseau-secCon-PickLayaDeti\\FileFrontEnd\\src\\main\\java\\secCon\\PickLayaDeti\\repository\\config.json")) {
-            fileWriter.write(new JSONConfig().getJSONString() + obj.toJSONString());
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+    public String getLogin() {
+        return login;
+    }
+
+    public String getHashPass() {
+        return hashPass;
+    }
+
+    public List<StoredFiles> getFilesList() {
+        return filesList;
     }
 }

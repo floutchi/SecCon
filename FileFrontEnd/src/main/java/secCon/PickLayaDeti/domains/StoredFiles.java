@@ -1,8 +1,5 @@
 package secCon.PickLayaDeti.domains;
 
-import org.json.simple.JSONObject;
-
-
 public class StoredFiles {
 
     String name;
@@ -16,12 +13,19 @@ public class StoredFiles {
         this.size = size;
     }
 
-    public JSONObject toJson() {
-        JSONObject jo = new JSONObject();
-        jo.put("filename", name);
-        jo.put("filesize", size);
-        jo.put("storage_provider", storageProvider);
-        jo.put("hashed_name", hashedName);
-        return jo;
+    public String getName() {
+        return name;
+    }
+
+    public String getHashedName() {
+        return hashedName;
+    }
+
+    public String getStorageProvider() {
+        return storageProvider;
+    }
+
+    public int getSize() {
+        return size;
     }
 }
