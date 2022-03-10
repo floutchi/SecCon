@@ -5,25 +5,17 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="3ba9187d-69d7-43ee-9e4a-6418d73e8210" name="Changes" comment="gitignore">
-      <change afterPath="$PROJECT_DIR$/FileFrontEnd/ffe.labo.swilabus.com.p12" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/FileFrontEnd/src/main/java/secCon/PickLayaDeti/domains/tasks/Users.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/7.1/executionHistory/executionHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/7.1/executionHistory/executionHistory.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/7.1/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/7.1/executionHistory/executionHistory.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/7.1/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/7.1/fileHashes/fileHashes.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/7.1/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/7.1/fileHashes/fileHashes.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/runConfigurations.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FileFrontEnd/build/classes/java/main/secCon/PickLayaDeti/Program.class" beforeDir="false" afterPath="$PROJECT_DIR$/FileFrontEnd/build/classes/java/main/secCon/PickLayaDeti/Program.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FileFrontEnd/build/classes/java/main/secCon/PickLayaDeti/Thread/MulticastListener.class" beforeDir="false" afterPath="$PROJECT_DIR$/FileFrontEnd/build/classes/java/main/secCon/PickLayaDeti/Thread/MulticastListener.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FileFrontEnd/build/classes/java/main/secCon/PickLayaDeti/repository/JSONConfig.class" beforeDir="false" afterPath="$PROJECT_DIR$/FileFrontEnd/build/classes/java/main/secCon/PickLayaDeti/repository/JSONConfig.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FileFrontEnd/build/tmp/compileJava/previous-compilation-data.bin" beforeDir="false" afterPath="$PROJECT_DIR$/FileFrontEnd/build/tmp/compileJava/previous-compilation-data.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FileFrontEnd/src/main/java/secCon/PickLayaDeti/Program.java" beforeDir="false" afterPath="$PROJECT_DIR$/FileFrontEnd/src/main/java/secCon/PickLayaDeti/Program.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FileFrontEnd/src/main/java/secCon/PickLayaDeti/domains/Clients.java" beforeDir="false" afterPath="$PROJECT_DIR$/FileFrontEnd/src/main/java/secCon/PickLayaDeti/domains/User.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FileFrontEnd/src/main/java/secCon/PickLayaDeti/repository/JSONConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/FileFrontEnd/src/main/java/secCon/PickLayaDeti/repository/JSONConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FileFrontEnd/src/main/java/secCon/PickLayaDeti/server/Server.java" beforeDir="false" afterPath="$PROJECT_DIR$/FileFrontEnd/src/main/java/secCon/PickLayaDeti/server/Server.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FileFrontEnd/src/main/java/secCon/PickLayaDeti/domains/tasks/Users.java" beforeDir="false" afterPath="$PROJECT_DIR$/FileFrontEnd/src/main/java/secCon/PickLayaDeti/domains/tasks/Users.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FileFrontEnd/src/main/java/secCon/PickLayaDeti/domains/tasks/client/FileListTask.java" beforeDir="false" afterPath="$PROJECT_DIR$/FileFrontEnd/src/main/java/secCon/PickLayaDeti/domains/tasks/client/FileListTask.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FileFrontEnd/src/main/java/secCon/PickLayaDeti/domains/tasks/client/GetFileTask.java" beforeDir="false" afterPath="$PROJECT_DIR$/FileFrontEnd/src/main/java/secCon/PickLayaDeti/domains/tasks/client/GetFileTask.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FileFrontEnd/src/main/java/secCon/PickLayaDeti/domains/tasks/client/RemoveFileTask.java" beforeDir="false" afterPath="$PROJECT_DIR$/FileFrontEnd/src/main/java/secCon/PickLayaDeti/domains/tasks/client/RemoveFileTask.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FileFrontEnd/src/main/java/secCon/PickLayaDeti/domains/tasks/client/SaveFileTask.java" beforeDir="false" afterPath="$PROJECT_DIR$/FileFrontEnd/src/main/java/secCon/PickLayaDeti/domains/tasks/client/SaveFileTask.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FileFrontEnd/src/main/java/secCon/PickLayaDeti/domains/tasks/client/SignInTask.java" beforeDir="false" afterPath="$PROJECT_DIR$/FileFrontEnd/src/main/java/secCon/PickLayaDeti/domains/tasks/client/SignInTask.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FileFrontEnd/src/main/java/secCon/PickLayaDeti/domains/tasks/client/SignOutTask.java" beforeDir="false" afterPath="$PROJECT_DIR$/FileFrontEnd/src/main/java/secCon/PickLayaDeti/domains/tasks/client/SignOutTask.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FileFrontEnd/src/main/java/secCon/PickLayaDeti/domains/tasks/client/SignUpTask.java" beforeDir="false" afterPath="$PROJECT_DIR$/FileFrontEnd/src/main/java/secCon/PickLayaDeti/domains/tasks/client/SignUpTask.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FileFrontEnd/src/main/java/secCon/PickLayaDeti/security/Hasher.java" beforeDir="false" afterPath="$PROJECT_DIR$/FileFrontEnd/src/main/java/secCon/PickLayaDeti/security/Hasher.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/FileFrontEnd/src/main/java/secCon/PickLayaDeti/thread/ClientHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/FileFrontEnd/src/main/java/secCon/PickLayaDeti/thread/ClientHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/StorBackEnd/build/tmp/compileJava/previous-compilation-data.bin" beforeDir="false" afterPath="$PROJECT_DIR$/StorBackEnd/build/tmp/compileJava/previous-compilation-data.bin" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -323,6 +315,7 @@
         </entry>
       </map>
     </option>
+    <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Séparation des deux programmes" />
