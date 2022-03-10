@@ -20,7 +20,7 @@ public class JSONConfig {
     private final int multicastPort;
     private final int unicastPort;
     private final String path;
-    private final List<User> users;
+    private List<User> users;
 
     public JSONConfig() {
         readJson();
@@ -31,6 +31,10 @@ public class JSONConfig {
         this.users = readUsers();
     }
 
+    public void setUserList(List<User> userList) {
+        this.users = userList;
+    }
+
     public void writeUsers() {
         JSONArray userArray = new JSONArray();
         for (User u : users) {
@@ -38,6 +42,7 @@ public class JSONConfig {
             object.put("login", u.getLogin());
             object.put("hashpass", u.getHashPass());
             object.put("aeskey", u.getAesKey());
+            object.put("salt", u.getSalt());
 
             JSONArray fileArrays = new JSONArray();
             for (StoredFiles f : u.getFilesList()) {
@@ -68,34 +73,38 @@ public class JSONConfig {
             Object obj = jsonParser.parse(reader);
             JSONObject jsonObject = (JSONObject) obj;
             JSONArray array = (JSONArray) jsonObject.get("users");
-            List<JSONObject> readUsers = new ArrayList<>();
-            Map<JSONObject, List<JSONObject>> jsonMap = new HashMap();
-            for (int i = 0; i < array.size(); i++) {
-                JSONObject u = (JSONObject) array.get(i);
-                readUsers.add(u);
-                JSONArray fileArray = (JSONArray) u.get("stored_files");
+            if(!array.isEmpty()) {
+                List<JSONObject> readUsers = new ArrayList<>();
+                Map<JSONObject, List<JSONObject>> jsonMap = new HashMap();
+                for (int i = 0; i < array.size(); i++) {
+                    JSONObject u = (JSONObject) array.get(i);
+                    readUsers.add(u);
+                    JSONArray fileArray = (JSONArray) u.get("stored_files");
 
-                List<JSONObject> files = new ArrayList<>();
-                for (int j = 0; i < fileArray.size(); i++) {
-                    files.add((JSONObject) fileArray.get(i));
+                    List<JSONObject> files = new ArrayList<>();
+                    for (int j = 0; i < fileArray.size(); i++) {
+                        files.add((JSONObject) fileArray.get(i));
+                    }
+
+                    jsonMap.put(u, files);
                 }
 
-                jsonMap.put(u, files);
-            }
+                List<User> clients = new ArrayList<>();
 
-            List<User> clients = new ArrayList<>();
-
-            for(JSONObject us : jsonMap.keySet()) {
-                List<StoredFiles> storedFiles = new ArrayList<>();
-                for (JSONObject f : jsonMap.get(us)) {
-                    StoredFiles st = new StoredFiles((String)f.get("filename"), (String)f.get("iv"), ((Long)f.get("filesize")).intValue());
-                    storedFiles.add(st);
+                for(JSONObject us : jsonMap.keySet()) {
+                    List<StoredFiles> storedFiles = new ArrayList<>();
+                    for (JSONObject f : jsonMap.get(us)) {
+                        StoredFiles st = new StoredFiles((String)f.get("filename"), (String)f.get("iv"), ((Long)f.get("filesize")).intValue());
+                        storedFiles.add(st);
+                    }
+                    User c = new User((String)us.get("aeskey"), (String) us.get("login"), (String) us.get("salt"), (String) us.get("hashpass"), storedFiles);
+                    clients.add(c);
                 }
-                User c = new User((String)us.get("aeskey"), (String) us.get("login"), (String) us.get("hashpass"), storedFiles);
-                clients.add(c);
-            }
 
-            return clients;
+                return clients;
+            } else {
+                return new ArrayList<>();
+            }
         } catch (IOException | ParseException e) {
             e.printStackTrace();
             return null;

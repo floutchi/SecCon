@@ -7,9 +7,10 @@ public class User {
     String aesKey;
     String login;
     String hashPass;
+    String salt;
     List<StoredFiles> filesList;
 
-    public User(String aesKey, String login, String hashPass, List<StoredFiles> filesList) {
+    public User(String aesKey, String login, String hashPass, String salt, List<StoredFiles> filesList) {
         this.aesKey = aesKey;
         this.login = login;
         this.hashPass = hashPass;
@@ -30,5 +31,9 @@ public class User {
 
     public List<StoredFiles> getFilesList() {
         return filesList;
+    }
+
+    public String getSalt() {
+        return salt;
     }
 }
