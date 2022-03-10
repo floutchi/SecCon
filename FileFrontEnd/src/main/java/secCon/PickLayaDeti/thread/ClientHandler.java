@@ -1,11 +1,14 @@
 package secCon.PickLayaDeti.thread;
 
+import secCon.PickLayaDeti.domains.Task;
 import secCon.PickLayaDeti.domains.tasks.client.*;
 import secCon.PickLayaDeti.domains.tasks.interfaces.TaskManager;
 
 import java.io.*;
 import java.net.Socket;
 import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
+import java.util.List;
 
 public class ClientHandler implements Runnable {
     private Socket client;
@@ -38,7 +41,7 @@ public class ClientHandler implements Runnable {
                 if(line != null) {
 
                     System.out.println("[ClientHandler][run] received: " + line);
-                    execute(line);
+                    readLineAndExecute(line);
 
                 } else {
                     stop = true;
@@ -55,40 +58,25 @@ public class ClientHandler implements Runnable {
 
     }
 
-    private void execute(String line) {
-        TaskManager taskManager;
-        taskManager = new SignUpTask();
-        if(taskManager.check(line)) {
-            taskManager.execute(line);
-        }
-        taskManager = new SignOutTask();
-        if(taskManager.check(line)) {
-            taskManager.execute(line);
-        }
-        taskManager = new SignInTask();
-        if(taskManager.check(line)) {
-            taskManager.execute(line);
-        }
-        taskManager = new SaveFileTask();
-        if(taskManager.check(line)) {
-            taskManager.execute(line);
-        }
-        taskManager = new RemoveFileTask();
-        if(taskManager.check(line)) {
-            taskManager.execute(line);
-        }
-        taskManager = new GetFileTask();
-        if(taskManager.check(line)) {
-            taskManager.execute(line);
-        }
-        taskManager = new GetFileTask();
-        if(taskManager.check(line)) {
-            taskManager.execute(line);
-        }
-        taskManager = new FileListTask();
-        if(taskManager.check(line)) {
-            taskManager.execute(line);
+    private void readLineAndExecute(String message) {
+        for (var currentTask : getAllTasks()) {
+            if (currentTask.check(message)) {
+                currentTask.execute(message);
+            }
         }
     }
 
+    private List<TaskManager> getAllTasks() {
+        List<TaskManager> allTasks = new ArrayList<>();
+        // region Ajout de tâches
+        allTasks.add(new SignUpTask());
+        allTasks.add(new SignOutTask());
+        allTasks.add(new SignInTask());
+        allTasks.add(new SaveFileTask());
+        allTasks.add(new RemoveFileTask());
+        allTasks.add(new GetFileTask());
+        allTasks.add(new FileListTask());
+        // endregion
+        return allTasks;
+    }
 }

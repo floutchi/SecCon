@@ -10,6 +10,7 @@ import secCon.PickLayaDeti.domains.StoredFiles;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.nio.file.Paths;
 import java.util.*;
 
 public class JSONConfig {
@@ -107,8 +108,9 @@ public class JSONConfig {
 
     private void readJson() {
         JSONParser jsonParser = new JSONParser();
+        var path = Paths.get("/FileFrontEnd", "/src/main/java/secCon/PickLayaDeti/repository/config.json").toAbsolutePath().toString();
 
-        try (FileReader reader = new FileReader("C:\\dev\\reseau\\secCon\\ProjetReseau-secCon-PickLayaDeti\\FileFrontEnd\\src\\main\\java\\secCon\\PickLayaDeti\\repository\\config.json")) {
+        try (FileReader reader = new FileReader("/Users/alexandrep/Desktop/HELMo/Réseaux Informatiques/GIT_PROJECT/ProjetReseau-secCon-PickLayaDeti/FileFrontEnd/src/main/java/secCon/PickLayaDeti/repository/config.json")) {
             Object obj = jsonParser.parse(reader);
             this.configObject = (JSONObject) obj;
 
