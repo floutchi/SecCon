@@ -15,7 +15,7 @@ import java.net.NetworkInterface;
 
 public class Program {
 
-    private final JSONConfig jsonConfig = new JSONConfig();
+    public static final JSONConfig jsonConfig = new JSONConfig();
 
     public static String MULTICAST_ADDRESS = "";
     public static int MULTICAST_PORT = 0;

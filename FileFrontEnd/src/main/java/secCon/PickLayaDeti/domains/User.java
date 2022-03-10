@@ -2,14 +2,14 @@ package secCon.PickLayaDeti.domains;
 
 import java.util.List;
 
-public class Clients {
+public class User {
 
     String aesKey;
     String login;
     String hashPass;
     List<StoredFiles> filesList;
 
-    public Clients(String aesKey, String login, String hashPass, List<StoredFiles> filesList) {
+    public User(String aesKey, String login, String hashPass, List<StoredFiles> filesList) {
         this.aesKey = aesKey;
         this.login = login;
         this.hashPass = hashPass;

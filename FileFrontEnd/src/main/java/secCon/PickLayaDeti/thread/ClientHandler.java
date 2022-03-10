@@ -1,5 +1,6 @@
 package secCon.PickLayaDeti.thread;
 
+import secCon.PickLayaDeti.domains.tasks.Users;
 import secCon.PickLayaDeti.domains.tasks.client.*;
 import secCon.PickLayaDeti.domains.tasks.interfaces.TaskManager;
 
@@ -13,8 +14,12 @@ public class ClientHandler implements Runnable {
     private boolean connected = false;
     private PrintWriter out;
     private BufferedReader in;
+    private Users users;
 
     public ClientHandler(Socket client) {
+
+        this.users = new Users();
+
         try {
             this.client = client;
             this.connected = true;
