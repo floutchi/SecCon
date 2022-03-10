@@ -28,6 +28,7 @@ public class SignUpTask implements TaskManager {
         try {
             var login = matcher.group(1);
             var clearTextPassword = matcher.group(2);
+            // TODO hacher le mot-de-passe
             var key = keyManager.generateAesKey();
         } catch (NoSuchAlgorithmException e) {
             e.printStackTrace();
