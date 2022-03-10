@@ -13,4 +13,19 @@ public class Users {
     public void Users() {
         this.userList = Program.jsonConfig.readUsers();
     }
+
+    public boolean checkUserLogin(String login) {
+        for (var currentUser:
+             userList) {
+            var currentUserLogin = currentUser.getLogin();
+            if (currentUserLogin.equals(login)) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public void addUser(User user) {
+        userList.add(user);
+    }
 }

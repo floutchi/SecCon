@@ -20,17 +20,14 @@ public class Hasher {
     private static final int ITERATIONS = 10000;
     private static final int KEY_LENGTH = 384;
 
-    /**
-     * static utility class
-     */
-    private Hasher() { }
+    public Hasher() { }
 
     /**
      * Returns a random salt to be used to hash a password.
      *
      * @return a 16 bytes random salt
      */
-    public static byte[] getNextSalt() {
+    public byte[] getNextSalt() {
         byte[] salt = new byte[16];
         RANDOM.nextBytes(salt);
         return salt;
@@ -45,7 +42,7 @@ public class Hasher {
      *
      * @return the hashed password with a pinch of salt
      */
-    public static byte[] hash(char[] password, byte[] salt) {
+    public byte[] hash(char[] password, byte[] salt) {
         PBEKeySpec spec = new PBEKeySpec(password, salt, ITERATIONS, KEY_LENGTH);
         Arrays.fill(password, Character.MIN_VALUE);
         try {
@@ -68,7 +65,7 @@ public class Hasher {
      *
      * @return true if the given password and salt match the hashed value, false otherwise
      */
-    public static boolean isExpectedPassword(char[] password, byte[] salt, byte[] expectedHash) {
+    public boolean isExpectedPassword(char[] password, byte[] salt, byte[] expectedHash) {
         byte[] pwdHash = hash(password, salt);
         Arrays.fill(password, Character.MIN_VALUE);
         if (pwdHash.length != expectedHash.length) return false;
@@ -85,7 +82,7 @@ public class Hasher {
      *
      * @return a random password
      */
-    public static String generateRandomPassword(int length) {
+    public String generateRandomPassword(int length) {
         StringBuilder sb = new StringBuilder(length);
         for (int i = 0; i < length; i++) {
             int c = RANDOM.nextInt(62);

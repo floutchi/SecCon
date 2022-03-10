@@ -2,6 +2,7 @@ package secCon.PickLayaDeti.domains.tasks.client;
 
 import secCon.PickLayaDeti.domains.tasks.interfaces.TaskManager;
 import secCon.PickLayaDeti.security.AesKeyManager;
+import secCon.PickLayaDeti.thread.ClientHandler;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -9,6 +10,9 @@ import java.util.regex.Pattern;
 public class SignInTask implements TaskManager {
 
     private Matcher matcher;
+
+    public SignInTask(ClientHandler clientHandler) {
+    }
 
     @Override
     public boolean check(String message) {

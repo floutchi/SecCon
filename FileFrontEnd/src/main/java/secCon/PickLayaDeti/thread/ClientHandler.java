@@ -7,19 +7,19 @@ import secCon.PickLayaDeti.domains.tasks.interfaces.TaskManager;
 import java.io.*;
 import java.net.Socket;
 import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
+import java.util.List;
 
 public class ClientHandler implements Runnable {
+    private final Users users;
     private Socket client;
     private boolean stop = false;
     private boolean connected = false;
     private PrintWriter out;
     private BufferedReader in;
-    private Users users;
 
     public ClientHandler(Socket client) {
-
         this.users = new Users();
-
         try {
             this.client = client;
             this.connected = true;
@@ -35,16 +35,13 @@ public class ClientHandler implements Runnable {
 
     @Override
     public void run() {
-        listeningForClient();
-
+        var tasks = createTask();
         try {
             while(connected && !stop) {
                 String line = in.readLine();
                 if(line != null) {
-
                     System.out.println("[ClientHandler][run] received: " + line);
-                    execute(line);
-
+                    executeTask(line, tasks);
                 } else {
                     stop = true;
                 }
@@ -56,44 +53,29 @@ public class ClientHandler implements Runnable {
 
     }
 
-    private void listeningForClient() {
-
+    private void executeTask(String message, List<TaskManager> tasks) {
+        for (var currentTask:
+             tasks) {
+            if (currentTask.check(message)) currentTask.execute(message);
+        }
     }
 
-    private void execute(String line) {
-        TaskManager taskManager;
-        taskManager = new SignUpTask();
-        if(taskManager.check(line)) {
-            taskManager.execute(line);
-        }
-        taskManager = new SignOutTask();
-        if(taskManager.check(line)) {
-            taskManager.execute(line);
-        }
-        taskManager = new SignInTask();
-        if(taskManager.check(line)) {
-            taskManager.execute(line);
-        }
-        taskManager = new SaveFileTask();
-        if(taskManager.check(line)) {
-            taskManager.execute(line);
-        }
-        taskManager = new RemoveFileTask();
-        if(taskManager.check(line)) {
-            taskManager.execute(line);
-        }
-        taskManager = new GetFileTask();
-        if(taskManager.check(line)) {
-            taskManager.execute(line);
-        }
-        taskManager = new GetFileTask();
-        if(taskManager.check(line)) {
-            taskManager.execute(line);
-        }
-        taskManager = new FileListTask();
-        if(taskManager.check(line)) {
-            taskManager.execute(line);
-        }
+    public Users getUsers() {
+        return users;
+    }
+
+    private List<TaskManager> createTask() {
+        var tasks = new ArrayList<TaskManager>();
+        // region Ajouts Tâches
+        tasks.add(new SignUpTask(this));
+        tasks.add(new SignOutTask(this));
+        tasks.add(new SignInTask(this));
+        tasks.add(new SaveFileTask(this));
+        tasks.add(new RemoveFileTask(this));
+        tasks.add(new GetFileTask(this));
+        tasks.add(new FileListTask(this));
+        // endregion
+        return tasks;
     }
 
 }
