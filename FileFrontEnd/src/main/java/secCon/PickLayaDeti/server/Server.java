@@ -2,12 +2,15 @@ package secCon.PickLayaDeti.server;
 
 import secCon.PickLayaDeti.thread.ClientHandler;
 
+import javax.net.ssl.SSLServerSocket;
+import javax.net.ssl.SSLServerSocketFactory;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.ServerSocket;
 import java.net.Socket;
 
+// changer ServerSocket en SSL serverSocket
 public class Server {
 
     private final int listeningPort;
@@ -20,10 +23,11 @@ public class Server {
 
     public void startListening() {
         try {
-            try (ServerSocket server = new ServerSocket(listeningPort)) {
+            SSLServerSocketFactory factory = (SSLServerSocketFactory)SSLServerSocketFactory.getDefault();
+            SSLServerSocket serverSocket = (SSLServerSocket) factory.createServerSocket(listeningPort);
 
                 while (!stop) {
-                    Socket client = server.accept();
+                    Socket client = serverSocket.accept();
 
                     //var in = new BufferedReader(new InputStreamReader(client.getInputStream()));
                     //System.out.println(readLine(in));
@@ -35,10 +39,9 @@ public class Server {
                     client.close();
                     isConnected = false;
                 }
-                server.close();
-            }
-        } catch (IOException ex) {
-            ex.printStackTrace();
+                serverSocket.close();
+            } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 
