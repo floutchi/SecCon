@@ -1,7 +1,7 @@
 package secCon.PickLayaDeti.domains.tasks.client;
 
 import secCon.PickLayaDeti.domains.User;
-import secCon.PickLayaDeti.domains.tasks.Users;
+import secCon.PickLayaDeti.domains.Users;
 import secCon.PickLayaDeti.domains.tasks.interfaces.TaskManager;
 import secCon.PickLayaDeti.security.AesKeyManager;
 import secCon.PickLayaDeti.security.Hasher;
@@ -47,7 +47,7 @@ public class SignUpTask implements TaskManager {
             // Récupère les utilisateurs
             Users users = getUsers();
             if (users.checkUserLogin(login)) {
-                users.addUser(new User(key, login, Arrays.toString(hashPassword), new ArrayList<>()));
+                users.addUser(new User(key, login, Arrays.toString(hashPassword), Arrays.toString(salt), new ArrayList<>()));
             }
         } catch (NoSuchAlgorithmException e) {
             e.printStackTrace();

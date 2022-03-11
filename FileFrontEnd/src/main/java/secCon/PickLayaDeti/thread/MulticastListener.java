@@ -1,6 +1,7 @@
 package secCon.PickLayaDeti.thread;
 
 import secCon.PickLayaDeti.Program;
+import secCon.PickLayaDeti.domains.tasks.sbe.HelloTask;
 
 import java.io.IOException;
 import java.net.DatagramPacket;
@@ -11,13 +12,13 @@ public class MulticastListener implements Runnable{
 
     private final DatagramSocket receiveStoreBackEnd;;
     private final byte[] buffer;
-    private final Program program;
+    private final StorManager manager;
     private boolean stop = false;
 
-    public MulticastListener(DatagramSocket receiveStoreBackEnd, byte[] buffer, Program program) {
+    public MulticastListener(DatagramSocket receiveStoreBackEnd, byte[] buffer, StorManager manager) {
         this.receiveStoreBackEnd = receiveStoreBackEnd;
         this.buffer = buffer;
-        this.program = program;
+        this.manager = manager;
         System.out.println("[MulticastListener] Setting interface");
     }
 
@@ -40,11 +41,9 @@ public class MulticastListener implements Runnable{
 
                 // Réceptionne et écrit le message reçu par le multicast.
                 System.out.println("[MulticastListener] " + received);
-                program.createClient(getInformations(received, buffered.getAddress()));
-
+                receiveMessage(received);
+                //program.createClient(getInformations(received, buffered.getAddress()));
             }
-            System.out.println("Sortie de la boucle.");
-
         } catch (IOException e) {
             System.out.println("Erreur lors de la réception du Multicast : " + e.getMessage());
             e.printStackTrace();
@@ -60,6 +59,13 @@ public class MulticastListener implements Runnable{
     public String[] getInformations(String received, InetAddress address) {
         var splittedArray = received.split(" ");
         return new String[]{splittedArray[1], splittedArray[2], address.toString().substring(1)};
+    }
+
+    private void receiveMessage(String message) {
+        var hello = new HelloTask(manager);
+        if (hello.check(message)) {
+            hello.execute(message);
+        }
     }
 
     public void stop() {

@@ -1,6 +1,7 @@
 package secCon.PickLayaDeti.thread;
 
 import secCon.PickLayaDeti.Program;
+import secCon.PickLayaDeti.domains.User;
 import secCon.PickLayaDeti.domains.Users;
 import secCon.PickLayaDeti.domains.tasks.client.*;
 import secCon.PickLayaDeti.domains.tasks.interfaces.TaskManager;
@@ -18,6 +19,7 @@ public class ClientHandler implements Runnable {
     private boolean connected = false;
     private PrintWriter out;
     private BufferedReader in;
+    private User connectedUser;
 
     public ClientHandler(Socket client) {
         this.users = new Users();
@@ -43,8 +45,6 @@ public class ClientHandler implements Runnable {
                 if(line != null) {
                     System.out.println("[ClientHandler][run] received: " + line);
                     executeTask(line, tasks);
-                } else {
-                    stop = true;
                 }
             }
         } catch (IOException e) {
@@ -66,6 +66,16 @@ public class ClientHandler implements Runnable {
 
     public Users getUsers() {
         return users;
+    }
+
+    public void setCurrentUser(User user) {
+        this.connectedUser = user;
+    }
+
+    public void disconnectAndStopConnexion() {
+        stop = true;
+        connected = false;
+        connectedUser = null;
     }
 
     private List<TaskManager> createTask() {

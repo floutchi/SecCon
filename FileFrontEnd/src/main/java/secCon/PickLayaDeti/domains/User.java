@@ -7,7 +7,7 @@ public class User {
     String aesKey;
     String login;
     String hashPass;
-    String salt;
+    byte[] salt;
     List<StoredFiles> filesList;
 
     public User(String aesKey, String login, String hashPass, String salt, List<StoredFiles> filesList) {
@@ -33,7 +33,7 @@ public class User {
         return filesList;
     }
 
-    public String getSalt() {
+    public byte[] getSalt() {
         return salt;
     }
 }
