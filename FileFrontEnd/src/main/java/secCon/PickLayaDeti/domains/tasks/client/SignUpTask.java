@@ -29,15 +29,21 @@ public class SignUpTask implements TaskManager {
     public boolean check(String message) {
         Pattern pattern = Pattern.compile("^(SIGNUP) ([a-zA-Z0-9]{5,20}) ([a-zA-Z0-9]{5,50})$");
         this.matcher = pattern.matcher(message);
-        return matcher.matches();
+        System.out.println(matcher.find(1));
+        if(!matcher.matches() && matcher.find(1)) {
+            handler.sendMessage("SIGN_ERROR");
+            return false;
+        }
+        return true;
     }
 
     @Override
     public void execute(String message) {
         // Génération de la clé AES.
         try {
-            var login = matcher.group(1);
-            var clearTextPassword = matcher.group(2);
+            System.out.println("SIGNUP TASK" + message);
+            var login = matcher.group(2);
+            var clearTextPassword = matcher.group(3);
             // Récupère le sel qui sera lié à l'utilisateur
             var salt = hasher.getNextSalt();
             // Hachage du mdp
@@ -46,8 +52,11 @@ public class SignUpTask implements TaskManager {
 
             // Récupère les utilisateurs
             Users users = getUsers();
+            handler.sendMessage("SIGN_OK");
             if (users.checkUserLogin(login)) {
-                users.addUser(new User(key, login, Arrays.toString(hashPassword), Arrays.toString(salt), new ArrayList<>()));
+                User u = new User(key, login, Arrays.toString(hashPassword), Arrays.toString(salt), new ArrayList<>());
+                users.addUser(u);
+                handler.setConnectedUser(u);
             }
         } catch (NoSuchAlgorithmException e) {
             e.printStackTrace();
