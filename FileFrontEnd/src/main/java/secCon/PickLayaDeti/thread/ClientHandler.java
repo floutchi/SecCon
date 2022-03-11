@@ -36,6 +36,21 @@ public class ClientHandler implements Runnable {
         }
     }
 
+    public void sendMessage(String message) {
+        if(connected) {
+            out.print(String.format("%s\r\n", message));
+            out.flush();
+        }
+    }
+
+    public void setConnectedUser(User user) {
+        this.connectedUser = user;
+    }
+
+    public User getConnectedUser() {
+        return connectedUser;
+    }
+
     @Override
     public void run() {
         var tasks = createTask();
@@ -48,6 +63,7 @@ public class ClientHandler implements Runnable {
                 }
             }
         } catch (IOException e) {
+            System.out.println("Erreur dans le handler : " + e.getMessage());
             e.printStackTrace();
             try { client.close(); } catch (IOException ex) {}
         }
@@ -58,8 +74,7 @@ public class ClientHandler implements Runnable {
     }
 
     private void executeTask(String message, List<TaskManager> tasks) {
-        for (var currentTask:
-             tasks) {
+        for (var currentTask:tasks) {
             if (currentTask.check(message)) currentTask.execute(message);
         }
     }

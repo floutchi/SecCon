@@ -21,7 +21,7 @@ public class JSONConfig {
     private final int multicastPort;
     private final int unicastPort;
     private final String path;
-    private final List<User> users;
+    private List<User> users;
     private final Path jsonPath = Paths.get("FileFrontEnd\\src\\main\\java\\secCon\\PickLayaDeti\\repository\\config.json");
 
     public JSONConfig() {
@@ -40,6 +40,7 @@ public class JSONConfig {
             object.put("login", u.getLogin());
             object.put("hashpass", u.getHashPass());
             object.put("aeskey", u.getAesKey());
+            object.put("salt", u.getSalt());
 
             JSONArray fileArrays = new JSONArray();
             for (StoredFiles f : u.getFilesList()) {
@@ -131,5 +132,9 @@ public class JSONConfig {
 
     public String getPath() {
         return path;
+    }
+
+    public void setUserList(List<User> userList) {
+        this.users = userList;
     }
 }
