@@ -48,13 +48,11 @@ public class SignUpTask implements TaskManager {
             // Récupère les utilisateurs
             Users users = getUsers();
             User newUser = new User(key, login, new String(hashPassword, StandardCharsets.UTF_8), new String(salt, StandardCharsets.UTF_8), new ArrayList<>());
-            System.out.println("Taille : " + users.getUserList().size());
             for (var t :
                  users.getUserList()) {
                 System.out.println(t.getLogin());
             }
             if (users.checkUserLogin(login)) {
-                System.out.println("Rentrée dans le if");
                 users.addUser(newUser);
                 handler.setCurrentUser(newUser);
             }
