@@ -7,14 +7,14 @@ public class User {
     String aesKey;
     String login;
     String hashPass;
-    byte[] salt;
+    String salt;
     List<StoredFiles> filesList;
 
     public User(String aesKey, String login, String hashPass, String salt, List<StoredFiles> filesList) {
         this.aesKey = aesKey;
         this.login = login;
         this.hashPass = hashPass;
-        //this.salt = salt;
+        this.salt = salt;
         this.filesList = filesList;
     }
 
@@ -34,7 +34,7 @@ public class User {
         return filesList;
     }
 
-    public byte[] getSalt() {
+    public String getSalt() {
         return salt;
     }
 }

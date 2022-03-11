@@ -18,12 +18,10 @@ public class AesKeyManager {
 
 
     public String generateAesKey() throws NoSuchAlgorithmException {
-        KeyGenerator keyGenerator;
-        keyGenerator = KeyGenerator.getInstance("AES");
-        keyGenerator.init(AES_KEY_SIZE);
-
-        // Genération de la clé.
-        return keyGenerator.generateKey().toString();
+        // create new key
+        SecretKey secretKey = KeyGenerator.getInstance("AES").generateKey();
+        // get base64 encoded version of the key
+        return Base64.getEncoder().encodeToString(secretKey.getEncoded());
     }
 
     public static byte[] encrypt(byte[] plaintext, SecretKey key, byte[] IV) throws Exception

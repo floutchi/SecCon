@@ -7,6 +7,7 @@ import secCon.PickLayaDeti.security.AesKeyManager;
 import secCon.PickLayaDeti.security.Hasher;
 import secCon.PickLayaDeti.thread.ClientHandler;
 
+import java.nio.charset.StandardCharsets;
 import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -36,8 +37,8 @@ public class SignUpTask implements TaskManager {
     public void execute(String message) {
         // Génération de la clé AES.
         try {
-            var login = matcher.group(1);
-            var clearTextPassword = matcher.group(2);
+            var login = matcher.group(2);
+            var clearTextPassword = matcher.group(3);
             // Récupère le sel qui sera lié à l'utilisateur
             var salt = hasher.getNextSalt();
             // Hachage du mdp
@@ -46,8 +47,16 @@ public class SignUpTask implements TaskManager {
 
             // Récupère les utilisateurs
             Users users = getUsers();
+            User newUser = new User(key, login, new String(hashPassword, StandardCharsets.UTF_8), new String(salt, StandardCharsets.UTF_8), new ArrayList<>());
+            System.out.println("Taille : " + users.getUserList().size());
+            for (var t :
+                 users.getUserList()) {
+                System.out.println(t.getLogin());
+            }
             if (users.checkUserLogin(login)) {
-                users.addUser(new User(key, login, Arrays.toString(hashPassword), Arrays.toString(salt), new ArrayList<>()));
+                System.out.println("Rentrée dans le if");
+                users.addUser(newUser);
+                handler.setCurrentUser(newUser);
             }
         } catch (NoSuchAlgorithmException e) {
             e.printStackTrace();

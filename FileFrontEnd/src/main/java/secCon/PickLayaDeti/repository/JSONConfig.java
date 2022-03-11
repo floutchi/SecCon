@@ -10,6 +10,7 @@ import secCon.PickLayaDeti.domains.User;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.*;
@@ -21,8 +22,8 @@ public class JSONConfig {
     private final int multicastPort;
     private final int unicastPort;
     private final String path;
-    private final List<User> users;
-    private final Path jsonPath = Paths.get("FileFrontEnd\\src\\main\\java\\secCon\\PickLayaDeti\\repository\\config.json");
+    private List<User> users;
+    private final String jsonPath = Paths.get("FileFrontEnd", "/src/main/java/secCon/PickLayaDeti/repository/config.json").toAbsolutePath().toString();
 
     public JSONConfig() {
         readJson();
@@ -40,6 +41,7 @@ public class JSONConfig {
             object.put("login", u.getLogin());
             object.put("hashpass", u.getHashPass());
             object.put("aeskey", u.getAesKey());
+            object.put("salt", u.getSalt());
 
             JSONArray fileArrays = new JSONArray();
             for (StoredFiles f : u.getFilesList()) {
@@ -57,7 +59,7 @@ public class JSONConfig {
 
         configObject.put("users", userArray);
 
-        try(FileWriter fw = new FileWriter(String.valueOf(jsonPath.toAbsolutePath()))) {
+        try(FileWriter fw = new FileWriter(jsonPath, StandardCharsets.UTF_8)) {
             fw.write(configObject.toJSONString());
         } catch (IOException e) {
             e.printStackTrace();
@@ -66,7 +68,7 @@ public class JSONConfig {
 
     public List<User> readUsers() {
         JSONParser jsonParser = new JSONParser();
-        try (FileReader reader = new FileReader(String.valueOf(jsonPath.toAbsolutePath()))) {
+        try (FileReader reader = new FileReader(jsonPath)) {
             Object obj = jsonParser.parse(reader);
             JSONObject jsonObject = (JSONObject) obj;
             JSONArray array = (JSONArray) jsonObject.get("users");
@@ -78,8 +80,8 @@ public class JSONConfig {
                 JSONArray fileArray = (JSONArray) u.get("stored_files");
 
                 List<JSONObject> files = new ArrayList<>();
-                for (int j = 0; i < fileArray.size(); i++) {
-                    files.add((JSONObject) fileArray.get(i));
+                for (int j = 0; j < fileArray.size(); j++) {
+                    files.add((JSONObject) fileArray.get(j));
                 }
 
                 jsonMap.put(u, files);
@@ -111,7 +113,7 @@ public class JSONConfig {
     private void readJson() {
         JSONParser jsonParser = new JSONParser();
 
-        try (FileReader reader = new FileReader(String.valueOf(jsonPath.toAbsolutePath()))) {
+        try (FileReader reader = new FileReader(jsonPath)) {
             Object obj = jsonParser.parse(reader);
             this.configObject = (JSONObject) obj;
 
@@ -131,5 +133,9 @@ public class JSONConfig {
 
     public String getPath() {
         return path;
+    }
+
+    public void setUserList(List<User> userList) {
+        this.users = userList;
     }
 }
