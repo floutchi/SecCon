@@ -3,6 +3,7 @@ package secCon.PickLayaDeti.domains;
 import secCon.PickLayaDeti.Program;
 import secCon.PickLayaDeti.security.Hasher;
 
+import java.nio.charset.StandardCharsets;
 import java.util.List;
 
 public class Users {
@@ -57,7 +58,7 @@ public class Users {
              userList) {
             var currentLogin = currentUser.login;
             if (currentLogin.equals(login)) {
-                byte[] salt = currentUser.salt;
+                byte[] salt = currentUser.salt.getBytes(StandardCharsets.UTF_8);
                 char[] passwordToByte = password.toCharArray();
                 hasher.hash(passwordToByte, salt);
             }

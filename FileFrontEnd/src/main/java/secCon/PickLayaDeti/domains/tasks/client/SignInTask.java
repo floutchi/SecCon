@@ -26,8 +26,8 @@ public class SignInTask implements TaskManager {
     @Override
     public void execute(String message) {
         // 1. Desplit le regex
-        var name = matcher.group(1);
-        var clearPassword = matcher.group(2);
+        var name = matcher.group(2);
+        var clearPassword = matcher.group(3);
 
         // 2. Vérifier login + mdp correspondant
         var users = handler.getUsers();

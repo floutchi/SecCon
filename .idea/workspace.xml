@@ -4,8 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="3ba9187d-69d7-43ee-9e4a-6418d73e8210" name="Changes" comment="Ajout de gestion des utilisateurs dans le handler">
-      <change beforePath="$PROJECT_DIR$/FileFrontEnd/build/classes/java/main/secCon/PickLayaDeti/Thread/MulticastListener.class" beforeDir="false" afterPath="$PROJECT_DIR$/FileFrontEnd/build/classes/java/main/secCon/PickLayaDeti/Thread/MulticastListener.class" afterDir="false" />
+    <list default="true" id="3ba9187d-69d7-43ee-9e4a-6418d73e8210" name="Changes" comment="Protocols de connexion / déconnexion : 100% OK">
+      <change beforePath="$PROJECT_DIR$/FileFrontEnd/src/main/java/secCon/PickLayaDeti/domains/tasks/client/SignUpTask.java" beforeDir="false" afterPath="$PROJECT_DIR$/FileFrontEnd/src/main/java/secCon/PickLayaDeti/domains/tasks/client/SignUpTask.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -107,6 +107,7 @@
     <configuration name="FFE" type="Application" factoryName="Application" temporary="true">
       <option name="MAIN_CLASS_NAME" value="secCon.PickLayaDeti.Program" />
       <module name="ProjetReseau-secCon-PickLayaDeti.FileFrontEnd.main" />
+      <option name="VM_PARAMETERS" value="-Djavax.net.ssl.keyStore=&quot;$PROJECT_DIR$/../../../Réseaux Informatiques/GIT_PROJECT/ProjetReseau-secCon-PickLayaDeti/ffe.labo.swilabus.com.p12&quot; -Djavax.net.ssl.keyStorePassword=labo2022 -Dhttps.protocols=TLSv1.2" />
       <extension name="coverage">
         <pattern>
           <option name="PATTERN" value="secCon.PickLayaDeti.*" />
@@ -263,7 +264,14 @@
       <option name="project" value="LOCAL" />
       <updated>1646914776500</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="Protocols de connexion / déconnexion : 100% OK">
+      <created>1647001704545</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1647001704545</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -279,6 +287,7 @@
         </entry>
       </map>
     </option>
+    <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Séparation des deux programmes" />
@@ -290,7 +299,8 @@
     <MESSAGE value="AES key + etapes synthétiques des execute" />
     <MESSAGE value="Correction JSON et connexion au client + appel des execute" />
     <MESSAGE value="gitignore" />
-    <option name="LAST_COMMIT_MESSAGE" value="gitignore" />
+    <MESSAGE value="Protocols de connexion / déconnexion : 100% OK" />
+    <option name="LAST_COMMIT_MESSAGE" value="Protocols de connexion / déconnexion : 100% OK" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

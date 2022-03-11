@@ -36,21 +36,6 @@ public class ClientHandler implements Runnable {
         }
     }
 
-    public void sendMessage(String message) {
-        if(connected) {
-            out.print(String.format("%s\r\n", message));
-            out.flush();
-        }
-    }
-
-    public void setConnectedUser(User user) {
-        this.connectedUser = user;
-    }
-
-    public User getConnectedUser() {
-        return connectedUser;
-    }
-
     @Override
     public void run() {
         var tasks = createTask();
@@ -63,7 +48,6 @@ public class ClientHandler implements Runnable {
                 }
             }
         } catch (IOException e) {
-            System.out.println("Erreur dans le handler : " + e.getMessage());
             e.printStackTrace();
             try { client.close(); } catch (IOException ex) {}
         }
@@ -74,8 +58,34 @@ public class ClientHandler implements Runnable {
     }
 
     private void executeTask(String message, List<TaskManager> tasks) {
-        for (var currentTask:tasks) {
+        if (setUpConnectedUser(message)) return;
+        for (var currentTask : tasks) {
             if (currentTask.check(message)) currentTask.execute(message);
+        }
+    }
+
+    private boolean setUpConnectedUser(String message) {
+        var initialTasks = connexionTasks();
+        for (var currentTask:
+             initialTasks) {
+            if (currentTask.check(message)) {
+                currentTask.execute(message);
+            }
+        }
+        System.out.println("Current connected User : " + connectedUser);
+        if (connectedUser == null) {
+            sendMessage("SIGN_ERROR");
+            return true;
+        } else {
+            sendMessage("SIGN_OK");
+        }
+        return false;
+    }
+
+    public void sendMessage(String message) {
+        if(connected) {
+            out.print(String.format("%s\r\n", message));
+            out.flush();
         }
     }
 
@@ -93,12 +103,17 @@ public class ClientHandler implements Runnable {
         connectedUser = null;
     }
 
-    private List<TaskManager> createTask() {
+    private List<TaskManager> connexionTasks() {
         var tasks = new ArrayList<TaskManager>();
-        // region Ajouts Tâches
         tasks.add(new SignUpTask(this));
         tasks.add(new SignOutTask(this));
         tasks.add(new SignInTask(this));
+        return tasks;
+    }
+
+    private List<TaskManager> createTask() {
+        var tasks = new ArrayList<TaskManager>();
+        // region Ajouts Tâches
         tasks.add(new SaveFileTask(this));
         tasks.add(new RemoveFileTask(this));
         tasks.add(new GetFileTask(this));

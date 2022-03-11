@@ -6,6 +6,7 @@
   "unicastPort": 32000,
   "users": [
     {
+      "salt": null,
       "aeskey": "nifozejbfroe",
       "stored_files": [
         {
@@ -17,6 +18,13 @@
       ],
       "login": "louis",
       "hashpass": "biufnsjklf"
+    },
+    {
+      "salt": "\b $�B\/a>_m���;'W",
+      "aeskey": "uPpKxDF+qsQIzVktZoKxQA==",
+      "stored_files": [],
+      "login": "squidgame",
+      "hashpass": "_�K\u001F\u007F��'_�\u0002��\u0010���s�\u001A`��a��Ѩw�X�0��!Q�����0k�-�"
     }
   ]
 }
