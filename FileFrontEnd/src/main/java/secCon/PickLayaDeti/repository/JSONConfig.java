@@ -4,8 +4,8 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
-import secCon.PickLayaDeti.domains.Clients;
 import secCon.PickLayaDeti.domains.StoredFiles;
+import secCon.PickLayaDeti.domains.User;
 
 import java.io.FileReader;
 import java.io.FileWriter;
@@ -21,7 +21,7 @@ public class JSONConfig {
     private final int multicastPort;
     private final int unicastPort;
     private final String path;
-    private final List<Clients> users;
+    private final List<User> users;
     private final Path jsonPath = Paths.get("FileFrontEnd\\src\\main\\java\\secCon\\PickLayaDeti\\repository\\config.json");
 
     public JSONConfig() {
@@ -35,7 +35,7 @@ public class JSONConfig {
 
     public void writeUsers() {
         JSONArray userArray = new JSONArray();
-        for (Clients u : users) {
+        for (User u : users) {
             JSONObject object = new JSONObject();
             object.put("login", u.getLogin());
             object.put("hashpass", u.getHashPass());
@@ -64,7 +64,7 @@ public class JSONConfig {
         }
     }
 
-    private List<Clients> readUsers() {
+    public List<User> readUsers() {
         JSONParser jsonParser = new JSONParser();
         try (FileReader reader = new FileReader(String.valueOf(jsonPath.toAbsolutePath()))) {
             Object obj = jsonParser.parse(reader);
@@ -85,7 +85,7 @@ public class JSONConfig {
                 jsonMap.put(u, files);
             }
 
-            List<Clients> clients = new ArrayList<>();
+            List<User> clients = new ArrayList<>();
 
             for(JSONObject us : jsonMap.keySet()) {
                 List<StoredFiles> storedFiles = new ArrayList<>();
@@ -93,7 +93,7 @@ public class JSONConfig {
                     StoredFiles st = new StoredFiles((String)f.get("filename"), (String)f.get("iv"), ((Long)f.get("filesize")).intValue());
                     storedFiles.add(st);
                 }
-                Clients c = new Clients((String)us.get("aeskey"), (String) us.get("login"), (String) us.get("hashpass"), storedFiles);
+                User c = new User((String)us.get("aeskey"), (String) us.get("login"), (String) us.get("hashpass"), (String) us.get("salt"), storedFiles);
                 clients.add(c);
             }
 

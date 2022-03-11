@@ -14,6 +14,7 @@ public class User {
         this.aesKey = aesKey;
         this.login = login;
         this.hashPass = hashPass;
+        //this.salt = salt;
         this.filesList = filesList;
     }
 
