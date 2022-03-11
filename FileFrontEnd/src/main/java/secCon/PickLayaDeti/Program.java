@@ -17,10 +17,10 @@ public class Program {
 
     public static final JSONConfig jsonConfig = new JSONConfig();
 
-    public static String MULTICAST_ADDRESS = "";
-    public static int MULTICAST_PORT = 0;
-    public static int UNICAST_PORT = 0;
-    public static String PATH = "";
+    public static String MULTICAST_ADDRESS;
+    public static int MULTICAST_PORT;
+    public static int UNICAST_PORT;
+    public static String PATH;
 
 
     private static byte[] buffer = new byte[1024];
@@ -31,11 +31,7 @@ public class Program {
 
     public Program() {
         // Initialisation attributs
-        MULTICAST_ADDRESS = jsonConfig.getMulticastAddress();
-        MULTICAST_PORT = jsonConfig.getMulticastPort();
-        UNICAST_PORT = jsonConfig.getUnicastPort();
-        PATH = jsonConfig.getPath();
-
+        extractInformationsFromJson();
 
         // Démarrage du serveur pour le client.
         var server = new Server();
@@ -49,9 +45,16 @@ public class Program {
         createMulticastSocket();
 
         // Le Multicast se rend disponible pour recevoir l'information du storeBackEnd.
-        MulticastListener multicastListener = new MulticastListener(multicastSocket, buffer, this);
+        MulticastListener multicastListener = new MulticastListener(multicastSocket, buffer, storManager);
         Thread multicastListenerThread = new Thread(multicastListener);
         multicastListenerThread.start();
+    }
+
+    private void extractInformationsFromJson() {
+        MULTICAST_ADDRESS = jsonConfig.getMulticastAddress();
+        MULTICAST_PORT = jsonConfig.getMulticastPort();
+        UNICAST_PORT = jsonConfig.getUnicastPort();
+        PATH = jsonConfig.getPath();
     }
 
     private void createMulticastSocket() {

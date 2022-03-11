@@ -7,7 +7,9 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class GetFileTask implements TaskManager {
+
     public GetFileTask(ClientHandler clientHandler) {
+
     }
 
     @Override

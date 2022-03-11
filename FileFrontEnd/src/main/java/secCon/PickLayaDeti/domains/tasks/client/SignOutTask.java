@@ -7,7 +7,11 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class SignOutTask implements TaskManager {
+
+    private final ClientHandler clientHandler;
+
     public SignOutTask(ClientHandler clientHandler) {
+        this.clientHandler = clientHandler;
     }
 
     @Override
@@ -19,6 +23,7 @@ public class SignOutTask implements TaskManager {
 
     @Override
     public void execute(String message) {
-        // ciao
+        // TODO ask prof + voir déconnexion
+        clientHandler.disconnectAndStopConnexion();
     }
 }
