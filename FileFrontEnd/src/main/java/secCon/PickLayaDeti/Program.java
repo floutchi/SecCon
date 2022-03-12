@@ -33,14 +33,16 @@ public class Program {
         // Initialisation attributs
         extractInformationsFromJson();
 
+        // Création du storManager
+        this.storManager = new StorManager();
+
         // Démarrage du serveur pour le client.
-        var server = new Server();
+        var server = new Server(storManager);
         System.out.printf("Démarrage du serveur sur le port %s\n", UNICAST_PORT);
         Thread serverThread = new Thread(server);
         serverThread.start();
 
         // Démarrage du multicast pour le SBE
-        this.storManager = new StorManager();
         this.networkInterface = new NetChooser().getSelected();
         createMulticastSocket();
 
@@ -76,14 +78,14 @@ public class Program {
         new Program();
     }
 
-    public void createClient(String[] informations) {
+    /*public void createClient(String[] informations) {
         System.out.printf("[Program] Receiving HELLO from %s with ID %s (unicast port: %s) \r\n", informations[2], informations[0], informations[1]);
         if (client != null) return;
 
         var process = new ServerInfo(informations[0],  informations[2], Integer.parseInt(informations[1]));
-        this.client = new StorProcessor(process, this.storManager);
+        this.client = new StorProcessor(process);
         Thread clientThread = new Thread(client);
         clientThread.start();
-    }
+    }*/
 
 }

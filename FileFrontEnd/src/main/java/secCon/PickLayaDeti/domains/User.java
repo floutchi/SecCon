@@ -4,17 +4,16 @@ import java.util.List;
 
 public class User {
 
-    String aesKey;
-    String login;
-    String hashPass;
-    String salt;
-    List<StoredFiles> filesList;
+    private String aesKey;
+    private String login;
+    private String hashPass;
+    private String salt;
+    private List<StoredFiles> filesList;
 
-    public User(String aesKey, String login, String hashPass, String salt, List<StoredFiles> filesList) {
+    public User(String aesKey, String login, String hashPass, List<StoredFiles> filesList) {
         this.aesKey = aesKey;
         this.login = login;
         this.hashPass = hashPass;
-        this.salt = salt;
         this.filesList = filesList;
     }
 
@@ -32,9 +31,5 @@ public class User {
 
     public List<StoredFiles> getFilesList() {
         return filesList;
-    }
-
-    public String getSalt() {
-        return salt;
     }
 }

@@ -10,13 +10,13 @@ import java.net.Socket;
 import java.nio.charset.StandardCharsets;
 
 public class StorProcessor implements Runnable {
-
+    private final StorManager manager;
     ServerInfo process;
-    StorManager storManager;
+    private boolean stop;
 
-    public StorProcessor(ServerInfo process, StorManager storManager) {
+    public StorProcessor(ServerInfo process, StorManager manager) {
         this.process = process;
-        this.storManager = storManager;
+        this.manager = manager;
     }
 
     @Override
@@ -28,15 +28,16 @@ public class StorProcessor implements Runnable {
         System.out.printf("[StorProcessorRunnable][run] Attempting connection to %s:%d\r\n", ipAddress, port);
 
         try (var server = new Socket(ipAddress, port)) {
+            stop = false;
             // Déclare une sortie pour envoyer un message qui va vérifier la connexion.
             var toServer = new PrintWriter(new OutputStreamWriter(server.getOutputStream(), StandardCharsets.UTF_8), true);
 
             // Envoie le message pour valider la connexion.
             toServer.flush();
-            if(!storManager.isSBEAlreadyIn(process)) {
-                storManager.addStorage(process);
-            }
 
+            do {
+                manager.askTask();
+            } while(!stop);
             // Envoie le fichier
             //FileSender fileSender = new FileSender("C:\\TEMP\\FFE");
             //fileSender.sendFile("aa.png", server.getOutputStream());
@@ -45,5 +46,9 @@ public class StorProcessor implements Runnable {
             System.out.println("Erreur lors de la connexion au serveur : " + ex.getMessage());
             ex.printStackTrace();
         }
+    }
+
+    private void stop() {
+        this.stop = true;
     }
 }

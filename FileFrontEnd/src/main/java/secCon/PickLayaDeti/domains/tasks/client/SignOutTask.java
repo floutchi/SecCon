@@ -23,7 +23,6 @@ public class SignOutTask implements TaskManager {
 
     @Override
     public void execute(String message) {
-        // TODO ask prof + voir déconnexion
         clientHandler.disconnectAndStopConnexion();
     }
 }

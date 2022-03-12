@@ -2,6 +2,7 @@ package secCon.PickLayaDeti.server;
 
 import secCon.PickLayaDeti.Program;
 import secCon.PickLayaDeti.thread.ClientHandler;
+import secCon.PickLayaDeti.thread.StorManager;
 
 import javax.net.ssl.SSLServerSocket;
 import javax.net.ssl.SSLServerSocketFactory;
@@ -15,10 +16,12 @@ import java.net.Socket;
 public class Server implements Runnable {
 
     private final int listeningPort;
+    private final StorManager storManager;
     private boolean stop = false;
     private boolean isConnected = false;
 
-    public Server() {
+    public Server(StorManager storManager) {
+        this.storManager = storManager;
         this.listeningPort = Program.UNICAST_PORT;
     }
 
@@ -52,7 +55,7 @@ public class Server implements Runnable {
                 //var in = new BufferedReader(new InputStreamReader(client.getInputStream()));
                 //System.out.println(readLine(in));
 
-                var handler = new ClientHandler(client);
+                var handler = new ClientHandler(client, storManager);
                 // Démarre le thread.
                 (new Thread(handler)).start();
 

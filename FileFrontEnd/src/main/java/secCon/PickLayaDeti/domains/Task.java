@@ -1,9 +1,6 @@
 package secCon.PickLayaDeti.domains;
 
-import secCon.PickLayaDeti.thread.ClientHandler;
-
 public class Task {
-
    /*
     ** Le type de tâche (envoi, réception, suppression d’un fichier),
     ** Le nom du fichier (le nom original, non haché),
@@ -16,43 +13,19 @@ public class Task {
     //faire une premiere methode pour diviser le message ( regex )
     // faire une methode pour executer chaque operation
 
-    private String type;
-    private String name;
-    private String command;
-    private ClientHandler client;
-    private String idBackEnd;
-    private String status;
+    private final String destination;
+    private final String protocol;
 
-    public Task(String type, String name, String command, ClientHandler client, String idBackEnd, String status) {
-        this.type = type;
-        this.name = name;
-        this.command = command;
-        this.client = client;
-        this.idBackEnd = idBackEnd;
-        this.status = status;
+    public Task(String protocol, String destination) {
+        this.protocol = protocol;
+        this.destination = destination;
     }
 
-    public String getType() {
-        return type;
+    public String getProtocol() {
+        return this.protocol;
+    }
+    public String getDestination() {
+        return this.destination;
     }
 
-    public String getName() {
-        return name;
-    }
-
-    public String getCommand() {
-        return command;
-    }
-
-    public ClientHandler getClient() {
-        return client;
-    }
-
-    public String getIdBackEnd() {
-        return idBackEnd;
-    }
-
-    public String getStatus() {
-        return status;
-    }
 }
