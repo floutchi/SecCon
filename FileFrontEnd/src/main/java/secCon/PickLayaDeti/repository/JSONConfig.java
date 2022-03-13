@@ -41,7 +41,6 @@ public class JSONConfig {
             object.put("login", u.getLogin());
             object.put("hashpass", u.getHashPass());
             object.put("aeskey", u.getAesKey());
-            object.put("salt", u.getSalt());
 
             JSONArray fileArrays = new JSONArray();
             for (StoredFiles f : u.getFilesList()) {
@@ -95,7 +94,7 @@ public class JSONConfig {
                     StoredFiles st = new StoredFiles((String)f.get("filename"), (String)f.get("iv"), ((Long)f.get("filesize")).intValue());
                     storedFiles.add(st);
                 }
-                User c = new User((String)us.get("aeskey"), (String) us.get("login"), (String) us.get("hashpass"), (String) us.get("salt"), storedFiles);
+                User c = new User((String)us.get("aeskey"), (String) us.get("login"), (String) us.get("hashpass"), storedFiles);
                 clients.add(c);
             }
 

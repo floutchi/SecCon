@@ -2,13 +2,14 @@ package secCon.PickLayaDeti.domains.tasks.client;
 
 import secCon.PickLayaDeti.domains.tasks.interfaces.TaskManager;
 import secCon.PickLayaDeti.thread.ClientHandler;
+import secCon.PickLayaDeti.thread.StorManager;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class RemoveFileTask implements TaskManager {
 
-    public RemoveFileTask(ClientHandler clientHandler) {
+    public RemoveFileTask(ClientHandler clientHandler, StorManager storManager) {
     }
 
     @Override

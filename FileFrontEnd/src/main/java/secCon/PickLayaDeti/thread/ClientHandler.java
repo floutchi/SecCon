@@ -5,6 +5,7 @@ import secCon.PickLayaDeti.domains.User;
 import secCon.PickLayaDeti.domains.Users;
 import secCon.PickLayaDeti.domains.tasks.client.*;
 import secCon.PickLayaDeti.domains.tasks.interfaces.TaskManager;
+import secCon.PickLayaDeti.fileManager.FileReceiver;
 
 import java.io.*;
 import java.net.Socket;
@@ -14,6 +15,7 @@ import java.util.List;
 
 public class ClientHandler implements Runnable {
     private final Users users;
+    private final StorManager storManager;
     private Socket client;
     private boolean stop = false;
     private boolean connected = false;
@@ -21,7 +23,8 @@ public class ClientHandler implements Runnable {
     private BufferedReader in;
     private User connectedUser;
 
-    public ClientHandler(Socket client) {
+    public ClientHandler(Socket client, StorManager storManager) {
+        this.storManager = storManager;
         this.users = new Users();
         try {
             this.client = client;
@@ -43,7 +46,7 @@ public class ClientHandler implements Runnable {
             while(connected && !stop) {
                 String line = in.readLine();
                 if(line != null) {
-                    System.out.println("[ClientHandler][run] received: " + line);
+                    //System.out.println("[ClientHandler][run] received: " + line);
                     executeTask(line, tasks);
                 }
             }
@@ -58,7 +61,7 @@ public class ClientHandler implements Runnable {
     }
 
     private void executeTask(String message, List<TaskManager> tasks) {
-        if (setUpConnectedUser(message)) return;
+        if(connectedUser == null) if (setUpConnectedUser(message)) return;
         for (var currentTask : tasks) {
             if (currentTask.check(message)) currentTask.execute(message);
         }
@@ -72,7 +75,7 @@ public class ClientHandler implements Runnable {
                 currentTask.execute(message);
             }
         }
-        System.out.println("Current connected User : " + connectedUser);
+
         if (connectedUser == null) {
             sendMessage("SIGN_ERROR");
             return true;
@@ -97,6 +100,10 @@ public class ClientHandler implements Runnable {
         this.connectedUser = user;
     }
 
+    public User getConnectedUser() {
+        return connectedUser;
+    }
+
     public void disconnectAndStopConnexion() {
         stop = true;
         connected = false;
@@ -114,12 +121,18 @@ public class ClientHandler implements Runnable {
     private List<TaskManager> createTask() {
         var tasks = new ArrayList<TaskManager>();
         // region Ajouts Tâches
-        tasks.add(new SaveFileTask(this));
-        tasks.add(new RemoveFileTask(this));
-        tasks.add(new GetFileTask(this));
+        tasks.add(new SaveFileTask(this, storManager));
+        tasks.add(new RemoveFileTask(this, storManager));
+        tasks.add(new GetFileTask(this, storManager));
         tasks.add(new FileListTask(this));
         // endregion
         return tasks;
     }
+
+    public boolean receiveFile(String name, int size) throws IOException {
+        FileReceiver receiver = new FileReceiver("/Users/alexandrep/Desktop/HELMo/Réseaux Informatiques/FFE");
+        return receiver.receiveFile(client.getInputStream(), name, size);
+    }
+
 
 }

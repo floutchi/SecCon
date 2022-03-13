@@ -12,11 +12,9 @@ import java.util.regex.Pattern;
 public class FileListTask implements TaskManager {
 
     private final ClientHandler clientHandler;
-    private final User connectedUser;
 
     public FileListTask(ClientHandler clientHandler) {
         this.clientHandler = clientHandler;
-        this.connectedUser = clientHandler.getConnectedUser();
     }
 
     @Override
@@ -28,7 +26,12 @@ public class FileListTask implements TaskManager {
 
     @Override
     public void execute(String message) {
-        List<StoredFiles> storedFiles = connectedUser.getFilesList();
+        // Récupère l'utilisateur connecté
+        var currentUser = clientHandler.getConnectedUser();
+
+        // Renvoie sa liste de fichiers
+        List<StoredFiles> storedFiles = currentUser.getFilesList();
+        if (storedFiles.isEmpty()) clientHandler.sendMessage("FILES");
         for (StoredFiles f : storedFiles) {
             clientHandler.sendMessage("FILES " + f.getName() + "!" + f.getSize());
         }

@@ -35,29 +35,30 @@ public class SignUpTask implements TaskManager {
 
     @Override
     public void execute(String message) {
-        // Génération de la clé AES.
         try {
+            // Récupération du login et mdp
             var login = matcher.group(2);
             var clearTextPassword = matcher.group(3);
-            // Récupère le sel qui sera lié à l'utilisateur
-            var salt = hasher.getNextSalt();
+
             // Hachage du mdp
-            var hashPassword = hasher.hash(clearTextPassword.toCharArray(), salt);
+            var hashPassword = hasher.clearTextToHash(clearTextPassword);
+
+            // Génération de la clé AES
             var key = keyManager.generateAesKey();
 
-            // Récupère les utilisateurs
-            Users users = getUsers();
-            User newUser = new User(key, login, new String(hashPassword, StandardCharsets.UTF_8), new String(salt, StandardCharsets.UTF_8), new ArrayList<>());
-            for (var t :
-                 users.getUserList()) {
-                System.out.println(t.getLogin());
-            }
-            if (users.checkUserLogin(login)) {
-                users.addUser(newUser);
-                handler.setCurrentUser(newUser);
-            }
+            User newUser = new User(key, login, hashPassword, new ArrayList<>());
+            addUserIfLoginIsValid(login, newUser);
         } catch (NoSuchAlgorithmException e) {
             e.printStackTrace();
+        }
+    }
+
+    private void addUserIfLoginIsValid(String login, User newUser) {
+        Users users = getUsers();
+
+        if (users.checkUserLogin(login)) {
+            users.addUser(newUser);
+            handler.setCurrentUser(newUser);
         }
     }
 

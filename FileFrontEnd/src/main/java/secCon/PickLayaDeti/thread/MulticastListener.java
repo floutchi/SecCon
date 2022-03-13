@@ -50,16 +50,6 @@ public class MulticastListener implements Runnable{
         }
     }
 
-    /**
-     * Retourne un tableau avec les informations demandées.
-     * Le nom de domain.
-     * Le port.
-     * @return
-     */
-    public String[] getInformations(String received, InetAddress address) {
-        var splittedArray = received.split(" ");
-        return new String[]{splittedArray[1], splittedArray[2], address.toString().substring(1)};
-    }
 
     private void receiveMessage(String message) {
         var hello = new HelloTask(manager);

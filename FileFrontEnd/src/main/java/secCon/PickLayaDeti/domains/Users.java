@@ -3,7 +3,6 @@ package secCon.PickLayaDeti.domains;
 import secCon.PickLayaDeti.Program;
 import secCon.PickLayaDeti.security.Hasher;
 
-import java.nio.charset.StandardCharsets;
 import java.util.List;
 
 public class Users {
@@ -45,6 +44,8 @@ public class Users {
      */
     public void addUser(User user) {
         userList.add(user);
+        Program.jsonConfig.setUserList(getUserList());
+        Program.jsonConfig.writeUsers();
     }
 
     /**
@@ -54,13 +55,11 @@ public class Users {
      * @return
      */
     public User getUsersByLoginAndPassword(String login, String password) {
-        for (var currentUser:
-             userList) {
-            var currentLogin = currentUser.login;
-            if (currentLogin.equals(login)) {
-                byte[] salt = currentUser.salt.getBytes(StandardCharsets.UTF_8);
-                char[] passwordToByte = password.toCharArray();
-                hasher.hash(passwordToByte, salt);
+        for (var currentUser: userList) {
+            var currentLogin = currentUser.getLogin();
+            var currentPassword = currentUser.getHashPass();
+            if (currentLogin.equals(login) && currentPassword.equals(password)) {
+                return currentUser;
             }
         }
         return null;

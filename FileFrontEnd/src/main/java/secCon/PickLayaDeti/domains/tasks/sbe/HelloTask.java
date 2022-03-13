@@ -28,9 +28,7 @@ public class HelloTask implements TaskManager {
     public void execute(String message){
         System.out.printf("[Program] Receiving HELLO from %s with ID %s (unicast port: %s) \r\n", matcher.group(3), matcher.group(1), matcher.group(2));
         var infos = new ServerInfo(matcher.group(1),matcher.group(2), Integer.parseInt(matcher.group(3)));
-        //decompose le regex et executer le code en fonction
-        var processor = new StorProcessor(infos, manager);
-        new Thread(processor).start();
+        manager.createProcessor(infos);
 
     }
 }
