@@ -1,5 +1,6 @@
 package secCon.PickLayaDeti.tasks;
 
+import secCon.PickLayaDeti.fileManager.FileReceiver;
 import secCon.PickLayaDeti.tasks.interfaces.TaskManager;
 
 import java.util.regex.Matcher;

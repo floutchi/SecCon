@@ -1,6 +1,9 @@
 package secCon.PickLayaDeti.thread;
 
 import secCon.PickLayaDeti.AppController;
+import secCon.PickLayaDeti.Program;
+import secCon.PickLayaDeti.fileManager.FileReceiver;
+import secCon.PickLayaDeti.tasks.SendFileTask;
 import secCon.PickLayaDeti.tasks.interfaces.TaskManager;
 
 import java.io.*;
@@ -37,8 +40,14 @@ public class ClientHandler implements Runnable {
         try {
             while(connected && !stop) {
                 String line = in.readLine();
+                System.out.println(line);
                 if(line != null) {
-
+                    System.out.println(line);
+                    TaskManager taskManager;
+                    taskManager = new SendFileTask(this);
+                    if(taskManager.check(line)) {
+                        taskManager.execute(line);
+                    }
                 } else {
                     stop = true;
                 }
@@ -47,7 +56,15 @@ public class ClientHandler implements Runnable {
             e.printStackTrace();
             try { client.close(); } catch (IOException ex) {}
         }
+    }
 
+    public void receiveFile(String fileName, int size) {
+        try {
+            FileReceiver fileReceiver = new FileReceiver(Program.PATH);
+            fileReceiver.receiveFile(client.getInputStream(), fileName, size);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
 }

@@ -87,6 +87,7 @@ public class ClientHandler implements Runnable {
 
     public void sendMessage(String message) {
         if(connected) {
+            System.out.println("[ClientHandler][sendMessage] " + message);
             out.print(String.format("%s\r\n", message));
             out.flush();
         }
@@ -130,7 +131,7 @@ public class ClientHandler implements Runnable {
     }
 
     public boolean receiveFile(String name, int size) throws IOException {
-        FileReceiver receiver = new FileReceiver("/Users/alexandrep/Desktop/HELMo/Réseaux Informatiques/FFE");
+        FileReceiver receiver = new FileReceiver(Program.PATH);
         return receiver.receiveFile(client.getInputStream(), name, size);
     }
 

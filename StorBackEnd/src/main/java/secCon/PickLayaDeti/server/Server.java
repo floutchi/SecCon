@@ -2,6 +2,7 @@ package secCon.PickLayaDeti.server;
 
 import secCon.PickLayaDeti.AppController;
 import secCon.PickLayaDeti.fileManager.FileReceiver;
+import secCon.PickLayaDeti.thread.ClientHandler;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -21,22 +22,19 @@ public class Server {
         try {
             try (ServerSocket server = new ServerSocket(listeningPort)) {
 
-                while (!stop) {
-                    Socket client = server.accept();
+                Socket client = server.accept();
 
-                    //Recoit le fichier
-                    FileReceiver fileReceiver = new FileReceiver("C:\\TEMP\\SBE");
-                    fileReceiver.receiveFile(client.getInputStream(), "aa.png", 154727);
-                    client.close();
-                    isConnected = false;
-                }
+                ClientHandler clientHandler = new ClientHandler(client, null);
+                new Thread(clientHandler).start();
 
-                server.close();
+                //server.close();
             }
         } catch (IOException ex) {
             ex.printStackTrace();
         }
     }
+
+
 
     private String readLine(BufferedReader reader) throws IOException {
         String line = reader.readLine();
