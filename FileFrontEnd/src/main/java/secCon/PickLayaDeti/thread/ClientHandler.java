@@ -23,6 +23,10 @@ public class ClientHandler implements Runnable {
     private BufferedReader in;
     private User connectedUser;
 
+    private String currentFileName;
+    private int currentFileSize;
+
+
     public ClientHandler(Socket client, StorManager storManager) {
         this.storManager = storManager;
         this.users = new Users();
@@ -69,8 +73,7 @@ public class ClientHandler implements Runnable {
 
     private boolean setUpConnectedUser(String message) {
         var initialTasks = connexionTasks();
-        for (var currentTask:
-             initialTasks) {
+        for (var currentTask: initialTasks) {
             if (currentTask.check(message)) {
                 currentTask.execute(message);
             }
@@ -131,9 +134,19 @@ public class ClientHandler implements Runnable {
     }
 
     public boolean receiveFile(String name, int size) throws IOException {
+
+        this.currentFileName = name;
+        this.currentFileSize = size;
+
         FileReceiver receiver = new FileReceiver(Program.PATH);
         return receiver.receiveFile(client.getInputStream(), name, size);
     }
 
+    public String getCurrentFileName() {
+        return currentFileName;
+    }
 
+    public int getCurrentFileSize() {
+        return currentFileSize;
+    }
 }

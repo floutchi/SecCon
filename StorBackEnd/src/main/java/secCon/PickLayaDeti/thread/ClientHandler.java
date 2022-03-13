@@ -3,6 +3,7 @@ package secCon.PickLayaDeti.thread;
 import secCon.PickLayaDeti.AppController;
 import secCon.PickLayaDeti.Program;
 import secCon.PickLayaDeti.fileManager.FileReceiver;
+import secCon.PickLayaDeti.tasks.EraseFileTask;
 import secCon.PickLayaDeti.tasks.SendFileTask;
 import secCon.PickLayaDeti.tasks.interfaces.TaskManager;
 
@@ -16,7 +17,7 @@ public class ClientHandler implements Runnable {
     private AppController controller;
     private boolean stop = false;
     private boolean connected = false;
-    private PrintWriter out;
+    private BufferedWriter out;
     private BufferedReader in;
     private int state = 0;
 
@@ -28,8 +29,8 @@ public class ClientHandler implements Runnable {
 
             this.in = new BufferedReader(new InputStreamReader(client.getInputStream(),
                     StandardCharsets.UTF_8));
-            this.out = new PrintWriter(new OutputStreamWriter(client.getOutputStream(),
-                    StandardCharsets.UTF_8), true);
+            this.out = new BufferedWriter(new OutputStreamWriter(client.getOutputStream(),
+                    StandardCharsets.UTF_8));
         } catch(IOException ex) {
             ex.printStackTrace();
         }
@@ -40,14 +41,13 @@ public class ClientHandler implements Runnable {
         try {
             while(connected && !stop) {
                 String line = in.readLine();
-                System.out.println(line);
                 if(line != null) {
                     System.out.println(line);
                     TaskManager taskManager;
                     taskManager = new SendFileTask(this);
-                    if(taskManager.check(line)) {
-                        taskManager.execute(line);
-                    }
+                    if(taskManager.check(line)) taskManager.execute(line);
+                    taskManager = new EraseFileTask(this);
+                    if(taskManager.check(line)) taskManager.execute(line);
                 } else {
                     stop = true;
                 }
@@ -65,6 +65,16 @@ public class ClientHandler implements Runnable {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    public void sendMessage(String message) {
+        try {
+            out.write(message + "\n");
+            out.flush();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
     }
 
 }

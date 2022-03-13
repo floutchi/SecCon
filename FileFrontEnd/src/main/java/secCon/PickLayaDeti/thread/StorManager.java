@@ -2,6 +2,9 @@ package secCon.PickLayaDeti.thread;
 
 import secCon.PickLayaDeti.domains.ServerInfo;
 import secCon.PickLayaDeti.domains.Task;
+import secCon.PickLayaDeti.domains.tasks.interfaces.TaskManager;
+import secCon.PickLayaDeti.domains.tasks.sbe.EraseResultTask;
+import secCon.PickLayaDeti.domains.tasks.sbe.SendResultTask;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -10,11 +13,15 @@ import java.util.Map;
 
 public class StorManager {
     List<StorProcessor> servers;
+
+    private ClientHandler clientHandler;
+
     private List<Task> tasks;
 
     public StorManager() {
         this.tasks = new ArrayList<>();
         this.servers = new ArrayList<>();
+
     }
 
     /*public void addStorage(ServerInfo server) {
@@ -42,16 +49,30 @@ public class StorManager {
         }
     }
 
-    public void addTask(Task t) {
-        this.tasks.add(t);
+    public void setClientHandler(ClientHandler clientHandler) {
+        this.clientHandler = clientHandler;
     }
 
-    public Task askTask() {
-        for (Task t : tasks) {
-            if (servers.get(0) != null) {
-                return t;
+    public void addTask(Task t) {
+        this.tasks.add(t);
+
+        for (StorProcessor sp : servers) {
+            if(!sp.isBusy()) {
+                sp.setTask(t);
             }
         }
-        return null;
+
+    }
+
+    public void removeTask(Task t) {
+        this.tasks.remove(t);
+    }
+
+    public void resultTask(String message) {
+        TaskManager taskManager;
+        taskManager = new SendResultTask(clientHandler);
+        if (taskManager.check(message)) taskManager.execute(message);
+        taskManager = new EraseResultTask(clientHandler);
+        if (taskManager.check(message)) taskManager.execute(message);
     }
 }

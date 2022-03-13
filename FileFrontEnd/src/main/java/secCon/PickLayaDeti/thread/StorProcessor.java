@@ -13,13 +13,18 @@ import java.nio.charset.StandardCharsets;
 
 public class StorProcessor implements Runnable {
     private final StorManager manager;
+
     ServerInfo process;
     private boolean stop;
 
+    private boolean isBusy = false;
+
     Socket server;
 
-    PrintWriter out;
+    BufferedWriter out;
     BufferedReader in;
+
+    Task t;
 
     public StorProcessor(ServerInfo process, StorManager manager) {
         this.process = process;
@@ -43,34 +48,61 @@ public class StorProcessor implements Runnable {
             server = new Socket("127.0.0.1", port);
             stop = false;
             // Déclare une sortie pour envoyer un message qui va vérifier la connexion.
-            this.out = new PrintWriter(new OutputStreamWriter(server.getOutputStream(), StandardCharsets.UTF_8), true);
+            this.out = new BufferedWriter(new OutputStreamWriter(server.getOutputStream(), StandardCharsets.UTF_8));
             this.in = new BufferedReader(new InputStreamReader(server.getInputStream(), StandardCharsets.UTF_8));
 
             do {
-                Task t = manager.askTask();
-
+                Thread.sleep(0);
                 if(t != null) {
+                    isBusy = true;
+
                     if(t.getProtocol().equals("SENDFILE")) {
-                        out.print("SENDFILE " + "jsp.png" + " " + 10);
+                        out.write("SENDFILE " + t.getFileName() + " " + t.getFileSize() + "\n");
+                        out.flush();
                         System.out.println("[StorProcessor][sendMessage] sending 'SENDFILE'");
                         try {
                             FileSender fileSender = new FileSender(Program.PATH);
-                            fileSender.sendFile("jsp.png", server.getOutputStream());
+                            fileSender.sendFile(t.getFileName(), server.getOutputStream());
+
+                            String line = in.readLine();
+                            System.out.println("[StorProcessor][run] received : " + line);
+                            manager.resultTask(line);
                         } catch (IOException e) {
                             e.printStackTrace();
                         }
                     }
 
-                    t = null;
+                    if(t.getProtocol().equals("REMOVEFILE")) {
+                        out.write("ERASEFILE " + t.getFileName() + "\n");
+                        out.flush();
+                        System.out.println("[StorProcessor][run] sending 'ERASEFILE'");
+
+                        String line = in.readLine();
+                        System.out.println("[StorProcessor][run] received : " + line);
+                        manager.resultTask(line);
+                    }
+
+
+                    this.t = null;
                 }
+
             } while(!stop);
 
         } catch (IOException ex) {
             System.out.println("Erreur lors de la connexion au serveur : " + ex.getMessage());
             ex.printStackTrace();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
         }
     }
 
+    public boolean isBusy() {
+        return isBusy;
+    }
+
+    public void setTask(Task t) {
+        this.t = t;
+    }
 
 
     private void stop() {

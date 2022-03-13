@@ -32,4 +32,12 @@ public class User {
     public List<StoredFiles> getFilesList() {
         return filesList;
     }
+
+    public void addFile(StoredFiles storedFile) {
+        filesList.add(storedFile);
+    }
+
+    public void removeFile(String name, int size) {
+
+    }
 }

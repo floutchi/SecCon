@@ -17,7 +17,7 @@ public class SendFileTask implements TaskManager {
 
     @Override
     public boolean check(String message) {
-        Pattern pattern = Pattern.compile("^(SENDFILE) ([a-zA-Z0-9]{50,200})(.jpg|.JPG|.gif|.GIF|.doc|.DOC|.pdf|.PDF|.png) ([0-9]{1,10}) ([a-zA-Z0-9]{50,200})$");
+        Pattern pattern = Pattern.compile("^(SENDFILE) ([a-zA-Z0-9].{5,20}) ([0-9]{1,10})$");
         this.matcher = pattern.matcher(message);
         return matcher.matches();
     }
@@ -26,12 +26,14 @@ public class SendFileTask implements TaskManager {
     public void execute(String message) {
 
         // Récupération et hachage
-        String filename = matcher.group(2) + matcher.group(3);
+        String filename = matcher.group(2);
 
         // Récupération de la taille
-        int size = Integer.parseInt(matcher.group(4));
+        int size = Integer.parseInt(matcher.group(3));
 
         clientHandler.receiveFile(filename, size);
+
+        clientHandler.sendMessage("SEND_OK");
 
 
     }

@@ -16,9 +16,28 @@ public class Task {
     private final String destination;
     private final String protocol;
 
+    private String fileName = "";
+    private int fileSize = 0;
+
     public Task(String protocol, String destination) {
         this.protocol = protocol;
         this.destination = destination;
+    }
+
+    public void setFileName(String fileName) {
+        this.fileName = fileName;
+    }
+
+    public void setFileSize(int fileSize) {
+        this.fileSize = fileSize;
+    }
+
+    public String getFileName() {
+        return fileName;
+    }
+
+    public int getFileSize() {
+        return fileSize;
     }
 
     public String getProtocol() {

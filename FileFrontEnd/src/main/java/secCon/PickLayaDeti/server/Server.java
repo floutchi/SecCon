@@ -20,29 +20,13 @@ public class Server implements Runnable {
     private boolean stop = false;
     private boolean isConnected = false;
 
+    private ClientHandler handler;
+
     public Server(StorManager storManager) {
         this.storManager = storManager;
         this.listeningPort = Program.UNICAST_PORT;
     }
 
-    private String readLine(BufferedReader reader) throws IOException {
-        String line = reader.readLine();
-        if (line != null && line.length() > 2 && line.startsWith("\uFEFF"))
-            return line.substring("\uFEFF".length());
-        return line;
-    }
-
-    /**
-     * When an object implementing interface <code>Runnable</code> is used
-     * to create a thread, starting the thread causes the object's
-     * <code>run</code> method to be called in that separately executing
-     * thread.
-     * <p>
-     * The general contract of the method <code>run</code> is that it may
-     * take any action whatsoever.
-     *
-     * @see Thread#run()
-     */
     @Override
     public void run() {
         try {
@@ -57,7 +41,8 @@ public class Server implements Runnable {
                 //var in = new BufferedReader(new InputStreamReader(client.getInputStream()));
                 //System.out.println(readLine(in));
 
-                var handler = new ClientHandler(client, storManager);
+                handler = new ClientHandler(client, storManager);
+                storManager.setClientHandler(handler);
                 // Démarre le thread.
                 (new Thread(handler)).start();
 

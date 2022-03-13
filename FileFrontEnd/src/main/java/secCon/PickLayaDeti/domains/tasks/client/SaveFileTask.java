@@ -29,7 +29,7 @@ public class SaveFileTask implements TaskManager {
 
     @Override
     public boolean check(String message) {
-        Pattern pattern = Pattern.compile("^(SAVEFILE) ([a-zA-Z0-9]{5,20})(.jpg|.JPG|.gif|.GIF|.doc|.DOC|.pdf|.PDF|.png) ([0-9]{1,10})$");
+        Pattern pattern = Pattern.compile("^(SAVEFILE) ([a-zA-Z0-9].{5,20}) ([0-9]{1,10})$");
         this.matcher = pattern.matcher(message);
 
         return matcher.matches();
@@ -40,12 +40,13 @@ public class SaveFileTask implements TaskManager {
 
         try {
             // Récupération et hachage
-            String filename = matcher.group(2) + matcher.group(3);
+            String filename = matcher.group(2);
 
             // Récupération de la taille
-            int size = Integer.parseInt(matcher.group(4));
+            int size = Integer.parseInt(matcher.group(3));
 
             var newTask = new Task("SENDFILE", null);
+            newTask.setFileName(filename); newTask.setFileSize(size);
             if (clientHandler.receiveFile(filename, size)) {
                 storManager.addTask(newTask);
             }

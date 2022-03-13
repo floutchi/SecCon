@@ -1,5 +1,6 @@
 package secCon.PickLayaDeti.domains.tasks.client;
 
+import secCon.PickLayaDeti.domains.Task;
 import secCon.PickLayaDeti.domains.tasks.interfaces.TaskManager;
 import secCon.PickLayaDeti.thread.ClientHandler;
 import secCon.PickLayaDeti.thread.StorManager;
@@ -9,18 +10,32 @@ import java.util.regex.Pattern;
 
 public class RemoveFileTask implements TaskManager {
 
+    Matcher matcher;
+    ClientHandler clientHandler;
+    StorManager storManager;
+
     public RemoveFileTask(ClientHandler clientHandler, StorManager storManager) {
+        this.clientHandler = clientHandler;
+        this.storManager = storManager;
     }
 
     @Override
     public boolean check(String message) {
         Pattern pattern = Pattern.compile("^(REMOVEFILE) ([a-zA-Z0-9]{5,20})$");
-        Matcher matcher = pattern.matcher(message);
+        matcher = pattern.matcher(message);
         return matcher.matches();
     }
 
     @Override
     public void execute(String message) {
+
+        String fileName = matcher.group(2);
+
+        var newTask = new Task("REMOVEFILE", null);
+
+
+        newTask.setFileName(fileName);
+        storManager.addTask(newTask);
 
     }
 }
