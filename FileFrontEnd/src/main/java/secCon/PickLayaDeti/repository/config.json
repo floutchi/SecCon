@@ -1,1 +1,21 @@
-{"path":"C:\\TEMP\\FFE","multicastAddress":"224.66.66.1","tls":false,"multicastPort":15201,"unicastPort":32000,"users":[{"aeskey":"waRSXGWIe0PBaz3NGZC6Rw==","stored_files":[{"filename":"swinenLeSang.jpg","storage_provider":null,"filesize":271817,"iv":""},{"filename":"93123189_p13.jpg","storage_provider":null,"filesize":2649488,"iv":""}],"login":"Florian","hashpass":"90514d84bc9ee8a13a77fca8a19b58a87069e3499aacbcc1f33a22a7502d8c80fa9d5325fc33f4618c6d0d62059374f3"},{"aeskey":"G4JLot6a9tZxJwzOfx+Tnw==","stored_files":[],"login":"alepckl","hashpass":"ac558bc80d0831e8aa04f6a5824b1ad3bb5a85af868eccba55c60b9cecb5cc75edfcc60c67dd60a12af49b7946a7bcaa"}]}
+{
+  "path": "C:\\TEMP\\FFE",
+  "multicastAddress": "224.66.66.1",
+  "tls": false,
+  "multicastPort": 15201,
+  "unicastPort": 32000,
+  "users": [
+    {
+      "aeskey": "waRSXGWIe0PBaz3NGZC6Rw==",
+      "stored_files": [],
+      "login": "Florian",
+      "hashpass": "90514d84bc9ee8a13a77fca8a19b58a87069e3499aacbcc1f33a22a7502d8c80fa9d5325fc33f4618c6d0d62059374f3"
+    },
+    {
+      "aeskey": "G4JLot6a9tZxJwzOfx+Tnw==",
+      "stored_files": [],
+      "login": "alepckl",
+      "hashpass": "ac558bc80d0831e8aa04f6a5824b1ad3bb5a85af868eccba55c60b9cecb5cc75edfcc60c67dd60a12af49b7946a7bcaa"
+    }
+  ]
+}

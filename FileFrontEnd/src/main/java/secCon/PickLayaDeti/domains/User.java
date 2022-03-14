@@ -37,7 +37,14 @@ public class User {
         filesList.add(storedFile);
     }
 
-    public void removeFile(String name, int size) {
-
+    public void removeFile(String name) {
+        StoredFiles todelete = null;
+        for (StoredFiles f : filesList) {
+            if(f.getName().equals(name)) {
+                todelete = f;
+            }
+        }
+        
+        filesList.remove(todelete);
     }
 }

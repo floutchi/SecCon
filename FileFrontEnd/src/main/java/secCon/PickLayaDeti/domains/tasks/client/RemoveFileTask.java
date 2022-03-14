@@ -21,7 +21,7 @@ public class RemoveFileTask implements TaskManager {
 
     @Override
     public boolean check(String message) {
-        Pattern pattern = Pattern.compile("^(REMOVEFILE) ([a-zA-Z0-9]{5,20})$");
+        Pattern pattern = Pattern.compile("^(REMOVEFILE) ([a-zA-Z0-9].{5,20})$");
         matcher = pattern.matcher(message);
         return matcher.matches();
     }
@@ -33,8 +33,9 @@ public class RemoveFileTask implements TaskManager {
 
         var newTask = new Task("REMOVEFILE", null);
 
-
         newTask.setFileName(fileName);
+
+        clientHandler.setCurrentFileName(fileName);
         storManager.addTask(newTask);
 
     }

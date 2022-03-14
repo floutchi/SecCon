@@ -42,7 +42,7 @@ public class ClientHandler implements Runnable {
             while(connected && !stop) {
                 String line = in.readLine();
                 if(line != null) {
-                    System.out.println(line);
+                    System.out.println("[ClientHandler][run] received : '" + line + "'");
                     TaskManager taskManager;
                     taskManager = new SendFileTask(this);
                     if(taskManager.check(line)) taskManager.execute(line);
@@ -70,6 +70,7 @@ public class ClientHandler implements Runnable {
     public void sendMessage(String message) {
         try {
             out.write(message + "\n");
+            System.out.println("[ClientHandler][sendMessage] send : '" + message);
             out.flush();
         } catch (IOException e) {
             e.printStackTrace();

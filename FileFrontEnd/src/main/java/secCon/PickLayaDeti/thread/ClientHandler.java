@@ -50,7 +50,9 @@ public class ClientHandler implements Runnable {
             while(connected && !stop) {
                 String line = in.readLine();
                 if(line != null) {
-                    //System.out.println("[ClientHandler][run] received: " + line);
+                    if(line.length() < 100) {
+                        System.out.println("[ClientHandler][run] received: " + line);
+                    }
                     executeTask(line, tasks);
                 }
             }
@@ -148,5 +150,9 @@ public class ClientHandler implements Runnable {
 
     public int getCurrentFileSize() {
         return currentFileSize;
+    }
+
+    public void setCurrentFileName(String name) {
+        this.currentFileName = name;
     }
 }

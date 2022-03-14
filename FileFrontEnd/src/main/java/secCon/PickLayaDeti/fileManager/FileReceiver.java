@@ -21,6 +21,8 @@ public class FileReceiver {
             long currentOffset = 0;
 
             while((currentOffset < fileSize) && ((bytesReceived = input.read(buffer)) > 0)) {
+
+                //System.out.printf("[FileReceiver] received : %ld / %ld\n", currentOffset, fileSize);
                 bosFile.write(buffer, 0, bytesReceived);
                 currentOffset += bytesReceived;
             }

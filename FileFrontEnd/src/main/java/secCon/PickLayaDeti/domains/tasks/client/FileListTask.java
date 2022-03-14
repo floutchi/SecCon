@@ -34,6 +34,7 @@ public class FileListTask implements TaskManager {
         if (storedFiles.isEmpty()) clientHandler.sendMessage("FILES");
         for (StoredFiles f : storedFiles) {
             clientHandler.sendMessage("FILES " + f.getName() + "!" + f.getSize());
+            //clientHandler.sendMessage("FILES testeuu.png!4566jspmdrlol.png!487648");
         }
     }
 }

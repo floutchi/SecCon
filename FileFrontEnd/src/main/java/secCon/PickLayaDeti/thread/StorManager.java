@@ -64,10 +64,6 @@ public class StorManager {
 
     }
 
-    public void removeTask(Task t) {
-        this.tasks.remove(t);
-    }
-
     public void resultTask(String message) {
         TaskManager taskManager;
         taskManager = new SendResultTask(clientHandler);

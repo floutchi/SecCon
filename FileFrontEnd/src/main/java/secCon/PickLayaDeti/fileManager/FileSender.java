@@ -20,6 +20,9 @@ public class FileSender {
                 bisFile = new BufferedInputStream(new FileInputStream(f));
                 long currentOffset = 0;
                 while((currentOffset < fileSize) && (bytesReaded = bisFile.read(buffer)) > 0) {
+
+                    //System.out.printf("[FileSender] sent : %ld / %ld\n", currentOffset, fileSize);
+
                     out.write(buffer, 0, bytesReaded); out.flush();
                     currentOffset+= bytesReaded;
                 }

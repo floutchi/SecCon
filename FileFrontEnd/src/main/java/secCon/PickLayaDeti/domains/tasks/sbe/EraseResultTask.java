@@ -1,5 +1,6 @@
 package secCon.PickLayaDeti.domains.tasks.sbe;
 
+import secCon.PickLayaDeti.Program;
 import secCon.PickLayaDeti.domains.tasks.interfaces.TaskManager;
 import secCon.PickLayaDeti.thread.ClientHandler;
 
@@ -9,6 +10,7 @@ import java.util.regex.Pattern;
 public class EraseResultTask implements TaskManager {
 
     ClientHandler clientHandler;
+    Matcher matcher;
 
     public EraseResultTask(ClientHandler clientHandler) {
         this.clientHandler = clientHandler;
@@ -17,12 +19,23 @@ public class EraseResultTask implements TaskManager {
     @Override
     public boolean check(String message) {
         Pattern pattern = Pattern.compile("^(ERASE_OK|ERASE_ERROR)$");
-        Matcher matcher = pattern.matcher(message);
+        matcher = pattern.matcher(message);
         return matcher.matches();
     }
 
     @Override
     public void execute(String message) {
-        clientHandler.sendMessage("REMOVEFILE_OK");
+
+        if(matcher.group(1).equals("ERASE_OK")) {
+            clientHandler.sendMessage("REMOVEFILE_OK");
+
+            var connectedUser = clientHandler.getConnectedUser();
+            connectedUser.removeFile(clientHandler.getCurrentFileName());
+
+            Program.jsonConfig.writeUsers();
+
+        } else {
+            clientHandler.sendMessage("REMOVEFILE_ERROR");
+        }
     }
 }
