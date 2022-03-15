@@ -42,7 +42,7 @@ public class RetrieveResultTask implements TaskManager {
             FileReceiver fileReceiver = new FileReceiver(Program.PATH);
             fileReceiver.receiveFile(storProcessor.getInputStream(), fileName, size);
 
-            clientHandler.sendMessage("GETFILE_OK " + fileName + size);
+            clientHandler.sendMessage("GETFILE_OK " + fileName + " " + size);
 
             clientHandler.sendFile(fileName);
 
