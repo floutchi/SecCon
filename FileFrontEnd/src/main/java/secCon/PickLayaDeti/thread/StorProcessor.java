@@ -4,6 +4,7 @@ import secCon.PickLayaDeti.Program;
 import secCon.PickLayaDeti.domains.ServerInfo;
 
 import secCon.PickLayaDeti.domains.Task;
+import secCon.PickLayaDeti.fileManager.FileReceiver;
 import secCon.PickLayaDeti.fileManager.FileSender;
 import secCon.PickLayaDeti.thread.*;
 
@@ -82,6 +83,17 @@ public class StorProcessor implements Runnable {
                         manager.resultTask(line);
                     }
 
+                    if(t.getProtocol().equals("GETFILE")) {
+                        out.write("RETRIEVEFILE " + t.getFileName() + "\n");
+                        out.flush();
+                        System.out.println("[StorProcessor][run] sending 'RETRIEVEFILE'");
+
+                        String line = in.readLine();
+                        System.out.println("[StorProcessor][run] received : " + line);
+                        manager.resultTask(line);
+
+                    }
+
 
                     this.t = null;
                 }
@@ -102,10 +114,15 @@ public class StorProcessor implements Runnable {
 
     public void setTask(Task t) {
         this.t = t;
+
     }
 
 
     private void stop() {
         this.stop = true;
+    }
+
+    public InputStream getInputStream() throws IOException {
+        return server.getInputStream();
     }
 }

@@ -4,17 +4,18 @@ import secCon.PickLayaDeti.domains.ServerInfo;
 import secCon.PickLayaDeti.domains.Task;
 import secCon.PickLayaDeti.domains.tasks.interfaces.TaskManager;
 import secCon.PickLayaDeti.domains.tasks.sbe.EraseResultTask;
+import secCon.PickLayaDeti.domains.tasks.sbe.RetrieveResultTask;
 import secCon.PickLayaDeti.domains.tasks.sbe.SendResultTask;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 public class StorManager {
     List<StorProcessor> servers;
 
     private ClientHandler clientHandler;
+
+    private StorProcessor currentStorProcessor;
 
     private List<Task> tasks;
 
@@ -59,6 +60,7 @@ public class StorManager {
         for (StorProcessor sp : servers) {
             if(!sp.isBusy()) {
                 sp.setTask(t);
+                currentStorProcessor = sp;
             }
         }
 
@@ -66,9 +68,27 @@ public class StorManager {
 
     public void resultTask(String message) {
         TaskManager taskManager;
-        taskManager = new SendResultTask(clientHandler);
+        taskManager = new SendResultTask(clientHandler, currentStorProcessor.getServerInfo().getDomain());
+
+
         if (taskManager.check(message)) taskManager.execute(message);
         taskManager = new EraseResultTask(clientHandler);
         if (taskManager.check(message)) taskManager.execute(message);
+
+
+        taskManager = new RetrieveResultTask(clientHandler, this);
+        if(taskManager.check(message)) taskManager.execute(message);
     }
+
+    public StorProcessor getStorProcessor(String fileName) {
+        String domain = clientHandler.getStorProcessorOfUser(fileName);
+        for (StorProcessor s : servers) {
+            if(s.getServerInfo().getIpAddress().equals(domain)) {
+                return s;
+            }
+        }
+
+        return null;
+    }
+
 }

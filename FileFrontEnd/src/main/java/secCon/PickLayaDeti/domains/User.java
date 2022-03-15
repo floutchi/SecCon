@@ -1,5 +1,7 @@
 package secCon.PickLayaDeti.domains;
 
+import secCon.PickLayaDeti.Program;
+
 import java.util.List;
 
 public class User {
@@ -35,6 +37,7 @@ public class User {
 
     public void addFile(StoredFiles storedFile) {
         filesList.add(storedFile);
+        Program.jsonConfig.writeUsers();
     }
 
     public void removeFile(String name) {
@@ -46,5 +49,17 @@ public class User {
         }
         
         filesList.remove(todelete);
+
+        Program.jsonConfig.writeUsers();
     }
+
+    public String getStorageManagerOfFile(String fileName) {
+        for (StoredFiles f : filesList) {
+            if(f.getName().equals(fileName)) {
+                return f.getStorageProvider();
+            }
+        }
+        return null;
+    }
+
 }

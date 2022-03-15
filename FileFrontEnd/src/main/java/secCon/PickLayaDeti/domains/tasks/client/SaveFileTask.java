@@ -53,6 +53,7 @@ public class SaveFileTask implements TaskManager {
 
         } catch (IOException ex) {
             System.out.println("Erreur dans la réception du fichier " + ex.getMessage());
+            clientHandler.sendMessage("SEND_ERROR");
         }
     }
 }

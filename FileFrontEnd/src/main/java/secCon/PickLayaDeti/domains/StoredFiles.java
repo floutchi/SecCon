@@ -7,10 +7,11 @@ public class StoredFiles {
     String storageProvider;
     int size;
 
-    public StoredFiles(String name, String hashedName, int size) {
+    public StoredFiles(String name, String hashedName, int size, String storageProvider) {
         this.name = name;
         this.hashedName = hashedName;
         this.size = size;
+        this.storageProvider = storageProvider;
     }
 
     public String getName() {

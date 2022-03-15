@@ -7,7 +7,14 @@
   "users": [
     {
       "aeskey": "waRSXGWIe0PBaz3NGZC6Rw==",
-      "stored_files": [],
+      "stored_files": [
+        {
+          "filename": "93123189_p13.jpg",
+          "storage_provider": "picklayadeti.sbe22.1",
+          "filesize": 2649488,
+          "iv": ""
+        }
+      ],
       "login": "Florian",
       "hashpass": "90514d84bc9ee8a13a77fca8a19b58a87069e3499aacbcc1f33a22a7502d8c80fa9d5325fc33f4618c6d0d62059374f3"
     },

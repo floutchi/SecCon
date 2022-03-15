@@ -3,7 +3,9 @@ package secCon.PickLayaDeti.thread;
 import secCon.PickLayaDeti.AppController;
 import secCon.PickLayaDeti.Program;
 import secCon.PickLayaDeti.fileManager.FileReceiver;
+import secCon.PickLayaDeti.fileManager.FileSender;
 import secCon.PickLayaDeti.tasks.EraseFileTask;
+import secCon.PickLayaDeti.tasks.RetrieveFileTask;
 import secCon.PickLayaDeti.tasks.SendFileTask;
 import secCon.PickLayaDeti.tasks.interfaces.TaskManager;
 
@@ -48,6 +50,8 @@ public class ClientHandler implements Runnable {
                     if(taskManager.check(line)) taskManager.execute(line);
                     taskManager = new EraseFileTask(this);
                     if(taskManager.check(line)) taskManager.execute(line);
+                    taskManager = new RetrieveFileTask(this);
+                    if(taskManager.check(line)) taskManager.execute(line);
                 } else {
                     stop = true;
                 }
@@ -66,6 +70,16 @@ public class ClientHandler implements Runnable {
             e.printStackTrace();
         }
     }
+
+    public void sendFile(String fileName) {
+        FileSender fileSender = new FileSender(Program.PATH);
+        try {
+            fileSender.sendFile(fileName, client.getOutputStream());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
 
     public void sendMessage(String message) {
         try {

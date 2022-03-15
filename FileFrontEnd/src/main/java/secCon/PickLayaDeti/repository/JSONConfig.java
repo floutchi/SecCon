@@ -91,7 +91,7 @@ public class JSONConfig {
             for(JSONObject us : jsonMap.keySet()) {
                 List<StoredFiles> storedFiles = new ArrayList<>();
                 for (JSONObject f : jsonMap.get(us)) {
-                    StoredFiles st = new StoredFiles((String)f.get("filename"), (String)f.get("iv"), ((Long)f.get("filesize")).intValue());
+                    StoredFiles st = new StoredFiles((String)f.get("filename"), (String)f.get("iv"), ((Long)f.get("filesize")).intValue(), (String)f.get("storage_provider"));
                     storedFiles.add(st);
                 }
                 User c = new User((String)us.get("aeskey"), (String) us.get("login"), (String) us.get("hashpass"), storedFiles);

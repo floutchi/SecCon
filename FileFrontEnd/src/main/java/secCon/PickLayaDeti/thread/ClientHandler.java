@@ -6,6 +6,7 @@ import secCon.PickLayaDeti.domains.Users;
 import secCon.PickLayaDeti.domains.tasks.client.*;
 import secCon.PickLayaDeti.domains.tasks.interfaces.TaskManager;
 import secCon.PickLayaDeti.fileManager.FileReceiver;
+import secCon.PickLayaDeti.fileManager.FileSender;
 
 import java.io.*;
 import java.net.Socket;
@@ -144,8 +145,20 @@ public class ClientHandler implements Runnable {
         return receiver.receiveFile(client.getInputStream(), name, size);
     }
 
+    public boolean sendFile(String name) throws IOException {
+        this.currentFileName = name;
+
+        FileSender sender = new FileSender(Program.PATH);
+        return sender.sendFile(name, client.getOutputStream());
+    }
+
+
     public String getCurrentFileName() {
         return currentFileName;
+    }
+
+    public String getStorProcessorOfUser(String fileName) {
+        return connectedUser.getStorageManagerOfFile(fileName);
     }
 
     public int getCurrentFileSize() {
