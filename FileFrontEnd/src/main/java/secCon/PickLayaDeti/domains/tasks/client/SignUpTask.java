@@ -43,7 +43,6 @@ public class SignUpTask implements TaskManager {
 
             // Génération de la clé AES
             var key = keyManager.generateAesKey();
-
             User newUser = new User(key, login, hashPassword, new ArrayList<>());
             addUserIfLoginIsValid(login, newUser);
         } catch (NoSuchAlgorithmException e) {
