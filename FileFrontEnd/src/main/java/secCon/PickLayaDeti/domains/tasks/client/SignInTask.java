@@ -1,5 +1,6 @@
 package secCon.PickLayaDeti.domains.tasks.client;
 
+import org.mindrot.jbcrypt.BCrypt;
 import secCon.PickLayaDeti.domains.Users;
 import secCon.PickLayaDeti.domains.tasks.interfaces.TaskManager;
 import secCon.PickLayaDeti.security.AesKeyManager;
@@ -38,11 +39,23 @@ public class SignInTask implements TaskManager {
 
         try {
             // 3. Hachage du mdp
+            var t = BCrypt.hashpw(clearPassword, BCrypt.gensalt());
             var hashedPassword = hasher.clearTextToHash(clearPassword);
-            var currentUser = users.getUsersByLoginAndPassword(name, hashedPassword);
+            var currentUser = users.getUsersByLoginAndPassword(name, clearPassword);
             if (currentUser == null) return;
 
             handler.setCurrentUser(currentUser);
+
+            //with Bcrypt
+            String hashed = BCrypt.hashpw(clearPassword, BCrypt.gensalt());
+
+            // Check that an unencrypted password matches one that has
+            // previously been hashed
+            if (BCrypt.checkpw(clearPassword, hashed))
+                System.out.println("It matches");
+            else
+                System.out.println("It does not match");
+
         } catch (NoSuchAlgorithmException e) {
             e.printStackTrace();
         }

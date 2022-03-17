@@ -1,5 +1,6 @@
 package secCon.PickLayaDeti.domains;
 
+import org.mindrot.jbcrypt.BCrypt;
 import secCon.PickLayaDeti.Program;
 import secCon.PickLayaDeti.security.Hasher;
 
@@ -58,7 +59,7 @@ public class Users {
         for (var currentUser: userList) {
             var currentLogin = currentUser.getLogin();
             var currentPassword = currentUser.getHashPass();
-            if (currentLogin.equals(login) && currentPassword.equals(password)) {
+            if (currentLogin.equals(login) && BCrypt.checkpw(password, currentPassword)) {
                 return currentUser;
             }
         }
