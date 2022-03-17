@@ -32,6 +32,7 @@ public class EraseResultTask implements TaskManager {
             var connectedUser = clientHandler.getConnectedUser();
             connectedUser.removeFile(clientHandler.getCurrentFileName());
 
+            Program.jsonConfig.updateUsers(clientHandler.getUsers());
             Program.jsonConfig.writeUsers();
 
         } else {

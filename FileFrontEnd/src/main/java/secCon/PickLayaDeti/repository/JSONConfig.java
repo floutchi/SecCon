@@ -6,6 +6,7 @@ import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 import secCon.PickLayaDeti.domains.StoredFiles;
 import secCon.PickLayaDeti.domains.User;
+import secCon.PickLayaDeti.domains.Users;
 
 import java.io.FileReader;
 import java.io.FileWriter;
@@ -136,5 +137,9 @@ public class JSONConfig {
 
     public void setUserList(List<User> userList) {
         this.users = userList;
+    }
+
+    public void updateUsers(Users users) {
+        this.users = users.getUserList();
     }
 }

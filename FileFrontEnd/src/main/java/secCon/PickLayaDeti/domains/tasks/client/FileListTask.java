@@ -32,9 +32,17 @@ public class FileListTask implements TaskManager {
         // Renvoie sa liste de fichiers
         List<StoredFiles> storedFiles = currentUser.getFilesList();
         if (storedFiles.isEmpty()) clientHandler.sendMessage("FILES");
+
+        StringBuilder sb = new StringBuilder();
+        sb.append("FILES ");
+
         for (StoredFiles f : storedFiles) {
-            clientHandler.sendMessage("FILES " + f.getName() + "!" + f.getSize());
-            //clientHandler.sendMessage("FILES testeuu.png!4566jspmdrlol.png!487648");
+            sb.append(f.getName() + "!" + f.getSize() + " ");
         }
+
+
+        clientHandler.sendMessage(sb.toString());
     }
+
+
 }
