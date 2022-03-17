@@ -145,11 +145,11 @@ public class ClientHandler implements Runnable {
         return receiver.receiveFile(client.getInputStream(), name, size);
     }
 
-    public boolean sendFile(String name) throws IOException {
+    public void sendFile(String name) throws IOException {
         this.currentFileName = name;
 
         FileSender sender = new FileSender(Program.PATH);
-        return sender.sendFile(name, client.getOutputStream());
+        sender.sendFile(name, client.getOutputStream());
     }
 
 
