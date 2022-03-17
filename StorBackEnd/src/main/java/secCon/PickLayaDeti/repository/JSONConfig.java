@@ -7,6 +7,7 @@ import org.json.simple.parser.*;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.nio.file.Paths;
 
 public class JSONConfig {
 
@@ -17,6 +18,7 @@ public class JSONConfig {
     private final int multicastPort;
     private final int multicastDelayInSeconds;
     private final int unicastPort;
+    private final String jsonPath = Paths.get("StorBackEnd", "/src/main/java/secCon/PickLayaDeti/repository/config.json").toAbsolutePath().toString();
 
     public JSONConfig() {
         readJson();
@@ -31,7 +33,7 @@ public class JSONConfig {
     private void readJson() {
         JSONParser jsonParser = new JSONParser();
 
-        try (FileReader reader = new FileReader("C:\\dev\\reseau\\secCon\\ProjetReseau-secCon-PickLayaDeti\\StorBackEnd\\src\\main\\java\\secCon\\PickLayaDeti\\repository\\config.json")) {
+        try (FileReader reader = new FileReader(jsonPath)) {
             Object obj = jsonParser.parse(reader);
             this.configObject = (JSONObject) obj;
 
