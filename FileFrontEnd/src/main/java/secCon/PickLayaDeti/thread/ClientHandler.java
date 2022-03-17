@@ -10,6 +10,7 @@ import secCon.PickLayaDeti.fileManager.FileSender;
 
 import java.io.*;
 import java.net.Socket;
+import java.net.SocketException;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
@@ -58,7 +59,7 @@ public class ClientHandler implements Runnable {
                 }
             }
         } catch (IOException e) {
-            e.printStackTrace();
+            System.out.println("[ClientHandler][run] Client déconnecté");
             try { client.close(); } catch (IOException ex) {}
         }
 

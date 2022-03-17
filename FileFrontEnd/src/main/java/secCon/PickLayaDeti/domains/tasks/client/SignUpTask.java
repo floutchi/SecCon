@@ -1,5 +1,6 @@
 package secCon.PickLayaDeti.domains.tasks.client;
 
+import org.mindrot.jbcrypt.BCrypt;
 import secCon.PickLayaDeti.domains.User;
 import secCon.PickLayaDeti.domains.Users;
 import secCon.PickLayaDeti.domains.tasks.interfaces.TaskManager;
@@ -39,7 +40,7 @@ public class SignUpTask implements TaskManager {
             var clearTextPassword = matcher.group(3);
 
             // Hachage du mdp
-            var hashPassword = hasher.clearTextToHash(clearTextPassword);
+            var hashPassword = BCrypt.hashpw(clearTextPassword, BCrypt.gensalt());
 
             // Génération de la clé AES
             var key = keyManager.generateAesKey();
