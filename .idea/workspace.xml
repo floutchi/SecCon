@@ -4,7 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="3ba9187d-69d7-43ee-9e4a-6418d73e8210" name="Changes" comment="debut retrieveFile" />
+    <list default="true" id="3ba9187d-69d7-43ee-9e4a-6418d73e8210" name="Changes" comment="debut retrieveFile">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/StorBackEnd/src/main/java/secCon/PickLayaDeti/repository/JSONConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/StorBackEnd/src/main/java/secCon/PickLayaDeti/repository/JSONConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/StorBackEnd/src/main/java/secCon/PickLayaDeti/tasks/EraseFileTask.java" beforeDir="false" afterPath="$PROJECT_DIR$/StorBackEnd/src/main/java/secCon/PickLayaDeti/tasks/EraseFileTask.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/StorBackEnd/src/main/java/secCon/PickLayaDeti/tasks/interfaces/TaskManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/StorBackEnd/src/main/java/secCon/PickLayaDeti/tasks/interfaces/TaskManager.java" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -198,6 +203,7 @@
       <workItem from="1647192866599" duration="4091000" />
       <workItem from="1647281700575" duration="4383000" />
       <workItem from="1647357265734" duration="5265000" />
+      <workItem from="1647521415283" duration="1146000" />
     </task>
     <task id="LOCAL-00001" summary="Séparation des deux programmes">
       <created>1645377433506</created>
@@ -327,6 +333,7 @@
         </entry>
       </map>
     </option>
+    <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Séparation des deux programmes" />
@@ -354,7 +361,7 @@
         </breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/StorBackEnd/src/main/java/secCon/PickLayaDeti/thread/ClientHandler.java</url>
-          <line>52</line>
+          <line>94</line>
           <option name="timeStamp" value="11" />
         </line-breakpoint>
       </breakpoints>
