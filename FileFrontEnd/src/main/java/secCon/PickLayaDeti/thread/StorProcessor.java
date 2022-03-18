@@ -57,7 +57,7 @@ public class StorProcessor implements Runnable {
                 if(t != null) {
                     isBusy = true;
 
-                    if(t.getProtocol().equals("SENDFILE")) {
+                    if(isEquals(t.getProtocol(), "SENDFILE")) {
                         out.write("SENDFILE " + t.getFileName() + " " + t.getFileSize() + "\n");
                         out.flush();
                         System.out.println("[StorProcessor][sendMessage] sending 'SENDFILE'");
@@ -73,7 +73,8 @@ public class StorProcessor implements Runnable {
                         }
                     }
 
-                    if(t.getProtocol().equals("REMOVEFILE")) {
+                    if(isEquals(t.getProtocol(), "REMOVEFILE")) {
+                        if (!isEquals(process.getDomain(), t.getDestination()) && process.getDomain() != null) return;
                         out.write("ERASEFILE " + t.getFileName() + "\n");
                         out.flush();
                         System.out.println("[StorProcessor][run] sending 'ERASEFILE'");
@@ -83,7 +84,8 @@ public class StorProcessor implements Runnable {
                         manager.resultTask(line);
                     }
 
-                    if(t.getProtocol().equals("GETFILE")) {
+                    if(isEquals(t.getProtocol(), "GETFILE")) {
+                        if (!isEquals(process.getDomain(), t.getDestination()) && process.getDomain() != null) return;
                         out.write("RETRIEVEFILE " + t.getFileName() + "\n");
                         out.flush();
                         System.out.println("[StorProcessor][run] sending 'RETRIEVEFILE'");
@@ -91,7 +93,6 @@ public class StorProcessor implements Runnable {
                         String line = in.readLine();
                         System.out.println("[StorProcessor][run] received : " + line);
                         manager.resultTask(line);
-
                     }
 
 
@@ -106,6 +107,10 @@ public class StorProcessor implements Runnable {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
+    }
+
+    private boolean isEquals(String domain, String destination) {
+        return domain.equals(destination);
     }
 
     public boolean isBusy() {

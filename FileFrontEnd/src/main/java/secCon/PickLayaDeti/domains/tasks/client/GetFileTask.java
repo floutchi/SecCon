@@ -33,10 +33,14 @@ public class GetFileTask implements TaskManager {
     public void execute(String message) {
         String fileName = matcher.group(2);
 
-        var newTask = new Task("GETFILE", null);
-        newTask.setFileName(fileName);
+        var currentUser = clientHandler.getConnectedUser();
+        var destination = currentUser.getStorageManagerOfFile(fileName);
 
-        storManager.addTask(newTask);
+        if (destination != null) {
+            var newTask = new Task("GETFILE", null);
+            newTask.setFileName(fileName);
 
+            storManager.addTask(newTask);
+        }
     }
 }

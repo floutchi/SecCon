@@ -1,6 +1,7 @@
 package secCon.PickLayaDeti.domains.tasks.client;
 
 import secCon.PickLayaDeti.domains.Task;
+import secCon.PickLayaDeti.domains.User;
 import secCon.PickLayaDeti.domains.tasks.interfaces.TaskManager;
 import secCon.PickLayaDeti.thread.ClientHandler;
 import secCon.PickLayaDeti.thread.StorManager;
@@ -30,13 +31,16 @@ public class RemoveFileTask implements TaskManager {
     public void execute(String message) {
 
         String fileName = matcher.group(2);
+        User currentUser = clientHandler.getConnectedUser();
+        var storage = currentUser.getStorageManagerOfFile(fileName);
+        if (storage != null) {
+            var newTask = new Task("REMOVEFILE", storage);
 
-        var newTask = new Task("REMOVEFILE", null);
+            newTask.setFileName(fileName);
 
-        newTask.setFileName(fileName);
-
-        clientHandler.setCurrentFileName(fileName);
-        storManager.addTask(newTask);
+            clientHandler.setCurrentFileName(fileName);
+            storManager.addTask(newTask);
+        }
 
     }
 }
