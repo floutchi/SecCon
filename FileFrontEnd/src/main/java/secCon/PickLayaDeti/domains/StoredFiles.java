@@ -3,13 +3,13 @@ package secCon.PickLayaDeti.domains;
 public class StoredFiles {
 
     String name;
-    String hashedName;
+    String iv;
     String storageProvider;
     int size;
 
-    public StoredFiles(String name, String hashedName, int size, String storageProvider) {
+    public StoredFiles(String name, String iv, int size, String storageProvider) {
         this.name = name;
-        this.hashedName = hashedName;
+        this.iv = iv;
         this.size = size;
         this.storageProvider = storageProvider;
     }
@@ -18,8 +18,8 @@ public class StoredFiles {
         return name;
     }
 
-    public String getHashedName() {
-        return hashedName;
+    public String getIv() {
+        return iv;
     }
 
     public String getStorageProvider() {

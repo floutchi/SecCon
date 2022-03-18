@@ -2,16 +2,11 @@ package secCon.PickLayaDeti.domains.tasks.client;
 
 import secCon.PickLayaDeti.domains.Task;
 import secCon.PickLayaDeti.domains.tasks.interfaces.TaskManager;
-import secCon.PickLayaDeti.fileManager.FileReceiver;
-import secCon.PickLayaDeti.fileManager.FileSender;
 import secCon.PickLayaDeti.security.Hasher;
 import secCon.PickLayaDeti.thread.ClientHandler;
 import secCon.PickLayaDeti.thread.StorManager;
 
-import javax.xml.crypto.dsig.DigestMethod;
-import java.io.File;
 import java.io.IOException;
-import java.security.NoSuchAlgorithmException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 

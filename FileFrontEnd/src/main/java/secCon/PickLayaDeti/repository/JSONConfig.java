@@ -12,7 +12,6 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
-import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.*;
 
@@ -52,7 +51,7 @@ public class JSONConfig {
                 JSONObject fileObject = new JSONObject();
                 fileObject.put("filename", f.getName());
                 fileObject.put("filesize", f.getSize());
-                fileObject.put("iv", f.getHashedName());
+                fileObject.put("iv", f.getIv());
                 fileObject.put("storage_provider", f.getStorageProvider());
 
                 fileArrays.add(fileObject);

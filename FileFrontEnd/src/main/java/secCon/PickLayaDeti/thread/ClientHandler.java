@@ -5,14 +5,18 @@ import secCon.PickLayaDeti.domains.User;
 import secCon.PickLayaDeti.domains.Users;
 import secCon.PickLayaDeti.domains.tasks.client.*;
 import secCon.PickLayaDeti.domains.tasks.interfaces.TaskManager;
-import secCon.PickLayaDeti.fileManager.FileReceiver;
+import secCon.PickLayaDeti.fileManager.FileReceiverEncrypt;
 import secCon.PickLayaDeti.fileManager.FileSender;
 
+import javax.crypto.SecretKey;
+import javax.crypto.spec.SecretKeySpec;
 import java.io.*;
 import java.net.Socket;
 import java.net.SocketException;
 import java.nio.charset.StandardCharsets;
+import java.security.SecureRandom;
 import java.util.ArrayList;
+import java.util.Base64;
 import java.util.List;
 
 public class ClientHandler implements Runnable {
@@ -27,6 +31,8 @@ public class ClientHandler implements Runnable {
 
     private String currentFileName;
     private int currentFileSize;
+
+    private String currentIv;
 
 
     public ClientHandler(Socket client, StorManager storManager) {
@@ -145,7 +151,14 @@ public class ClientHandler implements Runnable {
         this.currentFileName = name;
         this.currentFileSize = size;
 
-        FileReceiver receiver = new FileReceiver(Program.PATH);
+        // Generate key
+        byte[] decodedKey = Base64.getDecoder().decode(this.connectedUser.getAesKey());
+        SecretKey aesKey = new SecretKeySpec(decodedKey, 0, decodedKey.length, "AES");
+        byte[] IV = new byte[12]; //TODO Sauvegarder l'IV
+        this.currentIv = Base64.getEncoder().encodeToString(IV);
+        SecureRandom random = new SecureRandom();
+        random.nextBytes(IV);
+        FileReceiverEncrypt receiver = new FileReceiverEncrypt(Program.PATH, aesKey, IV);
         return receiver.receiveFile(client.getInputStream(), name, size);
     }
 
@@ -156,6 +169,9 @@ public class ClientHandler implements Runnable {
         sender.sendFile(name, client.getOutputStream());
     }
 
+    public String getCurrentIv() {
+        return currentIv;
+    }
 
     public String getCurrentFileName() {
         return currentFileName;

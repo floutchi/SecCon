@@ -1,14 +1,19 @@
 package secCon.PickLayaDeti.domains.tasks.sbe;
 
 import secCon.PickLayaDeti.Program;
+import secCon.PickLayaDeti.domains.StoredFiles;
+import secCon.PickLayaDeti.domains.User;
 import secCon.PickLayaDeti.domains.tasks.interfaces.TaskManager;
-import secCon.PickLayaDeti.fileManager.FileReceiver;
-import secCon.PickLayaDeti.fileManager.FileSender;
+import secCon.PickLayaDeti.fileManager.FileReceiverDecrypt;
+import secCon.PickLayaDeti.fileManager.FileReceiverEncrypt;
 import secCon.PickLayaDeti.thread.ClientHandler;
 import secCon.PickLayaDeti.thread.StorManager;
 import secCon.PickLayaDeti.thread.StorProcessor;
 
+import javax.crypto.SecretKey;
+import javax.crypto.spec.SecretKeySpec;
 import java.io.IOException;
+import java.util.Base64;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -39,7 +44,21 @@ public class RetrieveResultTask implements TaskManager {
 
             int size = Integer.parseInt(matcher.group(3));
 
-            FileReceiver fileReceiver = new FileReceiver(Program.PATH);
+            byte[] iv= new byte[12];
+
+            User user = clientHandler.getConnectedUser();
+            var fileList = user.getFilesList();
+            for (StoredFiles f: fileList) {
+                if(fileName==f.getName()){
+                    iv = Base64.getDecoder().decode(f.getIv());
+                }
+            }
+
+            byte[] decodedKey = Base64.getDecoder().decode(user.getAesKey());
+            SecretKey aesKey = new SecretKeySpec(decodedKey, 0, decodedKey.length, "AES");
+
+
+            FileReceiverDecrypt fileReceiver = new FileReceiverDecrypt(Program.PATH, aesKey, iv );
             fileReceiver.receiveFile(storProcessor.getInputStream(), fileName, size);
 
             clientHandler.sendMessage("GETFILE_OK " + fileName + " " + size);

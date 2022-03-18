@@ -30,7 +30,7 @@ public class SendResultTask implements TaskManager {
 
         var user = clientHandler.getConnectedUser();
 
-        user.addFile(new StoredFiles(clientHandler.getCurrentFileName(), "", clientHandler.getCurrentFileSize(), savedSBE));
+        user.addFile(new StoredFiles(clientHandler.getCurrentFileName(), clientHandler.getCurrentIv(), clientHandler.getCurrentFileSize(), savedSBE));
 
 
     }
