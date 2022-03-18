@@ -43,6 +43,7 @@ public class SignInTask implements TaskManager {
             var hashedPassword = hasher.clearTextToHash(clearPassword);
             var currentUser = users.getUsersByLoginAndPassword(name, clearPassword);
             if (currentUser == null) return;
+
             handler.setCurrentUser(currentUser);
 
             //with Bcrypt
@@ -54,7 +55,6 @@ public class SignInTask implements TaskManager {
                 System.out.println("It matches");
             else
                 System.out.println("It does not match");
-
 
         } catch (NoSuchAlgorithmException e) {
             e.printStackTrace();

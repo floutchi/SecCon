@@ -40,9 +40,6 @@ public class FileListTask implements TaskManager {
             sb.append(f.getName() + "!" + f.getSize() + " ");
         }
 
-
         clientHandler.sendMessage(sb.toString());
     }
-
-
 }

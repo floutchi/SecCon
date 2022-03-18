@@ -42,10 +42,8 @@ public class SignUpTask implements TaskManager {
             // Hachage du mdp
             var hashPassword = BCrypt.hashpw(clearTextPassword, BCrypt.gensalt());
 
-
             // Génération de la clé AES
             var key = keyManager.generateAesKey();
-
             User newUser = new User(key, login, hashPassword, new ArrayList<>());
             addUserIfLoginIsValid(login, newUser);
         } catch (NoSuchAlgorithmException e) {

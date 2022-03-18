@@ -35,6 +35,10 @@ public class JSONConfig {
         this.users = readUsers();
     }
 
+    public void updateUsers(Users users) {
+        this.users = users.getUserList();
+    }
+
     public void writeUsers() {
         JSONArray userArray = new JSONArray();
         for (User u : users) {
