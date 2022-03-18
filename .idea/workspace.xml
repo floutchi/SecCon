@@ -4,10 +4,24 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="3ba9187d-69d7-43ee-9e4a-6418d73e8210" name="Changes" comment="Hash du password en utilisant BCrypt">
+    <list default="true" id="3ba9187d-69d7-43ee-9e4a-6418d73e8210" name="Changes" comment="debut retrieveFile">
+      <change beforePath="$PROJECT_DIR$/.gradle/7.1/executionHistory/executionHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/7.1/executionHistory/executionHistory.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/7.1/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/7.1/executionHistory/executionHistory.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/7.1/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/7.1/fileHashes/fileHashes.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/7.1/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/7.1/fileHashes/fileHashes.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/checksums/checksums.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/checksums/checksums.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/checksums/md5-checksums.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/checksums/md5-checksums.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/checksums/sha1-checksums.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/checksums/sha1-checksums.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/ProjetReseau-secCon-PickLayaDeti.iml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FileFrontEnd/src/main/java/secCon/PickLayaDeti/thread/StorManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/FileFrontEnd/src/main/java/secCon/PickLayaDeti/thread/StorManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FileFrontEnd/src/main/java/secCon/PickLayaDeti/domains/tasks/client/GetFileTask.java" beforeDir="false" afterPath="$PROJECT_DIR$/FileFrontEnd/src/main/java/secCon/PickLayaDeti/domains/tasks/client/GetFileTask.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FileFrontEnd/src/main/java/secCon/PickLayaDeti/domains/tasks/client/RemoveFileTask.java" beforeDir="false" afterPath="$PROJECT_DIR$/FileFrontEnd/src/main/java/secCon/PickLayaDeti/domains/tasks/client/RemoveFileTask.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FileFrontEnd/src/main/java/secCon/PickLayaDeti/domains/tasks/client/SignInTask.java" beforeDir="false" afterPath="$PROJECT_DIR$/FileFrontEnd/src/main/java/secCon/PickLayaDeti/domains/tasks/client/SignInTask.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FileFrontEnd/src/main/java/secCon/PickLayaDeti/repository/config.json" beforeDir="false" afterPath="$PROJECT_DIR$/FileFrontEnd/src/main/java/secCon/PickLayaDeti/repository/config.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FileFrontEnd/src/main/java/secCon/PickLayaDeti/server/Server.java" beforeDir="false" afterPath="$PROJECT_DIR$/FileFrontEnd/src/main/java/secCon/PickLayaDeti/server/Server.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/FileFrontEnd/src/main/java/secCon/PickLayaDeti/thread/StorProcessor.java" beforeDir="false" afterPath="$PROJECT_DIR$/FileFrontEnd/src/main/java/secCon/PickLayaDeti/thread/StorProcessor.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -46,7 +60,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="master" />
+        <entry key="$PROJECT_DIR$" value="initUserInClientHandler" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -77,7 +91,6 @@
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
-    <property name="ChangesTree.GroupingKeys" value="directory" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
@@ -108,11 +121,11 @@
       <recent name="secCon.PickLayaDeti" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.SBE">
+  <component name="RunManager" selected="Application.FFE">
     <configuration name="FFE" type="Application" factoryName="Application" temporary="true">
       <option name="MAIN_CLASS_NAME" value="secCon.PickLayaDeti.Program" />
       <module name="ProjetReseau-secCon-PickLayaDeti.FileFrontEnd.main" />
-      <option name="VM_PARAMETERS" value="-Djavax.net.ssl.keyStore=&quot;C:\dev\reseau\secCon\ProjetReseau-secCon-PickLayaDetiffe.labo.swilabus.com.p12&quot; -Djavax.net.ssl.keyStorePassword=labo2022 -Dhttps.protocols=TLSv1.2" />
+      <option name="VM_PARAMETERS" value="-Djavax.net.ssl.keyStore=&quot;$PROJECT_DIR$/../../../../Réseaux Informatiques/project/finalVersion/ProjetReseau-secCon-PickLayaDeti/ffe.labo.swilabus.com.p12&quot; -Djavax.net.ssl.keyStorePassword=labo2022 -Dhttps.protocols=TLSv1.2" />
       <extension name="coverage">
         <pattern>
           <option name="PATTERN" value="secCon.PickLayaDeti.*" />
@@ -204,7 +217,7 @@
       <workItem from="1647192866599" duration="4091000" />
       <workItem from="1647281700575" duration="4383000" />
       <workItem from="1647357265734" duration="5265000" />
-      <workItem from="1647521415283" duration="6670000" />
+      <workItem from="1647521415283" duration="1146000" />
     </task>
     <task id="LOCAL-00001" summary="Séparation des deux programmes">
       <created>1645377433506</created>
@@ -318,21 +331,7 @@
       <option name="project" value="LOCAL" />
       <updated>1647362549639</updated>
     </task>
-    <task id="LOCAL-00017" summary="Methode safeDelete">
-      <created>1647522646818</created>
-      <option name="number" value="00017" />
-      <option name="presentableId" value="LOCAL-00017" />
-      <option name="project" value="LOCAL" />
-      <updated>1647522646818</updated>
-    </task>
-    <task id="LOCAL-00018" summary="Hash du password en utilisant BCrypt">
-      <created>1647527766651</created>
-      <option name="number" value="00018" />
-      <option name="presentableId" value="LOCAL-00018" />
-      <option name="project" value="LOCAL" />
-      <updated>1647527766651</updated>
-    </task>
-    <option name="localTasksCounter" value="19" />
+    <option name="localTasksCounter" value="17" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -365,9 +364,7 @@
     <MESSAGE value="Fin upload d'un fichier + début remove file" />
     <MESSAGE value="Fin removeFile" />
     <MESSAGE value="debut retrieveFile" />
-    <MESSAGE value="Methode safeDelete" />
-    <MESSAGE value="Hash du password en utilisant BCrypt" />
-    <option name="LAST_COMMIT_MESSAGE" value="Hash du password en utilisant BCrypt" />
+    <option name="LAST_COMMIT_MESSAGE" value="debut retrieveFile" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
