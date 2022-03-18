@@ -6,7 +6,9 @@ public class FileSender {
     private static final int DEFAULT_BUFFER=8000;
     private String path;
 
-    public FileSender(String path) { this.path = path; }
+    public FileSender(String path) {
+        this.path = path;
+    }
 
     public boolean sendFile(String filename, OutputStream out) {
         BufferedInputStream bisFile = null;

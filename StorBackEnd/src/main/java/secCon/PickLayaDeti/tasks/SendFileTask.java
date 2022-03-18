@@ -17,7 +17,7 @@ public class SendFileTask implements TaskManager {
 
     @Override
     public boolean check(String message) {
-        Pattern pattern = Pattern.compile("^(SENDFILE) ([a-zA-Z0-9].{5,20}) ([0-9]{1,10})$");
+        Pattern pattern = Pattern.compile("^(SENDFILE) ([a-zA-Z0-9].{50,200}) ([0-9]{1,10})$");
         this.matcher = pattern.matcher(message);
         return matcher.matches();
     }

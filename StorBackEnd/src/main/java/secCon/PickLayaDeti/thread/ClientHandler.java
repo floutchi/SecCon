@@ -44,7 +44,9 @@ public class ClientHandler implements Runnable {
             while(connected && !stop) {
                 String line = in.readLine();
                 if(line != null) {
-                    System.out.println("[ClientHandler][run] received : '" + line + "'");
+                    if(line.length() < 100) {
+                        System.out.println("[ClientHandler][run] received : '" + line + "'");
+                    }
                     TaskManager taskManager;
                     taskManager = new SendFileTask(this);
                     if(taskManager.check(line)) taskManager.execute(line);

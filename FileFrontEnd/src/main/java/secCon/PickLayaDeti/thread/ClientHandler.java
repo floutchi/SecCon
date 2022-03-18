@@ -1,19 +1,22 @@
 package secCon.PickLayaDeti.thread;
 
 import secCon.PickLayaDeti.Program;
+import secCon.PickLayaDeti.domains.StoredFiles;
 import secCon.PickLayaDeti.domains.User;
 import secCon.PickLayaDeti.domains.Users;
 import secCon.PickLayaDeti.domains.tasks.client.*;
 import secCon.PickLayaDeti.domains.tasks.interfaces.TaskManager;
 import secCon.PickLayaDeti.fileManager.FileReceiverEncrypt;
 import secCon.PickLayaDeti.fileManager.FileSender;
+import secCon.PickLayaDeti.fileManager.FileSenderDecrypt;
+import secCon.PickLayaDeti.security.Hasher;
 
 import javax.crypto.SecretKey;
 import javax.crypto.spec.SecretKeySpec;
 import java.io.*;
 import java.net.Socket;
-import java.net.SocketException;
 import java.nio.charset.StandardCharsets;
+import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
 import java.util.ArrayList;
 import java.util.Base64;
@@ -46,7 +49,7 @@ public class ClientHandler implements Runnable {
                     StandardCharsets.UTF_8));
             this.out = new PrintWriter(new OutputStreamWriter(client.getOutputStream(),
                     StandardCharsets.UTF_8), true);
-        } catch(IOException ex) {
+        } catch (IOException ex) {
             ex.printStackTrace();
         }
     }
@@ -54,22 +57,22 @@ public class ClientHandler implements Runnable {
     public void run() {
         var tasks = createTask();
         try {
-            while(connected && !stop) {
-                try {
-                    String line = in.readLine();
-                    if(line != null) {
-                        if(line.length() < 100) {
-                            System.out.println("[ClientHandler][run] received: " + line);
-                        }
-                        executeTask(line, tasks);
+            while (connected && !stop) {
+                String line = in.readLine();
+                if (line != null) {
+                    if (line.length() < 100) {
+                        //System.out.println("[ClientHandler][run] received: " + line);
                     }
-                } catch (SocketException se) {
-                    System.out.println("[ClientHandler][run] client déconnecté");
+                    executeTask(line, tasks);
                 }
             }
         } catch (IOException e) {
             System.out.println("[ClientHandler][run] Client déconnecté");
-            try { client.close(); } catch (IOException ex) {}
+            try {
+                client.close();
+            } catch (IOException ex) {
+                ex.printStackTrace();
+            }
         }
 
         Program.jsonConfig.setUserList(users.getUserList());
@@ -78,7 +81,7 @@ public class ClientHandler implements Runnable {
     }
 
     private void executeTask(String message, List<TaskManager> tasks) {
-        if(connectedUser == null) if (setUpConnectedUser(message)) return;
+        if (connectedUser == null) if (setUpConnectedUser(message)) return;
         for (var currentTask : tasks) {
             if (currentTask.check(message)) currentTask.execute(message);
         }
@@ -86,7 +89,7 @@ public class ClientHandler implements Runnable {
 
     private boolean setUpConnectedUser(String message) {
         var initialTasks = connexionTasks();
-        for (var currentTask: initialTasks) {
+        for (var currentTask : initialTasks) {
             if (currentTask.check(message)) {
                 currentTask.execute(message);
             }
@@ -102,7 +105,7 @@ public class ClientHandler implements Runnable {
     }
 
     public void sendMessage(String message) {
-        if(connected) {
+        if (connected) {
             System.out.println("[ClientHandler][sendMessage] " + message);
             out.print(String.format("%s\r\n", message));
             out.flush();
@@ -154,19 +157,36 @@ public class ClientHandler implements Runnable {
         // Generate key
         byte[] decodedKey = Base64.getDecoder().decode(this.connectedUser.getAesKey());
         SecretKey aesKey = new SecretKeySpec(decodedKey, 0, decodedKey.length, "AES");
-        byte[] IV = new byte[12]; //TODO Sauvegarder l'IV
-        this.currentIv = Base64.getEncoder().encodeToString(IV);
+        byte[] IV = new byte[16];
         SecureRandom random = new SecureRandom();
         random.nextBytes(IV);
+        this.currentIv = Base64.getEncoder().encodeToString(IV);
         FileReceiverEncrypt receiver = new FileReceiverEncrypt(Program.PATH, aesKey, IV);
         return receiver.receiveFile(client.getInputStream(), name, size);
     }
 
     public void sendFile(String name) throws IOException {
         this.currentFileName = name;
+        Hasher h = new Hasher();
+        String hashedName = "";
+        try {
+            hashedName = h.clearTextToHash(name);
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
+        }
 
-        FileSender sender = new FileSender(Program.PATH);
-        sender.sendFile(name, client.getOutputStream());
+        byte[] decodedKey = Base64.getDecoder().decode(this.connectedUser.getAesKey());
+        SecretKey aesKey = new SecretKeySpec(decodedKey, 0, decodedKey.length, "AES");
+        byte[] IV = new byte[12];
+        var fileList = connectedUser.getFilesList();
+        for (StoredFiles f : fileList) {
+            if(f.getName().equals(name)) {
+                IV = Base64.getDecoder().decode(f.getIv());
+            }
+        }
+
+        FileSenderDecrypt sender = new FileSenderDecrypt(Program.PATH, aesKey, IV);
+        sender.sendFile(hashedName, client.getOutputStream());
     }
 
     public String getCurrentIv() {
@@ -178,7 +198,7 @@ public class ClientHandler implements Runnable {
     }
 
     public String getStorProcessorOfUser(String fileName) {
-        return connectedUser.getStorageManagerOfFile(fileName);
+        return connectedUser.getStorageManagerOfFile(fileName, new Hasher());
     }
 
     public int getCurrentFileSize() {

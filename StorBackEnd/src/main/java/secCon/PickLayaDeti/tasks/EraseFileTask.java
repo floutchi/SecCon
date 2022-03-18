@@ -24,14 +24,15 @@ public class EraseFileTask implements TaskManager {
 
     @Override
     public boolean check(String message) {
-        Pattern pattern = Pattern.compile("^(ERASEFILE) ([a-zA-Z0-9].{5,20})$");
+        Pattern pattern = Pattern.compile("^(ERASEFILE) ([a-zA-Z0-9].{50,200})$");
         matcher = pattern.matcher(message);
         return matcher.matches();
     }
 
     @Override
     public void execute(String message) {
-        String filePath = Program.PATH + "\\" + matcher.group(2);
+        var name = matcher.group(2);
+        String filePath = Program.PATH + "\\" + name;
         File f = new File(filePath);
         if(f.exists()) {
             try {

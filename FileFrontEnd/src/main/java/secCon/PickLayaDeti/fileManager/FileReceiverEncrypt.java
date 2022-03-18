@@ -46,13 +46,20 @@ public class FileReceiverEncrypt {
             bosFile = new BufferedOutputStream(new FileOutputStream(String.format("%s/%s", path, fileName)));
             long currentOffset = 0;
 
+            byte[] encryptedBytes;
             while((currentOffset < fileSize) && ((bytesReceived = input.read(buffer)) > 0)) {
 
                 //System.out.printf("[FileReceiver] received : %ld / %ld\n", currentOffset, fileSize);
-                byte[] encryptedBytes = cipher.doFinal(buffer);
+
+                encryptedBytes = cipher.update(buffer);
+
                 bosFile.write(encryptedBytes, 0, bytesReceived);
                 currentOffset += bytesReceived;
             }
+
+            encryptedBytes = cipher.doFinal();
+            bosFile.write(encryptedBytes, 0, encryptedBytes.length);
+
             bosFile.flush();
             bosFile.close();
 

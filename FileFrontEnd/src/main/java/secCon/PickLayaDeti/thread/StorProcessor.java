@@ -42,7 +42,7 @@ public class StorProcessor implements Runnable {
 
     @Override
     public void run() {
-       var ipAddress = process.getIpAddress();
+       var ipAddress = process.getDomain();
        var port = process.getPort();
 
         // Affichage la demande de connexion
@@ -78,7 +78,7 @@ public class StorProcessor implements Runnable {
                     }
 
                     if(t.getProtocol().equals("REMOVEFILE")) {
-                        out.write("ERASEFILE " + hashedName + "\n");
+                        out.write("ERASEFILE " + t.getFileName() + "\n");
                         out.flush();
                         System.out.println("[StorProcessor][run] sending 'ERASEFILE'");
 

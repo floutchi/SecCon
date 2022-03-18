@@ -27,7 +27,7 @@ public class HelloTask implements TaskManager {
     @Override
     public void execute(String message){
         System.out.printf("[Program] Receiving HELLO from %s with ID %s (unicast port: %s) \r\n", matcher.group(3), matcher.group(1), matcher.group(2));
-        var infos = new ServerInfo(matcher.group(1),matcher.group(2), Integer.parseInt(matcher.group(3)));
+        var infos = new ServerInfo(matcher.group(2), Integer.parseInt(matcher.group(3)));
         manager.createProcessor(infos);
 
     }

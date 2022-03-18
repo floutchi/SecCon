@@ -6,6 +6,7 @@ import secCon.PickLayaDeti.security.Hasher;
 import secCon.PickLayaDeti.thread.ClientHandler;
 import secCon.PickLayaDeti.thread.StorManager;
 
+import java.security.NoSuchAlgorithmException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -34,10 +35,15 @@ public class GetFileTask implements TaskManager {
         String fileName = matcher.group(2);
 
         var currentUser = clientHandler.getConnectedUser();
-        var destination = currentUser.getStorageManagerOfFile(fileName);
+        String destination = null;
+        try {
+            destination = currentUser.getStorageManagerOfFile(hasher.clearTextToHash(fileName), hasher);
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
+        }
 
         if (destination != null) {
-            var newTask = new Task("GETFILE", null);
+            var newTask = new Task("GETFILE", destination);
             newTask.setFileName(fileName);
 
             storManager.addTask(newTask);

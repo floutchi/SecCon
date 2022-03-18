@@ -38,6 +38,20 @@ public class JSONConfig {
         this.users = users.getUserList();
     }
 
+    public void updateUser(User u) {
+        User uToReplace = null;
+        for (User cUser : users) {
+            if(cUser.getLogin().equals(u.getLogin())) {
+                uToReplace = cUser;
+            }
+        }
+        if(uToReplace != null) {
+            users.remove(uToReplace);
+            users.add(u);
+        }
+    }
+
+
     public void writeUsers() {
         JSONArray userArray = new JSONArray();
         for (User u : users) {
@@ -140,9 +154,5 @@ public class JSONConfig {
 
     public void setUserList(List<User> userList) {
         this.users = userList;
-    }
-
-    public void updateUsers(Users users) {
-        this.users = users.getUserList();
     }
 }

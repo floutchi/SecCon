@@ -44,6 +44,8 @@ public class SaveFileTask implements TaskManager {
             newTask.setFileName(filename); newTask.setFileSize(size);
             if (clientHandler.receiveFile(filename, size)) {
                 storManager.addTask(newTask);
+            } else {
+                clientHandler.sendMessage("SEND_ERROR");
             }
 
         } catch (IOException ex) {

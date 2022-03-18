@@ -8,6 +8,7 @@ import secCon.PickLayaDeti.domains.tasks.sbe.RetrieveResultTask;
 import secCon.PickLayaDeti.domains.tasks.sbe.SendResultTask;
 import secCon.PickLayaDeti.security.Hasher;
 
+import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -84,12 +85,17 @@ public class StorManager {
 
     public StorProcessor getStorProcessor(String fileName) {
         String domain = clientHandler.getStorProcessorOfUser(fileName);
-        for (StorProcessor s : servers) {
-            if(s.getServerInfo().getIpAddress().equals(domain)) {
-                return s;
+        try {
+            for (StorProcessor s : servers) {
+                var currentName = s.getServerInfo().getDomain();
+                new Hasher().clearTextToHash(currentName);
+                if (s.getServerInfo().getDomain().equals(domain)) {
+                    return s;
+                }
             }
+        } catch(NoSuchAlgorithmException ex) {
+            ex.printStackTrace();
         }
-
         return null;
     }
 

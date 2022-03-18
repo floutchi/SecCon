@@ -1,7 +1,9 @@
 package secCon.PickLayaDeti.domains;
 
 import secCon.PickLayaDeti.Program;
+import secCon.PickLayaDeti.security.Hasher;
 
+import java.security.NoSuchAlgorithmException;
 import java.util.List;
 
 public class User {
@@ -37,6 +39,7 @@ public class User {
 
     public void addFile(StoredFiles storedFile) {
         filesList.add(storedFile);
+        Program.jsonConfig.updateUser(this);
         Program.jsonConfig.writeUsers();
     }
 
@@ -53,12 +56,18 @@ public class User {
         Program.jsonConfig.writeUsers();
     }
 
-    public String getStorageManagerOfFile(String fileName) {
-        for (StoredFiles f : filesList) {
-            if(f.getName().equals(fileName)) {
-                return f.getStorageProvider();
+    public String getStorageManagerOfFile(String fileName, Hasher hasher) {
+        try {
+            for (StoredFiles f : filesList) {
+                var name = hasher.clearTextToHash(f.getName());
+                if (name.equals(fileName)) {
+                    return f.getStorageProvider();
+                }
             }
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
         }
+
         return null;
     }
 
