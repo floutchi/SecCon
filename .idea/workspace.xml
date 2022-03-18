@@ -4,26 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="3ba9187d-69d7-43ee-9e4a-6418d73e8210" name="Changes" comment="debut retrieveFile">
-      <change beforePath="$PROJECT_DIR$/.gradle/7.1/executionHistory/executionHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/7.1/executionHistory/executionHistory.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/7.1/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/7.1/executionHistory/executionHistory.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/7.1/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/7.1/fileHashes/fileHashes.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/7.1/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/7.1/fileHashes/fileHashes.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/checksums/checksums.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/checksums/checksums.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/checksums/md5-checksums.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/checksums/md5-checksums.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/checksums/sha1-checksums.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/checksums/sha1-checksums.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/ProjetReseau-secCon-PickLayaDeti.iml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FileFrontEnd/src/main/java/secCon/PickLayaDeti/domains/tasks/client/GetFileTask.java" beforeDir="false" afterPath="$PROJECT_DIR$/FileFrontEnd/src/main/java/secCon/PickLayaDeti/domains/tasks/client/GetFileTask.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FileFrontEnd/src/main/java/secCon/PickLayaDeti/domains/tasks/client/RemoveFileTask.java" beforeDir="false" afterPath="$PROJECT_DIR$/FileFrontEnd/src/main/java/secCon/PickLayaDeti/domains/tasks/client/RemoveFileTask.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FileFrontEnd/src/main/java/secCon/PickLayaDeti/domains/tasks/client/SignInTask.java" beforeDir="false" afterPath="$PROJECT_DIR$/FileFrontEnd/src/main/java/secCon/PickLayaDeti/domains/tasks/client/SignInTask.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FileFrontEnd/src/main/java/secCon/PickLayaDeti/repository/config.json" beforeDir="false" afterPath="$PROJECT_DIR$/FileFrontEnd/src/main/java/secCon/PickLayaDeti/repository/config.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FileFrontEnd/src/main/java/secCon/PickLayaDeti/server/Server.java" beforeDir="false" afterPath="$PROJECT_DIR$/FileFrontEnd/src/main/java/secCon/PickLayaDeti/server/Server.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FileFrontEnd/src/main/java/secCon/PickLayaDeti/thread/StorProcessor.java" beforeDir="false" afterPath="$PROJECT_DIR$/FileFrontEnd/src/main/java/secCon/PickLayaDeti/thread/StorProcessor.java" afterDir="false" />
-    </list>
+    <list default="true" id="d06b76c5-7388-4099-8a05-3afe4b8a3164" name="Default Changelist" comment="hashage nom fichier" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -60,7 +41,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="initUserInClientHandler" />
+        <entry key="$PROJECT_DIR$" value="BCrypt" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -125,7 +106,7 @@
     <configuration name="FFE" type="Application" factoryName="Application" temporary="true">
       <option name="MAIN_CLASS_NAME" value="secCon.PickLayaDeti.Program" />
       <module name="ProjetReseau-secCon-PickLayaDeti.FileFrontEnd.main" />
-      <option name="VM_PARAMETERS" value="-Djavax.net.ssl.keyStore=&quot;$PROJECT_DIR$/../../../../Réseaux Informatiques/project/finalVersion/ProjetReseau-secCon-PickLayaDeti/ffe.labo.swilabus.com.p12&quot; -Djavax.net.ssl.keyStorePassword=labo2022 -Dhttps.protocols=TLSv1.2" />
+      <option name="VM_PARAMETERS" value="-Djavax.net.ssl.keyStore=&quot;$USER_HOME$/Réseaux Informatiques/project/finalVersion/ProjetReseau-secCon-PickLayaDeti/ffe.labo.swilabus.com.p12&quot; -Djavax.net.ssl.keyStorePassword=labo2022 -Dhttps.protocols=TLSv1.2" />
       <extension name="coverage">
         <pattern>
           <option name="PATTERN" value="secCon.PickLayaDeti.*" />

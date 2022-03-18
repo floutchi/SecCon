@@ -4,13 +4,13 @@ import secCon.PickLayaDeti.Program;
 import secCon.PickLayaDeti.domains.ServerInfo;
 
 import secCon.PickLayaDeti.domains.Task;
-import secCon.PickLayaDeti.fileManager.FileReceiver;
 import secCon.PickLayaDeti.fileManager.FileSender;
-import secCon.PickLayaDeti.thread.*;
+import secCon.PickLayaDeti.security.Hasher;
 
 import java.io.*;
 import java.net.Socket;
 import java.nio.charset.StandardCharsets;
+import java.security.NoSuchAlgorithmException;
 
 public class StorProcessor implements Runnable {
     private final StorManager manager;
@@ -27,9 +27,12 @@ public class StorProcessor implements Runnable {
 
     Task t;
 
-    public StorProcessor(ServerInfo process, StorManager manager) {
+    private Hasher hasher;
+
+    public StorProcessor(ServerInfo process, StorManager manager, Hasher hasher) {
         this.process = process;
         this.manager = manager;
+        this.hasher = hasher;
     }
 
     public ServerInfo getServerInfo() {
@@ -56,9 +59,10 @@ public class StorProcessor implements Runnable {
                 Thread.sleep(0);
                 if(t != null) {
                     isBusy = true;
+                    var hashedName = hasher.clearTextToHash(t.getFileName());
 
-                    if(isEquals(t.getProtocol(), "SENDFILE")) {
-                        out.write("SENDFILE " + t.getFileName() + " " + t.getFileSize() + "\n");
+                    if(t.getProtocol().equals("SENDFILE")) {
+                        out.write("SENDFILE " + hashedName + " " + t.getFileSize() + "\n");
                         out.flush();
                         System.out.println("[StorProcessor][sendMessage] sending 'SENDFILE'");
                         try {
@@ -73,9 +77,8 @@ public class StorProcessor implements Runnable {
                         }
                     }
 
-                    if(isEquals(t.getProtocol(), "REMOVEFILE")) {
-                        if (!isEquals(process.getDomain(), t.getDestination()) && process.getDomain() != null) return;
-                        out.write("ERASEFILE " + t.getFileName() + "\n");
+                    if(t.getProtocol().equals("REMOVEFILE")) {
+                        out.write("ERASEFILE " + hashedName + "\n");
                         out.flush();
                         System.out.println("[StorProcessor][run] sending 'ERASEFILE'");
 
@@ -84,15 +87,16 @@ public class StorProcessor implements Runnable {
                         manager.resultTask(line);
                     }
 
-                    if(isEquals(t.getProtocol(), "GETFILE")) {
-                        if (!isEquals(process.getDomain(), t.getDestination()) && process.getDomain() != null) return;
-                        out.write("RETRIEVEFILE " + t.getFileName() + "\n");
+                    if(t.getProtocol().equals("GETFILE")) {
+                        out.write("RETRIEVEFILE " + hashedName + "\n");
+
                         out.flush();
                         System.out.println("[StorProcessor][run] sending 'RETRIEVEFILE'");
 
                         String line = in.readLine();
                         System.out.println("[StorProcessor][run] received : " + line);
                         manager.resultTask(line);
+
                     }
 
 
@@ -101,16 +105,12 @@ public class StorProcessor implements Runnable {
 
             } while(!stop);
 
-        } catch (IOException ex) {
+        } catch (IOException | NoSuchAlgorithmException ex) {
             System.out.println("Erreur lors de la connexion au serveur : " + ex.getMessage());
             ex.printStackTrace();
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-    }
-
-    private boolean isEquals(String domain, String destination) {
-        return domain.equals(destination);
     }
 
     public boolean isBusy() {

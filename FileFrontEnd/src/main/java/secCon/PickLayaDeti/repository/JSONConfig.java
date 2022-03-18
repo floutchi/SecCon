@@ -142,4 +142,8 @@ public class JSONConfig {
     public void setUserList(List<User> userList) {
         this.users = userList;
     }
+
+    public void updateUsers(Users users) {
+        this.users = users.getUserList();
+    }
 }
