@@ -36,28 +36,13 @@ public class SignInTask implements TaskManager {
 
         // 2. Vérifier login + mdp correspondant
         var users = handler.getUsers();
-
-        try {
             // 3. Hachage du mdp
-            var t = BCrypt.hashpw(clearPassword, BCrypt.gensalt());
-            var hashedPassword = hasher.clearTextToHash(clearPassword);
+            /*var t = BCrypt.hashpw(clearPassword, BCrypt.gensalt());
+            var hashedPassword = hasher.clearTextToHash(clearPassword);*/
             var currentUser = users.getUsersByLoginAndPassword(name, clearPassword);
             if (currentUser == null) return;
 
+
             handler.setCurrentUser(currentUser);
-
-            //with Bcrypt
-            String hashed = BCrypt.hashpw(clearPassword, BCrypt.gensalt());
-
-            // Check that an unencrypted password matches one that has
-            // previously been hashed
-            if (BCrypt.checkpw(clearPassword, hashed))
-                System.out.println("It matches");
-            else
-                System.out.println("It does not match");
-
-        } catch (NoSuchAlgorithmException e) {
-            e.printStackTrace();
-        }
     }
 }
