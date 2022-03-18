@@ -6,6 +6,7 @@ import secCon.PickLayaDeti.domains.tasks.interfaces.TaskManager;
 import secCon.PickLayaDeti.domains.tasks.sbe.EraseResultTask;
 import secCon.PickLayaDeti.domains.tasks.sbe.RetrieveResultTask;
 import secCon.PickLayaDeti.domains.tasks.sbe.SendResultTask;
+import secCon.PickLayaDeti.security.Hasher;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -35,16 +36,17 @@ public class StorManager {
     }*/
 
     public void createProcessor(ServerInfo infos) {
+
         for (StorProcessor cprocessor : servers) {
             if (!cprocessor.getServerInfo().getDomain().equals(infos.getDomain())) {
-                var processor = new StorProcessor(infos, this);
+                var processor = new StorProcessor(infos, this, new Hasher());
                 servers.add(processor);
                 new Thread(processor).start();
             }
         }
 
         if(servers.isEmpty()) {
-            var processor = new StorProcessor(infos, this);
+            var processor = new StorProcessor(infos, this, new Hasher());
             servers.add(processor);
             new Thread(processor).start();
         }
