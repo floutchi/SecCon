@@ -33,20 +33,16 @@ public class RemoveFileTask implements TaskManager {
     public void execute(String message) {
 
         String fileName = matcher.group(2);
-        try {
-            String hashedFileName = new Hasher().clearTextToHash(fileName);
-            User currentUser = clientHandler.getConnectedUser();
-            var storage = currentUser.getStorageManagerOfFile(hashedFileName, new Hasher());
-            if (storage != null) {
-                var newTask = new Task("REMOVEFILE", storage);
+        String hashedFileName = new Hasher().clearTextToHash(fileName);
+        User currentUser = clientHandler.getConnectedUser();
+        var storage = currentUser.getStorageManagerOfFile(hashedFileName, new Hasher());
+        if (storage != null) {
+            var newTask = new Task("REMOVEFILE", storage);
 
-                newTask.setFileName(hashedFileName);
+            newTask.setFileName(hashedFileName);
 
-                clientHandler.setCurrentFileName(fileName);
-                storManager.addTask(newTask);
-            }
-        } catch (NoSuchAlgorithmException e) {
-            e.printStackTrace();
+            clientHandler.setCurrentFileName(fileName);
+            storManager.addTask(newTask);
         }
 
     }

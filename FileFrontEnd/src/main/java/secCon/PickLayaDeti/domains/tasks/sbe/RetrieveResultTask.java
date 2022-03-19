@@ -12,6 +12,7 @@ import secCon.PickLayaDeti.thread.StorProcessor;
 
 import javax.crypto.SecretKey;
 import javax.crypto.spec.SecretKeySpec;
+import java.io.File;
 import java.io.IOException;
 import java.security.NoSuchAlgorithmException;
 import java.util.Base64;
@@ -33,7 +34,7 @@ public class RetrieveResultTask implements TaskManager {
 
     @Override
     public boolean check(String message) {
-        Pattern pattern = Pattern.compile("^(RETRIEVE_OK|RETRIEVE_ERROR) ([a-zA-Z0-9].{50,200}) ([0-9]{1,10})$");
+        Pattern pattern = Pattern.compile("^(RETRIEVE_OK|RETRIEVE_ERROR) ([a-zA-Z0-9].{50,200}) ([0-9]{1,10}) ([a-zA-Z0-9].{50,200})$");
         this.matcher = pattern.matcher(message);
         return matcher.matches();
     }
@@ -46,6 +47,8 @@ public class RetrieveResultTask implements TaskManager {
             StorProcessor storProcessor = storManager.getStorProcessor(fileName);
 
             int size = Integer.parseInt(matcher.group(3));
+
+            String hashFileContent = matcher.group(4);
 
             var t = clientHandler.getConnectedUser();
 
@@ -69,15 +72,22 @@ public class RetrieveResultTask implements TaskManager {
             FileReceiver fileReceiver = new FileReceiver(Program.PATH);
             fileReceiver.receiveFile(storProcessor.getInputStream(), fileName, size);
 
-            clientHandler.sendMessage("GETFILE_OK " + clearName + " " + size);
+            File receivedFile = new File(String.format("%s/%s", Program.PATH, fileName));
+            String hashReceivedFile = new Hasher().clearFileToHash(receivedFile);
+
+            if(hashFileContent.equals(hashReceivedFile)) {
+                clientHandler.sendMessage("GETFILE_OK " + clearName + " " + size);
+            } else {
+                clientHandler.sendMessage("GETFILE_ERROR");
+            }
+
+
 
             clientHandler.sendFile(clearName);
 
         } catch (IOException e) {
             e.printStackTrace();
             clientHandler.sendMessage("GETFILE_ERROR");
-        } catch (NoSuchAlgorithmException e) {
-            e.printStackTrace();
         }
     }
 }

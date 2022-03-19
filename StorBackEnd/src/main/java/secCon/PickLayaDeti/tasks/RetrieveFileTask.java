@@ -2,6 +2,7 @@ package secCon.PickLayaDeti.tasks;
 
 import secCon.PickLayaDeti.Program;
 import secCon.PickLayaDeti.fileManager.FileReceiver;
+import secCon.PickLayaDeti.security.Hasher;
 import secCon.PickLayaDeti.tasks.interfaces.TaskManager;
 import secCon.PickLayaDeti.thread.ClientHandler;
 
@@ -33,7 +34,11 @@ public class RetrieveFileTask implements TaskManager {
         File f = new File(String.format("%s/%s", Program.PATH, fileName));
 
         if(f.exists()) {
-            clientHandler.sendMessage("RETRIEVE_OK " + fileName + " " + f.length());
+
+            Hasher h = new Hasher();
+            String hashedFile = h.clearFileToHash(f);
+
+            clientHandler.sendMessage("RETRIEVE_OK " + fileName + " " + f.length() + " " + hashedFile);
 
             clientHandler.sendFile(fileName);
         }

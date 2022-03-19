@@ -85,16 +85,12 @@ public class StorManager {
 
     public StorProcessor getStorProcessor(String fileName) {
         String domain = clientHandler.getStorProcessorOfUser(fileName);
-        try {
-            for (StorProcessor s : servers) {
-                var currentName = s.getServerInfo().getDomain();
-                new Hasher().clearTextToHash(currentName);
-                if (s.getServerInfo().getDomain().equals(domain)) {
-                    return s;
-                }
+        for (StorProcessor s : servers) {
+            var currentName = s.getServerInfo().getDomain();
+            new Hasher().clearTextToHash(currentName);
+            if (s.getServerInfo().getDomain().equals(domain)) {
+                return s;
             }
-        } catch(NoSuchAlgorithmException ex) {
-            ex.printStackTrace();
         }
         return null;
     }

@@ -169,11 +169,7 @@ public class ClientHandler implements Runnable {
         this.currentFileName = name;
         Hasher h = new Hasher();
         String hashedName = "";
-        try {
-            hashedName = h.clearTextToHash(name);
-        } catch (NoSuchAlgorithmException e) {
-            e.printStackTrace();
-        }
+        hashedName = h.clearTextToHash(name);
 
         byte[] decodedKey = Base64.getDecoder().decode(this.connectedUser.getAesKey());
         SecretKey aesKey = new SecretKeySpec(decodedKey, 0, decodedKey.length, "AES");
