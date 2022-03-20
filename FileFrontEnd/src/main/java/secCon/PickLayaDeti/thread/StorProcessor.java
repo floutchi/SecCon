@@ -71,6 +71,7 @@ public class StorProcessor implements Runnable {
                     var hashedName = hasher.clearTextToHash(t.getFileName());
 
                     checkProtocol(hashedName);
+                    isBusy = false;
                     this.t = null;
                 }
 

@@ -60,7 +60,8 @@ public class GetFileTask implements TaskManager {
     private String defineDestination(String fileName) {
         var currentUser = clientHandler.getConnectedUser();
 
-        String destination = currentUser.getStorageManagerOfFile(hasher.clearTextToHash(fileName), hasher);
+        return currentUser.getStorageManagerOfFile(hasher.clearTextToHash(fileName), hasher);
+    }
 
 
     /**

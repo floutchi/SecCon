@@ -15,6 +15,7 @@ import javax.crypto.spec.SecretKeySpec;
 import java.io.File;
 import java.io.IOException;
 import java.security.NoSuchAlgorithmException;
+import java.util.Base64;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -49,37 +50,20 @@ public class RetrieveResultTask implements TaskManager {
             String fileName = matcher.group(2);
             int size = Integer.parseInt(matcher.group(3));
 
-            String hashFileContent = matcher.group(4);
-
-            var t = clientHandler.getConnectedUser();
-
-            byte[] iv= new byte[12];
+            // Récupère le bon storProcessor depuis notre manager.
+            StorProcessor storProcessor = storManager.getStorProcessor(fileName);
 
             User user = clientHandler.getConnectedUser();
 
-            byte[] decodedKey = Base64.getDecoder().decode(user.getAesKey());
-            SecretKey aesKey = new SecretKeySpec(decodedKey, 0, decodedKey.length, "AES");
-
-
-            FileReceiver fileReceiver = new FileReceiver(Program.PATH);
-            fileReceiver.receiveFile(storProcessor.getInputStream(), fileName, size);
-
-            File receivedFile = new File(String.format("%s/%s", Program.PATH, fileName));
-            String hashReceivedFile = new Hasher().clearFileToHash(receivedFile);
-
-            if(hashFileContent.equals(hashReceivedFile)) {
-                clientHandler.sendMessage("GETFILE_OK " + clearName + " " + size);
-            } else {
-                clientHandler.sendMessage("GETFILE_ERROR");
-            }
-
-
-
-            clientHandler.sendFile(clearName);
+            // Récupère le nom hashé du fichier souhaité.
+            String hashedName = getFileNameFromList(fileName, user);
+            receiveFileAndSendMessage(fileName, size, storProcessor, hashedName);
 
         } catch (IOException e) {
             e.printStackTrace();
             clientHandler.sendMessage("GETFILE_ERROR");
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
         }
     }
 
