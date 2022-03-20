@@ -11,6 +11,10 @@ import java.security.NoSuchAlgorithmException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+/**
+ * Classe responsable du protocol de suppression du fichier.
+ * Ce protocol est envoyé par le client python.
+ */
 public class RemoveFileTask implements TaskManager {
 
     Matcher matcher;
@@ -31,7 +35,7 @@ public class RemoveFileTask implements TaskManager {
 
     @Override
     public void execute(String message) {
-
+        // Récupère le nom du fichier à supprimer.
         String fileName = matcher.group(2);
         String hashedFileName = new Hasher().clearTextToHash(fileName);
         User currentUser = clientHandler.getConnectedUser();
@@ -44,6 +48,6 @@ public class RemoveFileTask implements TaskManager {
             clientHandler.setCurrentFileName(fileName);
             storManager.addTask(newTask);
         }
-
+        return hashedFileName;
     }
 }

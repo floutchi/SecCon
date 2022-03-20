@@ -8,6 +8,10 @@ import secCon.PickLayaDeti.thread.StorProcessor;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+/**
+ * Classe responsable du protocol de connexion avec un StorBackEnd.
+ * Ce protocol est envoyé par le SBE.
+ */
 public class HelloTask implements TaskManager {
 
     private final StorManager manager;
@@ -27,7 +31,11 @@ public class HelloTask implements TaskManager {
     @Override
     public void execute(String message){
         System.out.printf("[Program] Receiving HELLO from %s with ID %s (unicast port: %s) \r\n", matcher.group(3), matcher.group(1), matcher.group(2));
+
+        // Construction d'un objet pour stocker les informations plus facilement.
         var infos = new ServerInfo(matcher.group(2), Integer.parseInt(matcher.group(3)));
+
+        // Création d'un storProcessor par le storManager.
         manager.createProcessor(infos);
 
     }

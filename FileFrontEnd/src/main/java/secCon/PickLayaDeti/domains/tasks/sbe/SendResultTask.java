@@ -7,6 +7,10 @@ import secCon.PickLayaDeti.thread.ClientHandler;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+/**
+ * Classe responsable du protocol l'de la réception d'un envoi de fichier.
+ * Ce protocol est envoyé par le SBE.
+ */
 public class SendResultTask implements TaskManager {
 
     ClientHandler clientHandler;

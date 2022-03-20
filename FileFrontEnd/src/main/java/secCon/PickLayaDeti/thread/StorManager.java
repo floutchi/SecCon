@@ -12,6 +12,9 @@ import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Notre storManager qui va délégué les responsabilités aux bons SBE.
+ */
 public class StorManager {
     List<StorProcessor> servers;
 
@@ -19,23 +22,21 @@ public class StorManager {
 
     private StorProcessor currentStorProcessor;
 
-    private List<Task> tasks;
+    private final List<Task> tasks;
 
+    /**
+     * Défini notre liste de tâche vide et de serveur vides.
+     */
     public StorManager() {
         this.tasks = new ArrayList<>();
         this.servers = new ArrayList<>();
 
     }
 
-    /*public void addStorage(ServerInfo server) {
-        System.out.printf("[StorManager][addStorage] added [%d] %s\r\n", server.getPort(), server.getDomain());
-        servers.put(server.getDomain(), server.getPort());
-    }*/
-
-    /*public boolean isSBEAlreadyIn(ServerInfo server) {
-        return servers.containsKey(server.getDomain());
-    }*/
-
+    /**
+     * Crée notre storProcessor pour les informations passées en paramètre.
+     * @param infos les infos du serveur sur lequel se connecté.
+     */
     public void createProcessor(ServerInfo infos) {
 
         for (StorProcessor cprocessor : servers) {
@@ -53,10 +54,18 @@ public class StorManager {
         }
     }
 
+    /**
+     * Défini notre clienthandler
+     * @param clientHandler celui à définir.
+     */
     public void setClientHandler(ClientHandler clientHandler) {
         this.clientHandler = clientHandler;
     }
 
+    /**
+     * Ajoute une tâche à notre la liste.
+     * @param t la tâche à ajouter.
+     */
     public void addTask(Task t) {
         this.tasks.add(t);
 
@@ -69,20 +78,37 @@ public class StorManager {
 
     }
 
+    /**
+     * Vérifie notre message avec nos différents tâches.
+     * @param message  le message à vérifier.
+     */
     public void resultTask(String message) {
-        TaskManager taskManager;
-        taskManager = new SendResultTask(clientHandler, currentStorProcessor.getServerInfo().getDomain());
-
-
-        if (taskManager.check(message)) taskManager.execute(message);
-        taskManager = new EraseResultTask(clientHandler);
-        if (taskManager.check(message)) taskManager.execute(message);
-
-
-        taskManager = new RetrieveResultTask(clientHandler, this);
-        if(taskManager.check(message)) taskManager.execute(message);
+        var tasks = getTasks();
+        for (var currentTask:
+             tasks) {
+            if(currentTask.check(message)) {
+                currentTask.execute(message);
+            }
+        }
     }
 
+    /**
+     * Récupère nos listes de tâches.
+     * @return la liste de tâche.
+     */
+    private List<TaskManager> getTasks() {
+        List<TaskManager> tasks = new ArrayList<>();
+        tasks.add(new SendResultTask(clientHandler, currentStorProcessor.getServerInfo().getDomain()));
+        tasks.add(new EraseResultTask(clientHandler));
+        tasks.add(new RetrieveResultTask(clientHandler, this));
+        return tasks;
+    }
+
+    /**
+     * Récupère notre storProcessor pour un fichier donné.
+     * @param fileName le nom du fichier.
+     * @return le différent StorProcessor.
+     */
     public StorProcessor getStorProcessor(String fileName) {
         String domain = clientHandler.getStorProcessorOfUser(fileName);
         for (StorProcessor s : servers) {

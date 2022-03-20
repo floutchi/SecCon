@@ -2,6 +2,7 @@ package secCon.PickLayaDeti.fileManager;
 
 import java.io.BufferedOutputStream;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.io.InputStream;
 
 
@@ -13,8 +14,14 @@ public class FileReceiver {
         this.path = path;
     }
 
+    /**
+     * Récupère le fichier envoyer.
+     * @param input le stream d'entrée.
+     * @param fileName le nom du fichier.
+     * @param fileSize la taille du fichier.
+     * @return si l'écriture s'est bien faite ou non.
+     */
     public boolean receiveFile(InputStream input, String fileName, long fileSize) {
-        int bytesReceived = 0;
         BufferedOutputStream bosFile = null;
 
         try {
@@ -22,13 +29,7 @@ public class FileReceiver {
             bosFile = new BufferedOutputStream(new FileOutputStream(String.format("%s/%s", path, fileName)));
             long currentOffset = 0;
 
-            byte[] decryptedBytes;
-            while((currentOffset < fileSize) && ((bytesReceived = input.read(buffer)) > 0)) {
-
-                //System.out.printf("[FileReceiver] received : %ld / %ld\n", currentOffset, fileSize);
-                bosFile.write(buffer, 0, bytesReceived);
-                currentOffset += bytesReceived;
-            }
+            WriteBytes(input, fileSize, bosFile, buffer, currentOffset);
 
             bosFile.flush();
             bosFile.close();
@@ -41,6 +42,15 @@ public class FileReceiver {
         }
     }
 
+
+    private void WriteBytes(InputStream input, long fileSize, BufferedOutputStream bosFile, byte[] buffer, long currentOffset) throws IOException {
+        int bytesReceived;
+        while((currentOffset < fileSize) && ((bytesReceived = input.read(buffer)) > 0)) {
+
+            bosFile.write(buffer, 0, bytesReceived);
+            currentOffset += bytesReceived;
+        }
+    }
 
 
 }

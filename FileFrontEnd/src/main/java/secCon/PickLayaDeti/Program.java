@@ -4,8 +4,6 @@ import secCon.PickLayaDeti.repository.JSONConfig;
 import secCon.PickLayaDeti.server.Server;
 import secCon.PickLayaDeti.thread.MulticastListener;
 import secCon.PickLayaDeti.thread.StorManager;
-import secCon.PickLayaDeti.thread.StorProcessor;
-import secCon.PickLayaDeti.domains.ServerInfo;
 import secCon.PickLayaDeti.utils.NetChooser;
 
 import java.io.IOException;
@@ -17,24 +15,26 @@ public class Program {
 
     public static final JSONConfig jsonConfig = new JSONConfig();
 
-    public static String MULTICAST_ADDRESS;
-    public static int MULTICAST_PORT;
+    // Différentes constantes
+    private static String MULTICAST_ADDRESS;
+    private static int MULTICAST_PORT;
     public static int UNICAST_PORT;
     public static String PATH;
 
 
-    private static byte[] buffer = new byte[1024];
-    private final StorManager storManager;
+    private static final byte[] BUFFER = new byte[1024];
     private MulticastSocket multicastSocket;
     private final NetworkInterface networkInterface;
-    private StorProcessor client;
 
+    /**
+     * Crée le constructeur de notre application afin de bien démarrer tous nos thread / serveurs.
+     */
     public Program() {
         // Initialisation attributs
         extractInformationsFromJson();
 
         // Création du storManager
-        this.storManager = new StorManager();
+        StorManager storManager = new StorManager();
 
         // Démarrage du serveur pour le client.
         var server = new Server(storManager);
@@ -47,11 +47,14 @@ public class Program {
         createMulticastSocket();
 
         // Le Multicast se rend disponible pour recevoir l'information du storeBackEnd.
-        MulticastListener multicastListener = new MulticastListener(multicastSocket, buffer, storManager);
+        MulticastListener multicastListener = new MulticastListener(multicastSocket, BUFFER, storManager);
         Thread multicastListenerThread = new Thread(multicastListener);
         multicastListenerThread.start();
     }
 
+    /**
+     * Récupère les informations depuis notre fichier JSON.
+     */
     private void extractInformationsFromJson() {
         MULTICAST_ADDRESS = jsonConfig.getMulticastAddress();
         MULTICAST_PORT = jsonConfig.getMulticastPort();
@@ -59,6 +62,9 @@ public class Program {
         PATH = jsonConfig.getPath();
     }
 
+    /**
+    * Crée le socketMultiCast pour gérer la connexion à plusieurs SBE
+     */
     private void createMulticastSocket() {
         try  {
             this.multicastSocket = new MulticastSocket(MULTICAST_PORT);
@@ -77,15 +83,5 @@ public class Program {
     public static void main(String[] args) {
         new Program();
     }
-
-    /*public void createClient(String[] informations) {
-        System.out.printf("[Program] Receiving HELLO from %s with ID %s (unicast port: %s) \r\n", informations[2], informations[0], informations[1]);
-        if (client != null) return;
-
-        var process = new ServerInfo(informations[0],  informations[2], Integer.parseInt(informations[1]));
-        this.client = new StorProcessor(process);
-        Thread clientThread = new Thread(client);
-        clientThread.start();
-    }*/
 
 }

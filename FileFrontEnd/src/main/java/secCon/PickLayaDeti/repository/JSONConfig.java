@@ -25,6 +25,9 @@ public class JSONConfig {
     private List<User> users;
     private final String jsonPath = Paths.get("FileFrontEnd", "/src/main/java/secCon/PickLayaDeti/repository/config.json").toAbsolutePath().toString();
 
+    /**
+     * Déclare le constructeur de notre JSON Config. Va lire la totalité des objets et les stockés dans nos variables.
+     */
     public JSONConfig() {
         readJson();
         this.multicastAddress = (String) configObject.get("multicastAddress");
@@ -34,10 +37,18 @@ public class JSONConfig {
         this.users = readUsers();
     }
 
+    /**
+     * Update notre liste d'utilisateur pour la sauvegardé correctement.
+     * @param users la liste modifiée.
+     */
     public void updateUsers(Users users) {
         this.users = users.getUserList();
     }
 
+    /**
+     * Update un seul utilisateur dans notre liste afin d'éviter de rafraichir toute notre liste.
+     * @param u l'utilisateur à update.
+     */
     public void updateUser(User u) {
         User uToReplace = null;
         for (User cUser : users) {
@@ -52,6 +63,10 @@ public class JSONConfig {
     }
 
 
+    /**
+     * Ecris la totalité de nos utilisateurs dans notre fichier JSON
+     * Ces utilisateurs peuvent être mis à jour pendant l'exécution.
+     */
     public void writeUsers() {
         JSONArray userArray = new JSONArray();
         for (User u : users) {
@@ -83,6 +98,10 @@ public class JSONConfig {
         }
     }
 
+    /**
+     * Lis la totalité de nos utilisateurs et les ajoutes à notre liste.
+     * @return la liste d'utilisateur.
+     */
     public List<User> readUsers() {
         JSONParser jsonParser = new JSONParser();
         try (FileReader reader = new FileReader(jsonPath)) {
@@ -123,10 +142,9 @@ public class JSONConfig {
         }
     }
 
-    public String getJSONString() {
-        return configObject.toJSONString();
-    }
-
+    /**
+     * Lecture du JSON.
+     */
     private void readJson() {
         JSONParser jsonParser = new JSONParser();
 
@@ -139,19 +157,40 @@ public class JSONConfig {
         }
     }
 
+    /**
+     * Retourne l'adresse multicast.
+     * @return l'adresse.
+     */
     public String getMulticastAddress() {
         return multicastAddress;
     }
 
+    /**
+     * Retourne le port multicast.
+     * @return le port.
+     */
     public int getMulticastPort() {
         return multicastPort;
     }
+
+    /**
+     * Retourne le port unicast.
+     * @return le port.
+     */
     public int getUnicastPort() { return unicastPort; }
 
+    /**
+     * Retourne le chemin du JSON.
+     * @return le chemin.
+     */
     public String getPath() {
         return path;
     }
 
+    /**
+     * Défini la liste d'utilisateur pour la ré-écriture.
+     * @param userList la liste d'utilisateur.
+     */
     public void setUserList(List<User> userList) {
         this.users = userList;
     }
