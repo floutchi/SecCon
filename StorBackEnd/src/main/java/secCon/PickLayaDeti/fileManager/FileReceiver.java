@@ -11,6 +11,13 @@ public class FileReceiver {
 
     public FileReceiver(String path) { this.path = path; }
 
+    /**
+     * Permet de recevoir un fichier
+     * @param input L'input du client qui envoie le fichier
+     * @param fileName  Nom du fichier
+     * @param fileSize  Taille du fichier
+     * @return  Vrai si le fichier a bien été reçu, Faux sinon
+     */
     public boolean receiveFile(InputStream input, String fileName, long fileSize) {
         int bytesReceived = 0;
         BufferedOutputStream bosFile = null;

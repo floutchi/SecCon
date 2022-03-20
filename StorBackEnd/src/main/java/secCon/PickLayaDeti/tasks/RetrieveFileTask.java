@@ -26,6 +26,10 @@ public class RetrieveFileTask implements TaskManager {
         return matcher.matches();
     }
 
+    /**
+     * Va envoyer le fichier demandé au FFE
+     * @param message   Message reçu et valide
+     */
     @Override
     public void execute(String message) {
 
@@ -41,6 +45,8 @@ public class RetrieveFileTask implements TaskManager {
             clientHandler.sendMessage("RETRIEVE_OK " + fileName + " " + f.length() + " " + hashedFile);
 
             clientHandler.sendFile(fileName);
+        } else {
+            clientHandler.sendMessage("RETRIEVE_ERROR");
         }
 
 

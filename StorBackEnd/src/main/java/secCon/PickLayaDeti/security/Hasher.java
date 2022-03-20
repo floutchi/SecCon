@@ -14,6 +14,11 @@ public class Hasher {
 
     public Hasher() { }
 
+    /**
+     * Permet de hasher le contenu d'un fichier
+     * @param input Fichier à hasher
+     * @return      Le hash du contenu du fichier
+     */
     public String clearFileToHash(File input) {
         byte[] buffer = new byte[8192];
         int count;

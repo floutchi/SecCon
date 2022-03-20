@@ -29,6 +29,10 @@ public class EraseFileTask implements TaskManager {
         return matcher.matches();
     }
 
+    /**
+     * Supprime le fichier
+     * @param message   Message reçu et valide
+     */
     @Override
     public void execute(String message) {
         var name = matcher.group(2);
@@ -48,6 +52,11 @@ public class EraseFileTask implements TaskManager {
 
     }
 
+    /**
+     * Va remplacer le fichier par des bit aléatoire pour ensuite supprimer le fichier
+     * @param file  Fichier à supprimer
+     * @throws IOException
+     */
     public void secureDelete(File file) throws IOException {
         if (file.exists()) {
             long length = file.length();
