@@ -10,6 +10,9 @@ import secCon.PickLayaDeti.thread.ClientHandler;
 import secCon.PickLayaDeti.thread.StorManager;
 import secCon.PickLayaDeti.thread.StorProcessor;
 
+import javax.crypto.SecretKey;
+import javax.crypto.spec.SecretKeySpec;
+import java.io.File;
 import java.io.IOException;
 import java.security.NoSuchAlgorithmException;
 import java.util.regex.Matcher;
@@ -34,7 +37,7 @@ public class RetrieveResultTask implements TaskManager {
 
     @Override
     public boolean check(String message) {
-        Pattern pattern = Pattern.compile("^(RETRIEVE_OK|RETRIEVE_ERROR) ([a-zA-Z0-9].{50,200}) ([0-9]{1,10})$");
+        Pattern pattern = Pattern.compile("^(RETRIEVE_OK|RETRIEVE_ERROR) ([a-zA-Z0-9].{50,200}) ([0-9]{1,10}) ([a-zA-Z0-9].{50,200})$");
         this.matcher = pattern.matcher(message);
         return matcher.matches();
     }
@@ -46,20 +49,37 @@ public class RetrieveResultTask implements TaskManager {
             String fileName = matcher.group(2);
             int size = Integer.parseInt(matcher.group(3));
 
-            // Récupère le bon storProcessor depuis notre manager.
-            StorProcessor storProcessor = storManager.getStorProcessor(fileName);
+            String hashFileContent = matcher.group(4);
+
+            var t = clientHandler.getConnectedUser();
+
+            byte[] iv= new byte[12];
 
             User user = clientHandler.getConnectedUser();
 
-            // Récupère le nom hashé du fichier souhaité.
-            String hashedName = getFileNameFromList(fileName, user);
-            receiveFileAndSendMessage(fileName, size, storProcessor, hashedName);
+            byte[] decodedKey = Base64.getDecoder().decode(user.getAesKey());
+            SecretKey aesKey = new SecretKeySpec(decodedKey, 0, decodedKey.length, "AES");
+
+
+            FileReceiver fileReceiver = new FileReceiver(Program.PATH);
+            fileReceiver.receiveFile(storProcessor.getInputStream(), fileName, size);
+
+            File receivedFile = new File(String.format("%s/%s", Program.PATH, fileName));
+            String hashReceivedFile = new Hasher().clearFileToHash(receivedFile);
+
+            if(hashFileContent.equals(hashReceivedFile)) {
+                clientHandler.sendMessage("GETFILE_OK " + clearName + " " + size);
+            } else {
+                clientHandler.sendMessage("GETFILE_ERROR");
+            }
+
+
+
+            clientHandler.sendFile(clearName);
 
         } catch (IOException e) {
             e.printStackTrace();
             clientHandler.sendMessage("GETFILE_ERROR");
-        } catch (NoSuchAlgorithmException e) {
-            e.printStackTrace();
         }
     }
 

@@ -95,13 +95,11 @@ public class User {
      * @return le nom de domaine.
      */
     public String getStorageManagerOfFile(String fileName, Hasher hasher) {
-        try {
-            for (StoredFiles f : filesList) {
-                var name = hasher.clearTextToHash(f.getName());
-                if (isNameEquals(fileName, name)) return f.getStorageProvider();
+        for (StoredFiles f : filesList) {
+            var name = hasher.clearTextToHash(f.getName());
+            if (name.equals(fileName)) {
+                return f.getStorageProvider();
             }
-        } catch (NoSuchAlgorithmException e) {
-            e.printStackTrace();
         }
         return null;
     }

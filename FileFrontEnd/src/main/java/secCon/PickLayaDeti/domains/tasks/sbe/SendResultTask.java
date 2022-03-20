@@ -15,6 +15,7 @@ public class SendResultTask implements TaskManager {
 
     ClientHandler clientHandler;
     String savedSBE;
+    Matcher matcher;
 
     public SendResultTask(ClientHandler clientHandler, String domain) {
         this.clientHandler = clientHandler;
@@ -24,20 +25,20 @@ public class SendResultTask implements TaskManager {
     @Override
     public boolean check(String message) {
         Pattern pattern = Pattern.compile("^(SEND_ERROR|SEND_OK)$");
-        Matcher matcher = pattern.matcher(message);
+        this.matcher = pattern.matcher(message);
         return matcher.matches();
     }
 
     @Override
     public void execute(String message) {
-        // Envoie le message.
-        clientHandler.sendMessage("SAVEFILE_OK");
 
-        // Récupère l'utilisateur connecté.
-        var user = clientHandler.getConnectedUser();
+        if(matcher.group(1).equals("SEND_OK")) {
+            clientHandler.sendMessage("SAVEFILE_OK");
+            var user = clientHandler.getConnectedUser();
+            user.addFile(new StoredFiles(clientHandler.getCurrentFileName(), clientHandler.getCurrentIv(), clientHandler.getCurrentFileSize(), savedSBE));
 
-        // Ajoute le fichier à notre utilisateur.
-        var currentStoredFile = new StoredFiles(clientHandler.getCurrentFileName(), clientHandler.getCurrentIv(), clientHandler.getCurrentFileSize(), savedSBE);
-        user.addFile(currentStoredFile);
+        } else {
+            clientHandler.sendMessage("SAVEFILE_ERROR");
+        }
     }
 }

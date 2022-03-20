@@ -8,6 +8,12 @@ public class FileSender {
 
     public FileSender(String path) { this.path = path; }
 
+    /**
+     * Permet d'envoyer un fichier
+     * @param filename  Nom du fichier
+     * @param out       Output vers le client
+     * @return          vrai si le fichier a bien été envoyé, faux sinon
+     */
     public boolean sendFile(String filename, OutputStream out) {
         BufferedInputStream bisFile = null;
         int bytesReaded = 0;

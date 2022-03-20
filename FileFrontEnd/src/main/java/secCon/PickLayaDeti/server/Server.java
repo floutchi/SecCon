@@ -30,16 +30,13 @@ public class Server implements Runnable {
     @Override
     public void run() {
         try {
-            //SSLServerSocketFactory factory = (SSLServerSocketFactory)SSLServerSocketFactory.getDefault();
-            //SSLServerSocket serverSocket = (SSLServerSocket) factory.createServerSocket(listeningPort);
+            SSLServerSocketFactory factory = (SSLServerSocketFactory)SSLServerSocketFactory.getDefault();
+            SSLServerSocket serverSocket = (SSLServerSocket) factory.createServerSocket(listeningPort);
 
-            ServerSocket serverSocket = new ServerSocket(Program.UNICAST_PORT);
+            //ServerSocket serverSocket = new ServerSocket(Program.UNICAST_PORT);
 
             while (!stop) {
                 Socket client = serverSocket.accept();
-
-                //var in = new BufferedReader(new InputStreamReader(client.getInputStream()));
-                //System.out.println(readLine(in));
 
                 handler = new ClientHandler(client, storManager);
                 storManager.setClientHandler(handler);

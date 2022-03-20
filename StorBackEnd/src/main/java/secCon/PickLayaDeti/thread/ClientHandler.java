@@ -1,6 +1,5 @@
 package secCon.PickLayaDeti.thread;
 
-import secCon.PickLayaDeti.AppController;
 import secCon.PickLayaDeti.Program;
 import secCon.PickLayaDeti.fileManager.FileReceiver;
 import secCon.PickLayaDeti.fileManager.FileSender;
@@ -13,20 +12,25 @@ import java.io.*;
 import java.net.Socket;
 import java.nio.charset.StandardCharsets;
 
+/**
+ * Classe permettant de gérer le communication avec le FFE
+ */
 public class ClientHandler implements Runnable {
 
     private Socket client;
-    private AppController controller;
     private boolean stop = false;
     private boolean connected = false;
     private BufferedWriter out;
     private BufferedReader in;
     private int state = 0;
 
-    public ClientHandler(Socket client, AppController controller) {
+    /**
+     * Constructeur permetant d'instancier l'input et le output vers le client
+     * @param client Socket de connexion au FFE
+     */
+    public ClientHandler(Socket client) {
         try {
             this.client = client;
-            this.controller = controller;
             this.connected = true;
 
             this.in = new BufferedReader(new InputStreamReader(client.getInputStream(),
@@ -38,6 +42,9 @@ public class ClientHandler implements Runnable {
         }
     }
 
+    /**
+     * Va attendre un message du FFE et va vérifier quelle tâche le SBE doit réaliser
+     */
     @Override
     public void run() {
         try {
@@ -64,25 +71,40 @@ public class ClientHandler implements Runnable {
         }
     }
 
+    /**
+     * Permet de recevoir un fichier du FFE
+     * @param fileName  Nom du fichier
+     * @param size      Taille du fichier
+     */
     public void receiveFile(String fileName, int size) {
         try {
             FileReceiver fileReceiver = new FileReceiver(Program.PATH);
             fileReceiver.receiveFile(client.getInputStream(), fileName, size);
         } catch (IOException e) {
             e.printStackTrace();
+            sendMessage("SEND_ERROR");
         }
     }
 
+    /**
+     * Permet d'envoyer un fichier au FFE
+     * @param fileName  Nom du fichier à recevoir
+     */
     public void sendFile(String fileName) {
         FileSender fileSender = new FileSender(Program.PATH);
         try {
             fileSender.sendFile(fileName, client.getOutputStream());
         } catch (IOException e) {
             e.printStackTrace();
+            sendMessage("RETRIEVE_ERROR");
         }
     }
 
 
+    /**
+     * Permet d'envoyer un message au FFE
+     * @param message
+     */
     public void sendMessage(String message) {
         try {
             out.write(message + "\n");

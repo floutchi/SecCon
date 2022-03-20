@@ -22,6 +22,10 @@ public class SendFileTask implements TaskManager {
         return matcher.matches();
     }
 
+    /**
+     * Va recevoir un fichier
+     * @param message   Message reçu et valide
+     */
     @Override
     public void execute(String message) {
 

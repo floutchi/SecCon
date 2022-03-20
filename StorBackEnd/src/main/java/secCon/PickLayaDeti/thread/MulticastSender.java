@@ -1,6 +1,5 @@
 package secCon.PickLayaDeti.thread;
 
-import secCon.PickLayaDeti.AppController;
 import secCon.PickLayaDeti.Program;
 
 import java.net.MulticastSocket;
@@ -12,16 +11,17 @@ import java.nio.charset.StandardCharsets;
 public class MulticastSender implements Runnable{
 
     private final MulticastSocket multicastSocket;
-        private AppController controller;
         private boolean stop = false;
 
-        public MulticastSender(MulticastSocket multicastSocket, AppController controller) {
+        public MulticastSender(MulticastSocket multicastSocket) {
             this.multicastSocket = multicastSocket;
-            this.controller = controller;
             System.out.println("[MulticastSender] Setting interface");
         }
 
-        @Override
+    /**
+     * Envoie le message multicast au FFE sur l'adresse et le port multicast
+     */
+    @Override
         public void run() {
             String message = "HELLO " + Program.UNIQUE_ID + " " + Program.UNICAST_PORT;
             try {

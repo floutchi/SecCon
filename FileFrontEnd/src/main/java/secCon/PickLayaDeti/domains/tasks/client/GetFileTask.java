@@ -59,14 +59,9 @@ public class GetFileTask implements TaskManager {
      */
     private String defineDestination(String fileName) {
         var currentUser = clientHandler.getConnectedUser();
-        String destination = null;
-        try {
-            destination = currentUser.getStorageManagerOfFile(hasher.clearTextToHash(fileName), hasher);
-        } catch (NoSuchAlgorithmException e) {
-            e.printStackTrace();
-        }
-        return destination;
-    }
+
+        String destination = currentUser.getStorageManagerOfFile(hasher.clearTextToHash(fileName), hasher);
+
 
     /**
      * Crée notre tâche afin qu'elle soit réceptionnée par nos storProcessors.

@@ -37,24 +37,9 @@ public class RemoveFileTask implements TaskManager {
     public void execute(String message) {
         // Récupère le nom du fichier à supprimer.
         String fileName = matcher.group(2);
-
-        // Récupère le nom haché du fichier.
-        String hashedFileName = getHashedFileName(fileName);
-
+        String hashedFileName = new Hasher().clearTextToHash(fileName);
         User currentUser = clientHandler.getConnectedUser();
         var storage = currentUser.getStorageManagerOfFile(hashedFileName, new Hasher());
-
-        addTaskToStorProcessor(fileName, hashedFileName, storage);
-
-    }
-
-    /**
-     * Vérifie si le domaine de la tâche n'est pas nulle, si oui, il ajoute la tâche pour nos différents storProcessors.
-     * @param fileName le nom du fichier.
-     * @param hashedFileName le nom du fichier haché.
-     * @param storage le nom du storage.
-     */
-    private void addTaskToStorProcessor(String fileName, String hashedFileName, String storage) {
         if (storage != null) {
             var newTask = new Task("REMOVEFILE", storage);
 
@@ -62,20 +47,6 @@ public class RemoveFileTask implements TaskManager {
 
             clientHandler.setCurrentFileName(fileName);
             storManager.addTask(newTask);
-        }
-    }
-
-    /**
-     * Récupère le nom haché de notre fichié.
-     * @param fileName le nom du fichier en clair.
-     * @return le nom haché.
-     */
-    private String getHashedFileName(String fileName) {
-        String hashedFileName = null;
-        try {
-            hashedFileName = new Hasher().clearTextToHash(fileName);
-        } catch (NoSuchAlgorithmException e) {
-            e.printStackTrace();
         }
         return hashedFileName;
     }

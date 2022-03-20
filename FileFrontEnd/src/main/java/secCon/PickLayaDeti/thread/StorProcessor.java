@@ -76,7 +76,7 @@ public class StorProcessor implements Runnable {
 
             } while(!stop);
 
-        } catch (IOException | NoSuchAlgorithmException ex) {
+        } catch (IOException ex) {
             System.out.println("Erreur lors de la connexion au serveur : " + ex.getMessage());
             ex.printStackTrace();
         } catch (InterruptedException e) {

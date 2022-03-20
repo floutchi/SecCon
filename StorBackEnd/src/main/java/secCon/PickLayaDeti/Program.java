@@ -12,7 +12,7 @@ import java.net.NetworkInterface;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Program implements AppController {
+public class Program {
 
     private final JSONConfig jsonConfig = new JSONConfig();
 
@@ -44,12 +44,12 @@ public class Program implements AppController {
         this.networkInterface = new NetChooser().getSelected();
         createMulticastSocket();
 
-        MulticastSender multicastSender = new MulticastSender(multicastSocket, this);
+        MulticastSender multicastSender = new MulticastSender(multicastSocket);
         Thread multicastSenderThread = new Thread(multicastSender);
         multicastSenderThread.start();
 
         clients = new ArrayList<>();
-        Server server = new Server(this);
+        Server server = new Server();
         server.startListening();
     }
 
