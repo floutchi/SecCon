@@ -96,7 +96,6 @@ public class StorProcessor implements Runnable {
                         String line = in.readLine();
                         System.out.println("[StorProcessor][run] received : " + line);
                         manager.resultTask(line);
-
                     }
 
                     isBusy = false;
