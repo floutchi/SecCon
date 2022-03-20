@@ -93,7 +93,7 @@ public class StorProcessor implements Runnable {
     private void checkProtocol(String hashedName) throws IOException {
         switch (t.getProtocol()) {
             case "SENDFILE":
-                sendFile(hashedName);
+                sendFile(hashedName, t);
                 break;
             case "REMOVEFILE":
                 if (process.getDomain().equals(t.getDestination()) || process.getDomain() == null) {
@@ -143,8 +143,12 @@ public class StorProcessor implements Runnable {
      * @param hashedName le nom du fichier haché.
      * @throws IOException au cas où l'envoie ne se fasse pas correctement.
      */
-    private void sendFile(String hashedName) throws IOException {
-        out.write("SENDFILE " + hashedName + " " + t.getFileSize() + "\n");
+    private void sendFile(String hashedName, Task t) throws IOException {
+
+        String hashedFileContent = new Hasher().clearFileToHash(new File(String.format("%s/%s", Program.PATH, t.getFileName())));
+
+
+        out.write("SENDFILE " + hashedName + " " + t.getFileSize() + " " + hashedFileContent + "\n");
         out.flush();
         System.out.println("[StorProcessor][sendMessage] sending 'SENDFILE'");
         try {

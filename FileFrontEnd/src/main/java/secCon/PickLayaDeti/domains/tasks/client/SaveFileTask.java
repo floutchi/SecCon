@@ -1,11 +1,13 @@
 package secCon.PickLayaDeti.domains.tasks.client;
 
+import secCon.PickLayaDeti.Program;
 import secCon.PickLayaDeti.domains.Task;
 import secCon.PickLayaDeti.domains.tasks.interfaces.TaskManager;
 import secCon.PickLayaDeti.security.Hasher;
 import secCon.PickLayaDeti.thread.ClientHandler;
 import secCon.PickLayaDeti.thread.StorManager;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;

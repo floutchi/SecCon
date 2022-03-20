@@ -50,6 +50,8 @@ public class RetrieveResultTask implements TaskManager {
             String fileName = matcher.group(2);
             int size = Integer.parseInt(matcher.group(3));
 
+            String hashFileReceived = matcher.group(4);
+
             // Récupère le bon storProcessor depuis notre manager.
             StorProcessor storProcessor = storManager.getStorProcessor(fileName);
 
@@ -57,7 +59,7 @@ public class RetrieveResultTask implements TaskManager {
 
             // Récupère le nom hashé du fichier souhaité.
             String hashedName = getFileNameFromList(fileName, user);
-            receiveFileAndSendMessage(fileName, size, storProcessor, hashedName);
+            receiveFileAndSendMessage(fileName, size, storProcessor, hashedName, hashFileReceived);
 
         } catch (IOException e) {
             e.printStackTrace();
@@ -94,12 +96,21 @@ public class RetrieveResultTask implements TaskManager {
      * @param clearName le nom du fichier en clair.
      * @throws IOException Vérifie s'il y a eu un problème dans la réception du fichier.
      */
-    private void receiveFileAndSendMessage(String fileName, int size, StorProcessor storProcessor, String clearName) throws IOException {
+    private void receiveFileAndSendMessage(String fileName, int size, StorProcessor storProcessor, String clearName, String hashFileReceived) throws IOException {
         FileReceiver fileReceiver = new FileReceiver(Program.PATH);
 
         if(fileReceiver.receiveFile(storProcessor.getInputStream(), fileName, size)) {
-            clientHandler.sendMessage("GETFILE_OK " + clearName + " " + size);
-            clientHandler.sendFile(clearName);
+
+            // Vérifie l'empreinte du fichier reçu
+            File f = new File(String.format("%s/%s", Program.PATH, fileName));
+            String hashFileContent = hasher.clearFileToHash(f);
+
+            if(hashFileContent.equals(hashFileReceived)) {
+                clientHandler.sendMessage("GETFILE_OK " + clearName + " " + size);
+                clientHandler.sendFile(clearName);
+            } else {
+                clientHandler.sendMessage("GETFILE_ERROR");
+            }
         }
     }
 }
