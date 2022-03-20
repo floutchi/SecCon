@@ -7,6 +7,10 @@ import secCon.PickLayaDeti.thread.ClientHandler;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+/**
+ * Classe responsable du protocol l'de la réception d'un envoi de fichier.
+ * Ce protocol est envoyé par le SBE.
+ */
 public class SendResultTask implements TaskManager {
 
     ClientHandler clientHandler;
@@ -26,12 +30,14 @@ public class SendResultTask implements TaskManager {
 
     @Override
     public void execute(String message) {
+        // Envoie le message.
         clientHandler.sendMessage("SAVEFILE_OK");
 
+        // Récupère l'utilisateur connecté.
         var user = clientHandler.getConnectedUser();
 
-        user.addFile(new StoredFiles(clientHandler.getCurrentFileName(), clientHandler.getCurrentIv(), clientHandler.getCurrentFileSize(), savedSBE));
-
-
+        // Ajoute le fichier à notre utilisateur.
+        var currentStoredFile = new StoredFiles(clientHandler.getCurrentFileName(), clientHandler.getCurrentIv(), clientHandler.getCurrentFileSize(), savedSBE);
+        user.addFile(currentStoredFile);
     }
 }

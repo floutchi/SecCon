@@ -11,7 +11,7 @@ import java.security.NoSuchAlgorithmException;
 public class FileSenderDecrypt {
 
     private static final int DEFAULT_BUFFER=8000;
-    private String path;
+    private final String path;
 
     SecretKeySpec keySpec;
     byte[] IV;
@@ -26,16 +26,32 @@ public class FileSenderDecrypt {
         this.IV = IV;
 
         try {
-            cipher = Cipher.getInstance("AES/GCM/NoPadding");
-            cipher.init(Cipher.ENCRYPT_MODE, keySpec, gcmParameterSpec);
+            initCipher();
         } catch (NoSuchAlgorithmException | NoSuchPaddingException | InvalidAlgorithmParameterException | InvalidKeyException e) {
             e.printStackTrace();
         }
     }
 
+    /**
+     * Initialise Cipher pour le chiffrement.
+     * @throws NoSuchAlgorithmException pas d'algorithme trouvé.
+     * @throws NoSuchPaddingException problème lors de la détermination du Padding.
+     * @throws InvalidKeyException clé invalide.
+     * @throws InvalidAlgorithmParameterException paramètres de l'algorithme .
+     */
+    private void initCipher() throws NoSuchAlgorithmException, NoSuchPaddingException, InvalidKeyException, InvalidAlgorithmParameterException {
+        cipher = Cipher.getInstance("AES/GCM/NoPadding");
+        cipher.init(Cipher.ENCRYPT_MODE, keySpec, gcmParameterSpec);
+    }
+
+    /**
+     * Envoie un fichier dans la sortie passée en paramètre.
+     * @param filename le nom du fichier.
+     * @param out la sortie du serveur.
+     * @return vrai (ou faux)
+     */
     public boolean sendFile(String filename, OutputStream out) {
-        BufferedInputStream bisFile = null;
-        int bytesReaded = 0;
+        BufferedInputStream bisFile;
 
         try {
             File f = new File(String.format("%s/%s", path, filename));
@@ -46,15 +62,7 @@ public class FileSenderDecrypt {
                 long currentOffset = 0;
 
                 byte[] decryptedByte;
-                while((currentOffset < fileSize) && (bytesReaded = bisFile.read(buffer)) > 0) {
-
-                    //System.out.printf("[FileSender] sent : %ld / %ld\n", currentOffset, fileSize);
-
-                    decryptedByte = cipher.update(buffer);
-                    out.write(decryptedByte, 0, decryptedByte.length);
-                    out.flush();
-                    currentOffset+= bytesReaded;
-                }
+                writeBytes(out, bisFile, fileSize, buffer, currentOffset);
 
                 decryptedByte = cipher.doFinal();
                 out.write(decryptedByte, 0, decryptedByte.length);
@@ -71,5 +79,17 @@ public class FileSenderDecrypt {
             e.printStackTrace();
         }
         return false;
+    }
+
+    private void writeBytes(OutputStream out, BufferedInputStream bisFile, long fileSize, byte[] buffer, long currentOffset) throws IOException {
+        byte[] decryptedByte;
+        int bytesReaded;
+        while((currentOffset < fileSize) && (bytesReaded = bisFile.read(buffer)) > 0) {
+
+            decryptedByte = cipher.update(buffer);
+            out.write(decryptedByte, 0, decryptedByte.length);
+            out.flush();
+            currentOffset += bytesReaded;
+        }
     }
 }

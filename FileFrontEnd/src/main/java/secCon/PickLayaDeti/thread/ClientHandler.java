@@ -7,7 +7,6 @@ import secCon.PickLayaDeti.domains.Users;
 import secCon.PickLayaDeti.domains.tasks.client.*;
 import secCon.PickLayaDeti.domains.tasks.interfaces.TaskManager;
 import secCon.PickLayaDeti.fileManager.FileReceiverEncrypt;
-import secCon.PickLayaDeti.fileManager.FileSender;
 import secCon.PickLayaDeti.fileManager.FileSenderDecrypt;
 import secCon.PickLayaDeti.security.Hasher;
 
@@ -22,6 +21,10 @@ import java.util.ArrayList;
 import java.util.Base64;
 import java.util.List;
 
+/**
+ * Défini notre ClientHandler. Cette classe implémente runnable puisque c'est un thread. Elle va gérer la totalité du traitement entre
+ * le client et le FFE
+ */
 public class ClientHandler implements Runnable {
     private final Users users;
     private final StorManager storManager;
@@ -37,7 +40,11 @@ public class ClientHandler implements Runnable {
 
     private String currentIv;
 
-
+    /**
+     * déclare le constructeur du ClientHandler.
+     * @param client le socket du client.
+     * @param storManager notre storManager qui va contenir nos différents storProcessor connectés.
+     */
     public ClientHandler(Socket client, StorManager storManager) {
         this.storManager = storManager;
         this.users = new Users();
@@ -80,6 +87,11 @@ public class ClientHandler implements Runnable {
 
     }
 
+    /**
+     * Execute la bonne tâche en vérifiant que la regex soit bien comprise et vérifiable.
+     * @param message notre protocole envoyé par le client.
+     * @param tasks la liste des différentes tâches.
+     */
     private void executeTask(String message, List<TaskManager> tasks) {
         if (connectedUser == null) if (setUpConnectedUser(message)) return;
         for (var currentTask : tasks) {
@@ -87,6 +99,11 @@ public class ClientHandler implements Runnable {
         }
     }
 
+    /**
+     * Défini l'utilisateur connecté. Cette méthode va vérifier dans nos différentes tâches propres à la réception de fichier de connexion
+     * @param message le protocole envoyé.
+     * @return si la connexion s'est fait correctement (ou non).
+     */
     private boolean setUpConnectedUser(String message) {
         var initialTasks = connexionTasks();
         for (var currentTask : initialTasks) {
@@ -95,6 +112,14 @@ public class ClientHandler implements Runnable {
             }
         }
 
+        return isConnected();
+    }
+
+    /**
+     * Défini si notre utilisateur s'est bien connecté et envoie un message d'erreur dans le cas contraire.
+     * @return vrai si le client est connecté, faux dans le cas contraire.
+     */
+    private boolean isConnected() {
         if (connectedUser == null) {
             sendMessage("SIGN_ERROR");
             return true;
@@ -104,6 +129,10 @@ public class ClientHandler implements Runnable {
         return false;
     }
 
+    /**
+     * Envoie un message depuis le clientHandler.
+     * @param message le message à envoyer.
+     */
     public void sendMessage(String message) {
         if (connected) {
             System.out.println("[ClientHandler][sendMessage] " + message);
@@ -112,35 +141,58 @@ public class ClientHandler implements Runnable {
         }
     }
 
+    /**
+     * Récupère la liste de tous nos utilisateurs.
+     * @return la liste d'utilisateur.
+     */
     public Users getUsers() {
         return users;
     }
 
+    /**
+     * Défini notre utilisateur actuellement connecté.
+     * @param user
+     */
     public void setCurrentUser(User user) {
         this.connectedUser = user;
     }
 
+    /**
+     * Récupère l'utilisateur actuellement connecté.
+     * @return l'utilisateur connecté.
+     */
     public User getConnectedUser() {
         return connectedUser;
     }
 
+    /**
+     * Stop la connexion, se déconnecte et écrase l'utilisateur actuel.
+     */
     public void disconnectAndStopConnexion() {
         stop = true;
         connected = false;
         connectedUser = null;
     }
 
+    /**
+     * Défini les différentes tâches propres à la connexion.
+     * @return la liste des tâches.
+     */
     private List<TaskManager> connexionTasks() {
         var tasks = new ArrayList<TaskManager>();
         tasks.add(new SignUpTask(this));
-        tasks.add(new SignOutTask(this));
         tasks.add(new SignInTask(this));
         return tasks;
     }
 
+    /**
+     * Crée notre liste de tâche pour leur affecté un comportement si la regex se voit être validée.
+     * @return la liste des tâches.
+     */
     private List<TaskManager> createTask() {
         var tasks = new ArrayList<TaskManager>();
         // region Ajouts Tâches
+        tasks.add(new SignOutTask(this));
         tasks.add(new SaveFileTask(this, storManager));
         tasks.add(new RemoveFileTask(this, storManager));
         tasks.add(new GetFileTask(this, storManager));
@@ -165,6 +217,11 @@ public class ClientHandler implements Runnable {
         return receiver.receiveFile(client.getInputStream(), name, size);
     }
 
+    /**
+     * Envoie un fichier en le chiffrant avec la clé AES pour notre client connecté.
+     * @param name nom du fichier
+     * @throws IOException erreur lors de l'envoi du fichier.
+     */
     public void sendFile(String name) throws IOException {
         this.currentFileName = name;
         Hasher h = new Hasher();
@@ -189,22 +246,43 @@ public class ClientHandler implements Runnable {
         sender.sendFile(hashedName, client.getOutputStream());
     }
 
+    /**
+     * Récupère le vecteur d'initialisation
+     * @return le VI
+     */
     public String getCurrentIv() {
         return currentIv;
     }
 
+    /**
+     * Récupère le nom actuellement stocké du fichier.
+     * @return le nom du fichier.
+     */
     public String getCurrentFileName() {
         return currentFileName;
     }
 
+    /**
+     * Récupère le storProcessor de l'utilisateur pour écrire le fichier au bon endroit.
+     * @param fileName le nom du fichier.
+     * @return le storProcessor pour notre fichier.
+     */
     public String getStorProcessorOfUser(String fileName) {
         return connectedUser.getStorageManagerOfFile(fileName, new Hasher());
     }
 
+    /**
+     * Récupère la taille de notre fichier actuel.
+     * @return la taille.
+     */
     public int getCurrentFileSize() {
         return currentFileSize;
     }
 
+    /**
+     * Défini le nom actuel du fichier dans notre handler.
+     * @param name le nom du fichier.
+     */
     public void setCurrentFileName(String name) {
         this.currentFileName = name;
     }

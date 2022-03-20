@@ -2,17 +2,17 @@ package secCon.PickLayaDeti.domains;
 
 import org.mindrot.jbcrypt.BCrypt;
 import secCon.PickLayaDeti.Program;
-import secCon.PickLayaDeti.security.Hasher;
 
 import java.util.List;
 
+/**
+ * Déclare la classe qui va contenir la totalité des utilisateurs répertoriés dans notre fichier JSON.
+ */
 public class Users {
 
     List<User> userList;
-    private Hasher hasher;
 
     public List<User> getUserList() {
-        this.hasher = new Hasher();
         return userList;
     }
 
@@ -25,8 +25,8 @@ public class Users {
 
     /**
      * Vérifie le login de notre utilisateur.
-     * @param login
-     * @return
+     * @param login le login à vérifier.
+     * @return l'égalité (ou non) du login.
      */
     public boolean checkUserLogin(String login) {
         for (var currentUser:
@@ -41,7 +41,7 @@ public class Users {
 
     /**
      * Ajoute un utilisateur à notre liste.
-     * @param user
+     * @param user utilisateur à ajouter.
      */
     public void addUser(User user) {
         userList.add(user);
@@ -50,10 +50,10 @@ public class Users {
     }
 
     /**
-     * Vérifie que le login et le mdp existe bel et bien dans notre liste.
-     * @param login
-     * @param password
-     * @return
+     * Vérifie que le compte correspond et existe dans notre liste.
+     * @param login notre login à vérifier.
+     * @param password le mot-de-passe à vérifier.
+     * @return l'utilisateur (ou null si rien n'est trouvé).
      */
     public User getUsersByLoginAndPassword(String login, String password) {
         for (var currentUser: userList) {

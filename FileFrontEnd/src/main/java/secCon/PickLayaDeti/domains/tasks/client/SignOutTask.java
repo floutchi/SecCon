@@ -6,6 +6,10 @@ import secCon.PickLayaDeti.thread.ClientHandler;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+/**
+ * Classe responsable du protocol de déconnexion.
+ * Ce protocol est envoyé par le client python.
+ */
 public class SignOutTask implements TaskManager {
 
     private final ClientHandler clientHandler;

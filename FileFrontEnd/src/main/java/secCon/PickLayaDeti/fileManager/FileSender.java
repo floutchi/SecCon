@@ -11,8 +11,7 @@ public class FileSender {
     }
 
     public boolean sendFile(String filename, OutputStream out) {
-        BufferedInputStream bisFile = null;
-        int bytesReaded = 0;
+        BufferedInputStream bisFile;
 
         try {
             File f = new File(String.format("%s/%s", path, filename));
@@ -21,13 +20,7 @@ public class FileSender {
                 byte[] buffer = new byte[DEFAULT_BUFFER];
                 bisFile = new BufferedInputStream(new FileInputStream(f));
                 long currentOffset = 0;
-                while((currentOffset < fileSize) && (bytesReaded = bisFile.read(buffer)) > 0) {
-
-                    //System.out.printf("[FileSender] sent : %ld / %ld\n", currentOffset, fileSize);
-
-                    out.write(buffer, 0, bytesReaded); out.flush();
-                    currentOffset+= bytesReaded;
-                }
+                writeBytes(out, bisFile, fileSize, buffer, currentOffset);
                 bisFile.close();
                 return true;
             } else
@@ -35,6 +28,14 @@ public class FileSender {
         } catch(IOException ex) {
             ex.printStackTrace();
             return false;
+        }
+    }
+
+    private void writeBytes(OutputStream out, BufferedInputStream bisFile, long fileSize, byte[] buffer, long currentOffset) throws IOException {
+        int bytesReaded;
+        while((currentOffset < fileSize) && (bytesReaded = bisFile.read(buffer)) > 0) {
+            out.write(buffer, 0, bytesReaded); out.flush();
+            currentOffset += bytesReaded;
         }
     }
 

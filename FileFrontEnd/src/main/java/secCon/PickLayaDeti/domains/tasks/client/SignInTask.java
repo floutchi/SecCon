@@ -1,24 +1,21 @@
 package secCon.PickLayaDeti.domains.tasks.client;
 
-import org.mindrot.jbcrypt.BCrypt;
-import secCon.PickLayaDeti.domains.Users;
 import secCon.PickLayaDeti.domains.tasks.interfaces.TaskManager;
-import secCon.PickLayaDeti.security.AesKeyManager;
-import secCon.PickLayaDeti.security.Hasher;
 import secCon.PickLayaDeti.thread.ClientHandler;
 
-import java.security.NoSuchAlgorithmException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+/**
+ * Classe responsable du protocol de connexion de l'utilisateur.
+ * Ce protocol est envoyé par le client python.
+ */
 public class SignInTask implements TaskManager {
     private final ClientHandler handler;
-    private final Hasher hasher;
     private Matcher matcher;
 
     public SignInTask(ClientHandler clientHandler) {
         this.handler = clientHandler;
-        this.hasher = new Hasher();
     }
 
     @Override
@@ -30,19 +27,16 @@ public class SignInTask implements TaskManager {
 
     @Override
     public void execute(String message) {
-        // 1. Sépare le regex
+        // Récupération du nom et mdp.
         var name = matcher.group(2);
         var clearPassword = matcher.group(3);
 
-        // 2. Vérifier login + mdp correspondant
+        // Récupérations des utilisateurs
         var users = handler.getUsers();
-            // 3. Hachage du mdp
-            /*var t = BCrypt.hashpw(clearPassword, BCrypt.gensalt());
-            var hashedPassword = hasher.clearTextToHash(clearPassword);*/
-            var currentUser = users.getUsersByLoginAndPassword(name, clearPassword);
-            if (currentUser == null) return;
 
-
-            handler.setCurrentUser(currentUser);
+        // Obtention de notre utilisateur.
+        var currentUser = users.getUsersByLoginAndPassword(name, clearPassword);
+        if (currentUser == null) return;
+        handler.setCurrentUser(currentUser);
     }
 }
