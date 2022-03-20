@@ -1,7 +1,6 @@
 package secCon.PickLayaDeti.domains.tasks.client;
 
 import secCon.PickLayaDeti.domains.StoredFiles;
-import secCon.PickLayaDeti.domains.User;
 import secCon.PickLayaDeti.domains.tasks.interfaces.TaskManager;
 import secCon.PickLayaDeti.thread.ClientHandler;
 
@@ -9,6 +8,9 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+/**
+ * Classe responsable de la réception de la liste des différents fichiers de notre utilisateur qui vient de se connecter.
+ */
 public class FileListTask implements TaskManager {
 
     private final ClientHandler clientHandler;
@@ -32,13 +34,25 @@ public class FileListTask implements TaskManager {
         // Renvoie sa liste de fichiers
         List<StoredFiles> storedFiles = currentUser.getFilesList();
 
+        // Récupère la liste des fichiers sous un format correct.
+        StringBuilder allFiles = getFileListIntoString(storedFiles);
+
+        // Envoie le message au client python.
+        clientHandler.sendMessage(allFiles.toString());
+    }
+
+    /**
+     * Récupère la liste des fichiers et la mets sous une forme acceptée par le client python.
+     * @param storedFiles les différents fichiers de notre utilisateur.
+     * @return la liste des fichiers sous forme de String
+     */
+    private StringBuilder getFileListIntoString(List<StoredFiles> storedFiles) {
         StringBuilder sb = new StringBuilder();
         sb.append("FILES ");
 
         for (StoredFiles f : storedFiles) {
-            sb.append(f.getName() + "!" + f.getSize() + " ");
+            sb.append(f.getName()).append("!").append(f.getSize()).append(" ");
         }
-
-        clientHandler.sendMessage(sb.toString());
+        return sb;
     }
 }

@@ -13,15 +13,17 @@ import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+/**
+ * Classe responsable du protocol de création d'un compte.
+ * Ce protocol est envoyé par le client python.
+ */
 public class SignUpTask implements TaskManager {
     private final AesKeyManager keyManager;
-    private final Hasher hasher;
     private final ClientHandler handler;
     private Matcher matcher;
 
     public SignUpTask(ClientHandler clientHandler) {
         this.keyManager = new AesKeyManager();
-        this.hasher = new Hasher();
         this.handler = clientHandler;
     }
 
@@ -51,6 +53,11 @@ public class SignUpTask implements TaskManager {
         }
     }
 
+    /**
+     * Ajoute notre utilisateur si et SEULEMENT si, son login n'existe pas déjà dans les comptes enregistrés.
+     * @param login le nom de l'utilisateur
+     * @param newUser notre nouvel utilisation.
+     */
     private void addUserIfLoginIsValid(String login, User newUser) {
         Users users = getUsers();
 
@@ -60,6 +67,10 @@ public class SignUpTask implements TaskManager {
         }
     }
 
+    /**
+     * Récupère tous nos utilisateurs enregistrés.
+     * @return un objet "Users"
+     */
     private Users getUsers() {
         return handler.getUsers();
     }

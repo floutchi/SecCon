@@ -1,13 +1,14 @@
 package secCon.PickLayaDeti.thread;
 
-import secCon.PickLayaDeti.Program;
 import secCon.PickLayaDeti.domains.tasks.sbe.HelloTask;
 
 import java.io.IOException;
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
-import java.net.InetAddress;
 
+/**
+ * Déclare notre multicastListener afin de se connecter à plusieurs SBE.
+ */
 public class MulticastListener implements Runnable{
 
     private final DatagramSocket receiveStoreBackEnd;;
@@ -15,6 +16,12 @@ public class MulticastListener implements Runnable{
     private final StorManager manager;
     private boolean stop = false;
 
+    /**
+     * Déclare le constructeur de notre multicastlistener.
+     * @param receiveStoreBackEnd le BackEnd avec le quel se connecté.
+     * @param buffer notre buffer d'entrée.
+     * @param manager afin d'ajouter nos processors.
+     */
     public MulticastListener(DatagramSocket receiveStoreBackEnd, byte[] buffer, StorManager manager) {
         this.receiveStoreBackEnd = receiveStoreBackEnd;
         this.buffer = buffer;
@@ -51,6 +58,10 @@ public class MulticastListener implements Runnable{
     }
 
 
+    /**
+     * Récupère notre message multiCast afin d'exécuté la tâche demandée.
+     * @param message le message à vérifier.
+     */
     private void receiveMessage(String message) {
         var hello = new HelloTask(manager);
         if (hello.check(message)) {
